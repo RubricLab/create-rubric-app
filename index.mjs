@@ -101,7 +101,7 @@ console.log(
 	boxen(
 		chalk.bold(
 			`Welcome to \n${chalk(
-				figlet.textSync('Create Agent App', {
+				figlet.textSync('Create Rubric App', {
 					font: 'Small',
 					horizontalLayout: 'default',
 					verticalLayout: 'default'
@@ -148,15 +148,14 @@ const settings = _yes
 			message: 'Do you want to change any settings?'
 	})
 	  
-
 	if (settings.includes('scaffold')) {
 		copyTemplate(name, template)
 		console.log(`✅ 1/5 - Scaffolded project files`)
 	} else console.log(`✅ 1/5 - no-scaffold flag passed`)
 	
 	if (settings.includes('download'))
-		if (template === 'fullstack') {
-			await downloadFile('https://rubriclab.com/fonts/CalSans-SemiBold.ttf', `${name}/public/fonts`)
+		if (template === 'agent') {
+			await downloadFile('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700&display=swap', `${name}/public/fonts`)
 			console.log(`✅ 2/5 - Downloaded assets`)
 		} else console.log(`✅ 2/5 - Nothing to download`)
 	else console.log(`✅ 2/5 - no-download flag passed`)
