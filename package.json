@@ -1,0 +1,30 @@
+{
+  "bin": {
+    "create-rubric-app": "./index.mjs"
+  },
+  "dependencies": {
+    "@inquirer/prompts": "^3.2.0",
+    "boxen": "^7.1.1",
+    "chalk": "^5.3.0",
+    "clear": "^0.1.0",
+    "figlet": "^1.7.0",
+    "minimist": "^1.2.8",
+    "open": "^9.1.0"
+  },
+  "homepage": "https://github.com/RubricLab/rubric/tree/main/packages/create-rubric-app#readme",
+  "license": "MIT",
+  "name": "create-rubric-app",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "directory": "packages/create-rubric-app",
+    "type": "git",
+    "url": "https://github.com/RubricLab/rubric.git"
+  },
+  "scripts": {
+    "bleed": "npx yarn-upgrade-all -W && rm yarn.lock && bun install",
+    "lint": "eslint . --ext .js,.jsx,.cjs,.mjs,.json,.ts,.tsx"
+  },
+  "version": "1.1.0"
+}
