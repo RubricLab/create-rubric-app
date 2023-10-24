@@ -17,6 +17,7 @@ export const env = createEnv({
 	 */
 	runtimeEnv: {
 		OPENAI_API_KEY: process.env.OPENAI_API_KEY,
+		DB_URL: process.env.DB_URL,
 		NODE_ENV: process.env.NODE_ENV
 	},
 
@@ -26,6 +27,7 @@ export const env = createEnv({
 	 */
 	server: {
 		OPENAI_API_KEY: z.string().min(1),
+		DB_URL: z.string().min(1),
 		NODE_ENV: z.string()
 	}
 })
