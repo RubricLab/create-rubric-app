@@ -130,7 +130,7 @@ if (fs.existsSync(name)) {
 
 const template = _template || (_yes ? 'agent' : await select({ choices: CHOICES, default: 'agent', message: 'What project template would you like to generate?' }))
 
-const key = _key || ( await input({ default: 'sk-XXX', message: 'What is your Open AI API key? (\u001b]8;;https://platform.openai.com/account/api-keys\u0007Generate one here\u001b]8;;\u0007)'}))
+const key = _key || (await input({ default: 'sk-XXX', message: 'What is your Open AI API key? (\u001b]8;;https://platform.openai.com/account/api-keys\u0007Generate one here\u001b]8;;\u0007)' }))
 // Ideally -> store default key in rubric.rc file in ~
 // Must handle bad key error (it looks like your key is invalid)
 // Must handle no GPT 4 avail in account error (it looks like you don't have access to GPT 4, navigate to this page to fix)
@@ -151,6 +151,7 @@ const settings = _yes
 	if (settings.includes('scaffold')) {
 		copyTemplate(name, template)
 		console.log(`✅ 1/5 - Scaffolded project files`)
+		child_process.execSync(`cd ${name} && cp .env.example .env && echo ${key} >> .env`, { stdio: [0, 1, 2] })
 	} else console.log(`✅ 1/5 - no-scaffold flag passed`)
 	
 	if (settings.includes('download'))
@@ -202,7 +203,7 @@ const settings = _yes
 							)
 					  )
 			}),
-			child_process.exec(`cd ${name} && ${settings.includes('yarn') ? 'yarn' : 'bun'} run dev`, {stdio: [0, 1, 2]})
+			child_process.exec(`cd ${name} && ${settings.includes('yarn') ? 'yarn' : 'bun'} dev`, {stdio: [0, 1, 2]})
 		])
 	else console.log(`✅ 5/5 - no-dev flag passed`)
 
