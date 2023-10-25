@@ -3,9 +3,7 @@
     "@rubriclab/ui": "latest",
     "@rubriclab/utils": "latest",
     "better-sqlite3": "^9.0.0",
-    "bindings": "^1.5.0",
     "dotenv": "^16.3.1",
-    "drizzle-kit": "^0.19.13",
     "drizzle-orm": "^0.28.6",
     "langchain": "^0.0.160",
     "next": "^13.4.18",
@@ -22,6 +20,7 @@
     "@types/react": "18.2.20",
     "@types/react-dom": "18.2.7",
     "autoprefixer": "^10.4.15",
+    "drizzle-kit": "^0.19.13",
     "eslint": "^8.47.0",
     "postcss": "^8.4.28",
     "prettier": "^3.0.2",
@@ -34,8 +33,11 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev",
+    "generate": "drizzle-kit generate:sqlite",
     "lint": "eslint . --ext .js,.jsx,.cjs,.mjs,.json,.ts,.tsx",
-    "start": "next start"
+    "push": "drizzle-kit push:sqlite",
+    "start": "next start",
+    "studio": "drizzle-kit studio --port 3005"
   },
   "version": "0.0.0"
 }

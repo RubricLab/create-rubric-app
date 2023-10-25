@@ -5,7 +5,7 @@ const lineAttributes = {
 	strokeWidth: 1
 }
 
-function BackgroundGrid({
+export default function BackgroundGrid({
 	className,
 	...props
 }: {
@@ -130,5 +130,3 @@ function BackgroundGrid({
 		</svg>
 	)
 }
-
-export default BackgroundGrid

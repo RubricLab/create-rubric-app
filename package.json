@@ -11,6 +11,14 @@
     "minimist": "^1.2.8",
     "open": "^9.1.0"
   },
+  "devDependencies": {
+		"@rubriclab/eslint-config": "latest",
+		"@rubriclab/prettier-config": "latest",
+		"@rubriclab/tailwind-config": "latest",
+		"@rubriclab/typescript-config": "latest",
+		"eslint": "^8.47.0",
+		"prettier": "^3.0.2"
+	},
   "homepage": "https://github.com/RubricLab/rubric/tree/main/packages/create-rubric-app#readme",
   "license": "MIT",
   "name": "create-rubric-app",

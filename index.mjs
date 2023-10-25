@@ -142,40 +142,47 @@ const settings = _yes
 				{checked: true, name: 'scaffold project files', value: 'scaffold'},
 				{checked: true, name: 'download assets', value: 'download'},
 				{checked: true, name: 'configure vscode', value: 'vscode'},
+				{checked: true, name: 'configure DB', value: 'db'},
 				{checked: true, name: 'run install', value: 'install'},
 				{checked: true, name: 'run dev', value: 'dev'},
+				{checked: false, name: 'use yarn instead of bun', value: 'yarn'}
 			],
 			message: 'Do you want to change any settings?'
 	})
 	  
 	if (settings.includes('scaffold')) {
 		copyTemplate(name, template)
-		console.log(`✅ 1/5 - Scaffolded project files`)
+		console.log(`✅ 1/6 - Scaffolded project files`)
 		child_process.execSync(`cd ${name} && cp .env.example .env && echo ${key} >> .env`, { stdio: [0, 1, 2] })
-	} else console.log(`✅ 1/5 - no-scaffold flag passed`)
+	} else console.log(`✅ 1/6 - no-scaffold flag passed`)
 	
 	if (settings.includes('download'))
 		if (template === 'agent') {
 			await downloadFile('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700&display=swap', `${name}/public/fonts`)
-			console.log(`✅ 2/5 - Downloaded assets`)
+			console.log(`✅ 2/6 - Downloaded assets`)
 		} else console.log(`✅ 2/5 - Nothing to download`)
-	else console.log(`✅ 2/5 - no-download flag passed`)
+	else console.log(`✅ 2/6 - no-download flag passed`)
 	
 	if (settings.includes('install')) {
 		child_process.execSync(`cd ${name} && ${settings.includes('yarn') ? 'yarn' : 'bun i'}`, {stdio: [0, 1, 2]})
-		console.log(`✅ 3/5 - Installed dependencies with ${settings.includes('yarn') ? 'yarn' : 'bun'}`)
-	} else console.log(`✅ 3/5 - no-install flag passed`)
+		console.log(`✅ 3/6 - Installed dependencies with ${settings.includes('yarn') ? 'yarn' : 'bun'}`)
+	} else console.log(`✅ 3/6 - no-install flag passed`)
+
+	if (settings.includes('db')) {
+		child_process.execSync(`cd ${name} && ${settings.includes('yarn') ? 'yarn push' : 'bun push'}`, {stdio: [0, 1, 2]})
+		console.log(`✅ 4/6 - Configured DB with sqlite3`)
+	} else console.log(`✅ 4/6 - no-db flag passed`)
 	
 	if (settings.includes('vscode'))
 		try {
 			child_process.execSync('code --install-extension dbaeumer.vscode-eslint', {stdio: [0, 1, 2]})
 			child_process.execSync('code --install-extension esbenp.prettier-vscode', {stdio: [0, 1, 2]})
 			child_process.execSync(`code ${name}`, {stdio: [0, 1, 2]})
-			console.log(`✅ 4/5 - Configured vscode`)
+			console.log(`✅ 5/6 - Configured vscode`)
 		} catch (e) {
-			console.log(`❌ 4/5 - Could not configure vscode. You might have to do this: https://code.visualstudio.com/docs/setup/mac`)
+			console.log(`❌ 5/6 - Could not configure vscode. You might have to do this: https://code.visualstudio.com/docs/setup/mac`)
 		}
-	else console.log(`✅ 4/5 - no-vscode flag passed`)
+	else console.log(`✅ 5/6 - no-vscode flag passed`)
 	
 	if (settings.includes('dev'))
 		await Promise.all([
@@ -185,7 +192,7 @@ const settings = _yes
 				}, 2000)
 			}).then(() => {
 				open(`http://localhost:3000`)
-				console.log(`✅ 5/5 - Started development server`)
+				console.log(`✅ 6/6 - Started development server`)
 				
 					console.log(
 							boxen(
@@ -205,5 +212,5 @@ const settings = _yes
 			}),
 			child_process.exec(`cd ${name} && ${settings.includes('yarn') ? 'yarn' : 'bun'} dev`, {stdio: [0, 1, 2]})
 		])
-	else console.log(`✅ 5/5 - no-dev flag passed`)
+	else console.log(`✅ 6/6 - no-dev flag passed`)
 

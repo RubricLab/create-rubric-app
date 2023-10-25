@@ -1,5 +1,6 @@
 import {revalidatePath} from 'next/cache'
 import basicAgent from '../agents/basic'
+import TodoList from '../components/TodoList'
 
 export default function Page() {
 	async function agentAction(formData: FormData) {
@@ -9,13 +10,16 @@ export default function Page() {
 	}
 
 	return (
+		<div>
 		<form action={agentAction}>
 			<input
 				name='input'
-				type='text'
 				placeholder='Enter some text'
+				type='text'
 			/>
 			<button type='submit'>Submit</button>
-		</form>
+			</form>
+			<TodoList/>
+		</div>
 	)
 }
