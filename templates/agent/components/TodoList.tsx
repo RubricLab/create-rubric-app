@@ -2,18 +2,20 @@ import {listTasks} from '../tools/listTasks'
 
 export default async function TodoList() {
 	const tasks = await listTasks()
-
 	return (
-		<h1>
+		<div className='flex w-full flex-col gap-3'>
 			{tasks.map(task => (
-				<h2 key={task.id}>
+				<div
+					className='flex items-center gap-2'
+					key={task.id}>
 					<input
 						checked={task.complete}
+						className='h-5 w-5'
 						type='checkbox'
 					/>{' '}
-					{task.title}
-				</h2>
+					<p>{task.title}</p>
+				</div>
 			))}
-		</h1>
+		</div>
 	)
 }
