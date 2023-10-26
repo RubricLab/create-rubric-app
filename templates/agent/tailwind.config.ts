@@ -1,20 +1,14 @@
-import {Config} from 'tailwindcss'
-
 import config from '@rubriclab/tailwind-config'
+import {Config} from 'tailwindcss'
 
 const tailwindConfig = {
 	content: ['./app/**/*.tsx', './components/**/*.tsx'],
 	presets: [config],
 	theme: {
 		colors: {
-			...config.theme.colors,
-			'off-white': '#E2DCDB'
+			...config.theme.colors
 		},
-		extend: {
-			fontFamily: {
-				'cal-sans': ['var(--font-cal-sans)']
-			}
-		}
+		extend: {}
 	}
 } satisfies Config
 
