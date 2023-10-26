@@ -1,18 +1,19 @@
-import { listTodos } from "../tools/listTodos"
+import {listTasks} from '../tools/listTasks'
 
 export default async function TodoList() {
+	const tasks = await listTasks()
 
-    const todos = await listTodos()
-    
-    return (
-        <h1>
-            {todos.map((todo) => (
-                <h2 key={todo.id}>
-                    <input checked={todo.complete === 1} type="checkbox" />
-                    {" "}{todo.text}
-                </h2>
-            ))}
-        </h1>
-    )
+	return (
+		<h1>
+			{tasks.map(task => (
+				<h2 key={task.id}>
+					<input
+						checked={task.complete}
+						type='checkbox'
+					/>{' '}
+					{task.title}
+				</h2>
+			))}
+		</h1>
+	)
 }
-
