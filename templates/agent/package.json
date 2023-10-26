@@ -1,13 +1,15 @@
 {
 	"dependencies": {
+		"@prisma/client": "5.5.2",
 		"@rubriclab/ui": "latest",
 		"@rubriclab/utils": "latest",
-		"better-sqlite3": "^9.0.0",
 		"dotenv": "^16.3.1",
 		"langchain": "^0.0.160",
 		"next": "^13.4.18",
+		"prisma": "^5.5.2",
 		"react": "^18.2.0",
-		"react-dom": "^18.2.0"
+		"react-dom": "^18.2.0",
+		"sqlite3": "^5.1.6"
 	},
 	"devDependencies": {
 		"@rubriclab/eslint-config": "latest",
@@ -31,11 +33,11 @@
 	"scripts": {
 		"build": "next build",
 		"dev": "next dev",
-		"generate": " generate:sqlite",
+		"generate": "cd prisma && touch dev.db",
 		"lint": "eslint . --ext .js,.jsx,.cjs,.mjs,.json,.ts,.tsx",
-		"push": "push:sqlite",
+		"push": "prisma db push",
 		"start": "next start",
-		"studio": ""
+		"studio": "prisma studio"
 	},
 	"version": "0.0.0"
 }
