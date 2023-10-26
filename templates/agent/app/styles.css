@@ -1,0 +1,33 @@
+@tailwind utilities;
+@tailwind base;
+@tailwind components;
+
+@import '@rubriclab/ui/build.css';
+
+html {
+	@apply bg-white;
+}
+
+@layer base {
+	h1 {
+		@apply text-5xl font-bold;
+	}
+	h2 {
+		@apply text-3xl font-bold;
+	}
+	h3 {
+		@apply text-xl font-semibold;
+	}
+	input {
+		@apply w-full rounded-md border bg-stone-50 px-3 py-2 focus:outline-none;
+	}
+	code {
+		@apply border-stone-700/80 bg-orange-200/60;
+	}
+	a {
+		@apply underline-offset-4 hover:underline !important;
+	}
+	blockquote {
+		@apply border-stone-500/80;
+	}
+}
