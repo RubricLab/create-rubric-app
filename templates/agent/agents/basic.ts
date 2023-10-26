@@ -1,9 +1,12 @@
 import {initializeAgentExecutorWithOptions} from 'langchain/agents'
 import {ChatOpenAI} from 'langchain/chat_models/openai'
 import {env} from '../env.mjs'
+import createTaskTool from '../tools/createTask'
+import deleteTaskTool from '../tools/deleteTask'
 import helloTool from '../tools/hello'
-import listTodosTool from '../tools/listTodos'
-import createTodoTool from '../tools/createTodo'
+import listTasksTool from '../tools/listTasks'
+import rankTasksTool from '../tools/rankTask'
+import updateTaskTool from '../tools/updateTask'
 
 const gptModel = 'gpt-4'
 
@@ -14,9 +17,12 @@ const model = new ChatOpenAI({
 })
 
 const tools = [
-	helloTool({ apiKey: '0' }), // The apiKey is not passed to the AI, but is used by the tool
-	listTodosTool(),
-	createTodoTool()
+	helloTool({apiKey: '0'}), // The apiKey is not passed to the AI, but is used by the tool
+	createTaskTool(),
+	deleteTaskTool(),
+	listTasksTool(),
+	rankTasksTool(),
+	updateTaskTool()
 ]
 
 export default async function basicAgent({input}) {
