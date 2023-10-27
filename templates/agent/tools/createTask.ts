@@ -3,10 +3,17 @@ import z from 'zod'
 import prisma from '../utils/prisma'
 
 // Create a new task
-export async function createTask({text}: {text: string}) {
+export async function createTask({
+	title,
+	status = false // Task is not completed by default
+}: {
+	title: string
+	status?: boolean
+}) {
 	const addedTask = await prisma.task.create({
 		data: {
-			title: text
+			status: status,
+			title: title
 		}
 	})
 	console.log(addedTask)
@@ -15,11 +22,11 @@ export async function createTask({text}: {text: string}) {
 
 export default function createTaskTool() {
 	return new DynamicStructuredTool({
-		description: 'Create a todo',
-		func: async ({text}) => {
-			return JSON.stringify(await createTask({text}))
+		description: 'Create a task',
+		func: async ({title, status}) => {
+			return JSON.stringify(await createTask({status, title}))
 		},
 		name: 'createTask',
-		schema: z.object({text: z.string()})
+		schema: z.object({status: z.boolean(), title: z.string()})
 	})
 }

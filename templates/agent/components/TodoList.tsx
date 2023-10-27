@@ -17,7 +17,17 @@ export default async function TodoList() {
 						className='h-5 w-5'
 						type='checkbox'
 					/>{' '}
-					<p>{task.title}</p>
+					<div className='flex w-full items-center justify-between'>
+						<p>{task.title}</p>
+						<span className='text-xs text-stone-400'>
+							{new Date(task.createdAt).toLocaleDateString('en-US', {
+								day: '2-digit',
+								hour: '2-digit',
+								minute: '2-digit',
+								month: 'short'
+							})}
+						</span>
+					</div>
 				</div>
 			))}
 		</div>
