@@ -1,8 +1,6 @@
-import {PrismaClient} from '@prisma/client'
 import {DynamicStructuredTool} from 'langchain/tools'
 import z from 'zod'
-
-const prisma = new PrismaClient()
+import prisma from '../utils/prisma'
 
 // Update a task
 export async function updateTask({id, input}: {id: number; input: string}) {

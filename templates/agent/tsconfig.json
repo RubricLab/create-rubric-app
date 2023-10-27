@@ -4,5 +4,11 @@
 	},
 	"exclude": ["node_modules"],
 	"extends": "@rubriclab/typescript-config/nextjs",
-	"include": ["./app/**/*.ts", "./app/**/*.tsx", ".next/types/**/*.ts", "next-env.d.ts"]
+	"include": [
+		"./app/**/*.ts",
+		"./app/**/*.tsx",
+		"./components/**/*.tsx",
+		".next/types/**/*.ts",
+		"next-env.d.ts"
+	]
 }

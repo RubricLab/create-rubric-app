@@ -1,8 +1,6 @@
-import {PrismaClient, Task} from '@prisma/client'
+import {Task} from '@prisma/client'
 import {DynamicStructuredTool} from 'langchain/tools'
 import z from 'zod'
-
-const prisma = new PrismaClient()
 
 // This tool takes a string input and compared it against all existing todos and returns
 // the most similar todo
