@@ -13,8 +13,8 @@ export default async function TodoList() {
 					className='flex items-center gap-2'
 					key={task.id}>
 					<input
-						checked={task.status}
 						className='h-5 w-5'
+						defaultChecked={task.status}
 						type='checkbox'
 					/>{' '}
 					<div className='flex w-full items-center justify-between'>
