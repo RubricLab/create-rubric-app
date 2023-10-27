@@ -3,9 +3,17 @@ import z from 'zod'
 import prisma from '../utils/prisma'
 
 // Update a task
-export async function updateTask({id, input}: {id: number; input: string}) {
+export async function updateTask({
+	id,
+	status,
+	title
+}: {
+	id: number
+	status: boolean
+	title: string
+}) {
 	const updatedTask = await prisma.task.update({
-		data: {title: input},
+		data: {status: status, title: title},
 		where: {id: id}
 	})
 	return JSON.stringify(updatedTask)
@@ -14,10 +22,16 @@ export async function updateTask({id, input}: {id: number; input: string}) {
 export default function updatedTaskTool() {
 	return new DynamicStructuredTool({
 		description: 'Update a task',
-		func: async ({id, input}) => {
-			return JSON.stringify(await updateTask({id, input}))
+		func: async ({id, title, status}) => {
+			return JSON.stringify(await updateTask({id, status, title}))
 		},
 		name: 'updateTask',
-		schema: z.object({id: z.number(), input: z.string()})
+		schema: z.object({
+			id: z.number().describe('Integer ID of the task'),
+			status: z
+				.boolean()
+				.describe('Status of the task, true if completed, false otherwise'),
+			title: z.string().describe('Title of the task')
+		})
 	})
 }
