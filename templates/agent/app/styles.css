@@ -25,7 +25,7 @@ html {
 		@apply w-full rounded-md border px-3 py-2 transition-colors duration-300 hover:bg-stone-100;
 	}
 	code {
-		@apply border-stone-700/80 bg-orange-200/60;
+		@apply rounded-md border-stone-700/80 bg-stone-200/60;
 	}
 	a {
 		@apply underline-offset-4 hover:underline !important;
