@@ -8,13 +8,11 @@ export async function deleteTask({id}: {id: number}) {
 	return JSON.stringify(deletedTask)
 }
 
-export default function deleteTaskTool() {
-	return new DynamicStructuredTool({
-		description: 'Delete a task',
-		func: async ({id}) => {
-			return JSON.stringify(await deleteTask({id}))
-		},
-		name: 'deleteTask',
-		schema: z.object({id: z.number()})
-	})
-}
+export const deleteTaskTool = async ()=> new DynamicStructuredTool({
+	name: 'deleteTask',
+	description: 'Delete a task',
+	func: async ({id}) => {
+		return JSON.stringify(await deleteTask({id}))
+	},
+	schema: z.object({id: z.number()})
+})

@@ -20,13 +20,13 @@ export async function createTask({
 	return JSON.stringify(addedTask)
 }
 
-export default function createTaskTool() {
-	return new DynamicStructuredTool({
-		description: 'Create a task',
-		func: async ({title, status}) => {
-			return JSON.stringify(await createTask({status, title}))
-		},
+export const createTaskTool = async () => 
+	 new DynamicStructuredTool({
 		name: 'createTask',
-		schema: z.object({status: z.boolean(), title: z.string()})
+		description: 'Create a task',
+		func: async ({ title, status }) => {
+			return JSON.stringify(await createTask({ status, title }))
+		},
+		schema: z.object({ status: z.boolean(), title: z.string() })
 	})
-}
+
