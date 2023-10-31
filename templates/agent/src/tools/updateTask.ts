@@ -1,5 +1,3 @@
-'use server'
-
 import {DynamicStructuredTool} from 'langchain/tools'
 import z from 'zod'
 import db from '~/utils/db'

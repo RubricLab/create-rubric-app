@@ -1,4 +1,4 @@
 module.exports = {
-	extends: ['@rubriclab/eslint-config'],
+	extends: ['next/babel','@rubriclab/eslint-config'],
 	root: true
 }

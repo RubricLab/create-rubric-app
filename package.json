@@ -16,8 +16,8 @@
 		"@rubriclab/prettier-config": "latest",
 		"@rubriclab/tailwind-config": "latest",
 		"@rubriclab/typescript-config": "latest",
-		"eslint": "^8.47.0",
-		"prettier": "^3.0.2"
+		"eslint": "^8.52.0",
+		"prettier": "^3.0.3"
 	},
 	"homepage": "https://github.com/RubricLab/rubric/tree/main/packages/create-rubric-app#readme",
 	"license": "MIT",
