@@ -39,3 +39,5 @@ yarn-error.log*
 jarvis/
 
 **/dev.db
+
+**/bun.lockb

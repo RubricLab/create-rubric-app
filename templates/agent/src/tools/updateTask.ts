@@ -1,6 +1,6 @@
 import {DynamicStructuredTool} from 'langchain/tools'
 import z from 'zod'
-import prisma from '../utils/prisma'
+import db from '~/utils/db'
 
 // Update a task
 export async function updateTask({
@@ -12,7 +12,7 @@ export async function updateTask({
 	status: boolean
 	title: string
 }) {
-	const updatedTask = await prisma.task.update({
+	const updatedTask = await db.task.update({
 		data: {status: status, title: title},
 		where: {id: id}
 	})

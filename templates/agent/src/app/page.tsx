@@ -1,5 +1,5 @@
-import ChatBox from '../components/ChatBox'
-import TodoList from '../components/TodoListServer'
+import ChatBox from '~/components/ChatBox'
+import TodoList from '~/components/TodoListServer'
 
 export default function Page() {
 	return (

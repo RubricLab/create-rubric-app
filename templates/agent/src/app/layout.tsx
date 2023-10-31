@@ -1,5 +1,5 @@
 import {Plus_Jakarta_Sans} from 'next/font/google'
-import {META} from '../constants/metadata'
+import {META} from '~/constants/metadata'
 import './styles.css'
 
 const font = Plus_Jakarta_Sans({subsets: ['latin']})

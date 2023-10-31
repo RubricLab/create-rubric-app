@@ -1,6 +1,6 @@
 import {DynamicStructuredTool} from 'langchain/tools'
 import z from 'zod'
-import prisma from '../utils/prisma'
+import db from '~/utils/db'
 
 // Create a new task
 export async function createTask({
@@ -10,7 +10,7 @@ export async function createTask({
 	title: string
 	status?: boolean
 }) {
-	const addedTask = await prisma.task.create({
+	const addedTask = await db.task.create({
 		data: {
 			status: status,
 			title: title

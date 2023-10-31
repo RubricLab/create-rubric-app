@@ -1,10 +1,10 @@
 import {DynamicStructuredTool} from 'langchain/tools'
 import z from 'zod'
-import prisma from '../utils/prisma'
+import db from '~/utils/db'
 
 // Create a new task
 export async function deleteTask({id}: {id: number}) {
-	const deletedTask = await prisma.task.delete({where: {id: id}})
+	const deletedTask = await db.task.delete({where: {id: id}})
 	return JSON.stringify(deletedTask)
 }
 

@@ -1,12 +1,18 @@
 #! /usr/bin/env node
 
-import { checkbox, input, select } from '@inquirer/prompts'
+import {checkbox, input, select} from '@inquirer/prompts'
 import boxen from 'boxen'
 import chalk from 'chalk'
 import child_process from 'child_process'
 import clear from 'clear'
 import figlet from 'figlet'
-import fs, {mkdirSync, readFileSync, readdirSync, statSync, writeFileSync} from 'fs'
+import fs, {
+	mkdirSync,
+	readFileSync,
+	readdirSync,
+	statSync,
+	writeFileSync
+} from 'fs'
 import https from 'https'
 import {parseArgs} from 'node:util'
 import open from 'open'
@@ -19,7 +25,7 @@ const __dirname = path.dirname(__filename)
 
 const CURR_DIR = process.cwd()
 
-function createDirectoryContents (templatePath, newProjectPath) {
+function createDirectoryContents(templatePath, newProjectPath) {
 	const filesToCreate = readdirSync(templatePath)
 
 	filesToCreate.forEach(file => {
@@ -37,12 +43,15 @@ function createDirectoryContents (templatePath, newProjectPath) {
 			mkdirSync(`${CURR_DIR}/${newProjectPath}/${file}`)
 
 			// recursive call
-			createDirectoryContents(`${templatePath}/${file}`, `${newProjectPath}/${file}`)
+			createDirectoryContents(
+				`${templatePath}/${file}`,
+				`${newProjectPath}/${file}`
+			)
 		}
 	})
 }
 
-function copyTemplate (name, template) {
+function copyTemplate(name, template) {
 	const projectName = name
 	const templatePath = `${__dirname}/templates/${template}`
 
@@ -51,7 +60,7 @@ function copyTemplate (name, template) {
 	createDirectoryContents(templatePath, projectName)
 }
 
-async function downloadFile (url, dest) {
+async function downloadFile(url, dest) {
 	if (!fs.existsSync(dest)) mkdirSync(dest)
 	const file = fs.createWriteStream(`${dest}/${path.basename(url)}`)
 	return await new Promise(resolve => {
@@ -69,7 +78,13 @@ async function downloadFile (url, dest) {
 }
 
 const {
-	values: {name: _name, yes: _yes, template: _template, verbose: _verbose, key: _key}
+	values: {
+		name: _name,
+		yes: _yes,
+		template: _template,
+		verbose: _verbose,
+		key: _key
+	}
 } = parseArgs({
 	options: {
 		name: {
@@ -83,10 +98,10 @@ const {
 		yes: {
 			short: 'y',
 			type: 'boolean'
-        },
-        verbose: {
-            short: 'v',
-            type: 'boolean'
+		},
+		verbose: {
+			short: 'v',
+			type: 'boolean'
 		},
 		key: {
 			short: 'k',
@@ -120,7 +135,14 @@ const CHOICES = readdirSync(`${__dirname}/templates`).map(template => ({
 	value: template
 }))
 
-let name = _name || (_yes ? 'jarvis' : await input({ default: 'jarvis', message: 'What do you want to name your project?' }))
+let name =
+	_name ||
+	(_yes
+		? 'jarvis'
+		: await input({
+				default: 'jarvis',
+				message: 'What do you want to name your project?'
+		  }))
 
 if (fs.existsSync(name)) {
 	let i = 1
@@ -128,9 +150,23 @@ if (fs.existsSync(name)) {
 	name = `${name}-${i}`
 }
 
-const template = _template || (_yes ? 'agent' : await select({ choices: CHOICES, default: 'agent', message: 'What project template would you like to generate?' }))
+const template =
+	_template ||
+	(_yes
+		? 'agent'
+		: await select({
+				choices: CHOICES,
+				default: 'agent',
+				message: 'What project template would you like to generate?'
+		  }))
 
-const key = _key || (await input({ default: 'sk-XXX', message: 'What is your Open AI API key? (\u001b]8;;https://platform.openai.com/account/api-keys\u0007Generate one here\u001b]8;;\u0007)' }))
+const key =
+	_key ||
+	(await input({
+		default: 'sk-XXX',
+		message:
+			'What is your Open AI API key? (\u001b]8;;https://platform.openai.com/account/api-keys\u0007Generate one here\u001b]8;;\u0007)'
+	}))
 // Ideally -> store default key in rubric.rc file in ~
 // Must handle bad key error (it looks like your key is invalid)
 // Must handle no GPT 4 avail in account error (it looks like you don't have access to GPT 4, navigate to this page to fix)
@@ -148,69 +184,93 @@ const settings = _yes
 				{checked: false, name: 'use yarn instead of bun', value: 'yarn'}
 			],
 			message: 'Do you want to change any settings?'
-	})
-	  
-	if (settings.includes('scaffold')) {
-		copyTemplate(name, template)
-		console.log(`✅ 1/6 - Scaffolded project files`)
-		child_process.execSync(`cd ${name} && cp .env.example .env && echo ${key} >> .env`, { stdio: [0, 1, 2] })
-	} else console.log(`✅ 1/6 - no-scaffold flag passed`)
-	
-	if (settings.includes('download'))
-		if (template === 'agent') {
-			await downloadFile('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700&display=swap', `${name}/public/fonts`)
-			console.log(`✅ 2/6 - Downloaded assets`)
-		} else console.log(`✅ 2/5 - Nothing to download`)
-	else console.log(`✅ 2/6 - no-download flag passed`)
-	
-	if (settings.includes('install')) {
-		child_process.execSync(`cd ${name} && ${settings.includes('yarn') ? 'yarn' : 'bun i'}`, {stdio: [0, 1, 2]})
-		console.log(`✅ 3/6 - Installed dependencies with ${settings.includes('yarn') ? 'yarn' : 'bun'}`)
-	} else console.log(`✅ 3/6 - no-install flag passed`)
+	  })
 
-	if (settings.includes('db')) {
-		child_process.execSync(`cd ${name} && ${settings.includes('yarn') ? 'yarn push' : 'bun push'}`, {stdio: [0, 1, 2]})
-		console.log(`✅ 4/6 - Configured DB with sqlite3`)
-	} else console.log(`✅ 4/6 - no-db flag passed`)
-	
-	if (settings.includes('vscode'))
-		try {
-			child_process.execSync('code --install-extension dbaeumer.vscode-eslint', {stdio: [0, 1, 2]})
-			child_process.execSync('code --install-extension esbenp.prettier-vscode', {stdio: [0, 1, 2]})
-			child_process.execSync(`code ${name}`, {stdio: [0, 1, 2]})
-			console.log(`✅ 5/6 - Configured vscode`)
-		} catch (e) {
-			console.log(`❌ 5/6 - Could not configure vscode. You might have to do this: https://code.visualstudio.com/docs/setup/mac`)
-		}
-	else console.log(`✅ 5/6 - no-vscode flag passed`)
-	
-	if (settings.includes('dev'))
-		await Promise.all([
-			new Promise(resolve => {
-				setTimeout(() => {
-					resolve()
-				}, 2000)
-			}).then(() => {
-				open(`http://localhost:3000`)
-				console.log(`✅ 6/6 - Started development server`)
-				
-					console.log(
-							boxen(
-								chalk(
-									figlet.textSync('Happy Hacking!', {
-										font: 'Small',
-										horizontalLayout: 'default',
-										verticalLayout: 'default'
-									})
-								),
-								{
-									borderStyle: 'round',
-									padding: 1
-								}
-							)
-					  )
-			}),
-			child_process.exec(`cd ${name} && ${settings.includes('yarn') ? 'yarn' : 'bun'} dev`, {stdio: [0, 1, 2]})
-		])
-	else console.log(`✅ 6/6 - no-dev flag passed`)
+if (settings.includes('scaffold')) {
+	copyTemplate(name, template)
+	console.log(`✅ 1/6 - Scaffolded project files`)
+	child_process.execSync(
+		`cd ${name} && cp .env.example .env && echo ${key} >> .env`,
+		{stdio: [0, 1, 2]}
+	)
+} else console.log(`✅ 1/6 - no-scaffold flag passed`)
 
+if (settings.includes('download'))
+	if (template === 'agent') {
+		await downloadFile(
+			'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700&display=swap',
+			`${name}/public/fonts`
+		)
+		console.log(`✅ 2/6 - Downloaded assets`)
+	} else console.log(`✅ 2/5 - Nothing to download`)
+else console.log(`✅ 2/6 - no-download flag passed`)
+
+if (settings.includes('install')) {
+	child_process.execSync(
+		`cd ${name} && ${settings.includes('yarn') ? 'yarn' : 'bun i'}`,
+		{stdio: [0, 1, 2]}
+	)
+	console.log(
+		`✅ 3/6 - Installed dependencies with ${
+			settings.includes('yarn') ? 'yarn' : 'bun'
+		}`
+	)
+} else console.log(`✅ 3/6 - no-install flag passed`)
+
+if (settings.includes('db')) {
+	child_process.execSync(
+		`cd ${name} && ${settings.includes('yarn') ? 'yarn db:push' : 'bun db:push'}`,
+		{stdio: [0, 1, 2]}
+	)
+	console.log(`✅ 4/6 - Configured DB with sqlite3`)
+} else console.log(`✅ 4/6 - no-db flag passed`)
+
+if (settings.includes('vscode'))
+	try {
+		child_process.execSync('code --install-extension dbaeumer.vscode-eslint', {
+			stdio: [0, 1, 2]
+		})
+		child_process.execSync('code --install-extension esbenp.prettier-vscode', {
+			stdio: [0, 1, 2]
+		})
+		child_process.execSync(`code ${name}`, {stdio: [0, 1, 2]})
+		console.log(`✅ 5/6 - Configured vscode`)
+	} catch (e) {
+		console.log(
+			`❌ 5/6 - Could not configure vscode. You might have to do this: https://code.visualstudio.com/docs/setup/mac`
+		)
+	}
+else console.log(`✅ 5/6 - no-vscode flag passed`)
+
+if (settings.includes('dev'))
+	await Promise.all([
+		new Promise(resolve => {
+			setTimeout(() => {
+				resolve()
+			}, 2000)
+		}).then(() => {
+			open(`http://localhost:3000`)
+			console.log(`✅ 6/6 - Started development server`)
+
+			console.log(
+				boxen(
+					chalk(
+						figlet.textSync('Happy Hacking!', {
+							font: 'Small',
+							horizontalLayout: 'default',
+							verticalLayout: 'default'
+						})
+					),
+					{
+						borderStyle: 'round',
+						padding: 1
+					}
+				)
+			)
+		}),
+		child_process.exec(
+			`cd ${name} && ${settings.includes('yarn') ? 'yarn' : 'bun'} dev`,
+			{stdio: [0, 1, 2]}
+		)
+	])
+else console.log(`✅ 6/6 - no-dev flag passed`)

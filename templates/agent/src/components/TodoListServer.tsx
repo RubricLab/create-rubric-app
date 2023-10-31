@@ -1,4 +1,4 @@
-import {listTasks} from '../tools/listTasks'
+import {listTasks} from '~/tools/listTasks'
 import TodoListClient from './TodoListClient'
 
 export default async function TodoListServer() {

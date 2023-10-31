@@ -1,10 +1,10 @@
 import {DynamicStructuredTool} from 'langchain/tools'
 import z from 'zod'
-import prisma from '../utils/prisma'
+import db from '~/utils/db'
 
 // Get some or all tasks
 export async function listTasks() {
-	const allTasks = await prisma.task.findMany({orderBy: {createdAt: 'desc'}})
+	const allTasks = await db.task.findMany({orderBy: {createdAt: 'desc'}})
 	console.log(allTasks)
 	return allTasks
 }
