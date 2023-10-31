@@ -30,10 +30,14 @@ export default function ChatBox({refetch}: Props) {
 		const reader = response.body.getReader()
 
 		while (true) {
-			const {done, value} = await reader.read()
+			const { done, value } = await reader.read()
+			setLoading(false)
 
-			if (done) break
-
+			if (done) {
+				refetch()
+				break
+			}
+			
 			const text = new TextDecoder().decode(value)
 
 			if (text === '[') {
@@ -56,12 +60,6 @@ export default function ChatBox({refetch}: Props) {
 				})
 			else setStreamedData(prevData => prevData + text)
 		}
-
-		setLoading(false)
-	}
-
-	const handleClearChat = () => {
-		setStreamedData('')
 	}
 
 	return (

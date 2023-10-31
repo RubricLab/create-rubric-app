@@ -28,10 +28,6 @@ export default async function basicAgent({input}) {
 					await writer.ready
 					await writer.write(`[${JSON.stringify(data)}]`)
 				},
-				async handleAgentEnd() {
-					await writer.ready
-					await writer.close()
-				}
 			}
 		],
 		modelName: gptModel,
@@ -53,11 +49,15 @@ export default async function basicAgent({input}) {
 			prefix: `You are a generally intelligent AI.`
 		},
 		agentType: 'openai-functions',
-		returnIntermediateSteps: env.NODE_ENV === 'development',
-		verbose: env.NODE_ENV === 'development'
+		// returnIntermediateSteps: env.NODE_ENV === 'development',
+		// verbose: env.NODE_ENV === 'development'
 	})
 
-	executor.call({input})
+	executor.call({ input }).then(async () => {
+		await writer.ready
+		await writer.close()
+				
+	})
 
 	return stream.readable
 }
