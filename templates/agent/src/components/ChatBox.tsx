@@ -2,6 +2,7 @@
 
 import {CheckIcon} from 'lucide-react'
 import {useState} from 'react'
+import Loader from './Loader'
 
 type Props = {
 	refetch: () => void
@@ -16,7 +17,6 @@ export default function ChatBox({refetch}: Props) {
 
 	async function agentChat(formData: FormData) {
 		setLoading(true)
-
 		setStreamedData('')
 
 		const input = formData.get('input') as string
@@ -31,13 +31,11 @@ export default function ChatBox({refetch}: Props) {
 
 		while (true) {
 			const {done, value} = await reader.read()
-			setLoading(false)
-
 			if (done) {
 				refetch()
+				setLoading(false)
 				break
 			}
-
 			const text = new TextDecoder().decode(value)
 
 			if (text === '[') {
@@ -64,9 +62,6 @@ export default function ChatBox({refetch}: Props) {
 
 	return (
 		<>
-			{loading ? (
-				<div className='animate-pulse text-5xl font-bold'>LOADING</div>
-			) : null}
 			{streamedData ? (
 				<div className='flex flex-col gap-2'>
 					{streamedData.split('\n').map((line, index) => (
@@ -92,8 +87,9 @@ export default function ChatBox({refetch}: Props) {
 				/>
 				<button
 					className='w-fit'
-					type='submit'>
-					<CheckIcon />
+					type='submit'
+					disabled={loading}>
+					{loading ? <Loader /> : <CheckIcon />}
 				</button>
 			</form>
 		</>
