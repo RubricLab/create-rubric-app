@@ -34,7 +34,7 @@ const TaskList = ({tasks}: Props) => {
 				: tasks.map(({id, title, status, createdAt}) => (
 						<div
 							key={id}
-							className='flex items-center gap-2'>
+							className='flex items-center justify-between gap-2'>
 							<input
 								name='status'
 								onChange={e => {
