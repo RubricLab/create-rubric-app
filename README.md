@@ -15,7 +15,3 @@ CLI for initializing projects
 `npx create-rubric-app@latest --n my-cool-app --t fullstack`
 
 `npx create-rubric-app@latest -y`
-
-
-## Todo List
-- [ ] Remove turbo from the `@rubriclab/es-lint` package
