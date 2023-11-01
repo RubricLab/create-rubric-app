@@ -15,7 +15,7 @@
 	},
 	"description": "This project was bootstrapped with create-rubric-app",
 	"devDependencies": {
-		"@rubriclab/eslint-config": "^1.1.0",
+		"@rubriclab/eslint-config": "latest",
 		"@rubriclab/prettier-config": "latest",
 		"@rubriclab/tailwind-config": "latest",
 		"@rubriclab/typescript-config": "latest",

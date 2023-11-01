@@ -1,10 +1,10 @@
 {
 	"compilerOptions": {
-		"plugins": [{"name": "next"}],
 		"baseUrl": ".",
 		"paths": {
 			"~/*": ["./src/*"]
-		}
+		},
+		"plugins": [{"name": "next"}]
 	},
 	"exclude": ["node_modules"],
 	"extends": "@rubriclab/typescript-config/nextjs",

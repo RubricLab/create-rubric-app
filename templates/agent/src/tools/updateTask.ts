@@ -23,17 +23,18 @@ export async function updateTask({
 	return JSON.stringify(updatedTask)
 }
 
-export const updateTaskTool = async ()=> new DynamicStructuredTool({
-	description: 'Update a task',
-	func: async ({id, title, status}) => {
-		return JSON.stringify(await updateTask({id, status, title}))
-	},
-	name: 'updateTask',
-	schema: z.object({
-		id: z.number().describe('Integer ID of the task'),
-		status: z
-			.boolean()
-			.describe('Status of the task, true if completed, false otherwise'),
-		title: z.string().describe('Title of the task')
+export const updateTaskTool = async () =>
+	new DynamicStructuredTool({
+		description: 'Update a task',
+		func: async ({id, title, status}) => {
+			return JSON.stringify(await updateTask({id, status, title}))
+		},
+		name: 'updateTask',
+		schema: z.object({
+			id: z.number().describe('Integer ID of the task'),
+			status: z
+				.boolean()
+				.describe('Status of the task, true if completed, false otherwise'),
+			title: z.string().describe('Title of the task')
+		})
 	})
-})

@@ -12,15 +12,17 @@
 		"open": "^9.1.0"
 	},
 	"devDependencies": {
+		"@changesets/cli": "^2.26.2",
 		"@rubriclab/eslint-config": "latest",
 		"@rubriclab/prettier-config": "latest",
 		"@rubriclab/tailwind-config": "latest",
 		"@rubriclab/typescript-config": "latest",
 		"eslint": "^8.52.0",
+		"next": "^14.0.1",
 		"prettier": "^3.0.3"
 	},
 	"homepage": "https://github.com/RubricLab/rubric/tree/main/packages/create-rubric-app#readme",
-	"license": "MIT",
+	"license": "gonuts",
 	"name": "create-rubric-app",
 	"publishConfig": {
 		"access": "public"
@@ -32,6 +34,7 @@
 	},
 	"scripts": {
 		"bleed": "npx yarn-upgrade-all -W && rm yarn.lock && bun install",
+		"format": "prettier --write .",
 		"lint": "eslint . --ext .js,.jsx,.cjs,.mjs,.json,.ts,.tsx"
 	},
 	"version": "1.1.0"
