@@ -11,7 +11,7 @@ const TaskList = ({tasks}: Props) => {
 	const [showData, setShowData] = useState(false)
 
 	return (
-		<div className='border-primary bg-primary flex h-full max-h-80 w-full flex-col gap-3 overflow-y-scroll rounded-md p-3'>
+		<div className='border-primary bg-primary flex h-full max-h-80 sm:max-h-96 w-full flex-col gap-5 overflow-y-scroll rounded-md p-3 pl-5'>
 			<div className='flex w-full items-center justify-between'>
 				<h3>Checklist</h3>
 				<button
@@ -31,10 +31,14 @@ const TaskList = ({tasks}: Props) => {
 
 			{showData
 				? null
-				: tasks.map(({id, title, status, createdAt}) => (
+				: <>
+					<div className="w-full text-xs flex justify-end">
+						Created at
+					</div>
+					{tasks.map(({ id, title, status, createdAt }) => (
 						<div
 							key={id}
-							className='flex items-center justify-between gap-2'>
+							className='flex items-center justify-between gap-1'>
 							<input
 								name='status'
 								onChange={e => {
@@ -60,16 +64,18 @@ const TaskList = ({tasks}: Props) => {
 								className='w-3/4 border-none'
 								defaultValue={title}
 							/>
-							<span className='text-xs text-stone-400'>
+							<div className='text-xs text-stone-400'>
 								{new Date(createdAt).toLocaleDateString('en-US', {
-									day: '2-digit',
-									hour: '2-digit',
+									day: 'numeric',
+									hour: "numeric",
 									minute: '2-digit',
 									month: 'short'
 								})}
-							</span>
+							</div>
 						</div>
-				  ))}
+					))}
+					</>
+			}
 		</div>
 	)
 }
