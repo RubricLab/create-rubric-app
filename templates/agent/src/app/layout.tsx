@@ -1,4 +1,5 @@
 import {Plus_Jakarta_Sans} from 'next/font/google'
+import BackgroundGrid from '~/components/BackgroundGrid'
 import {META} from '~/constants/metadata'
 import './styles.css'
 
@@ -19,7 +20,8 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
 		<html lang='en'>
 			<body
 				className={`${font.className} relative flex h-full min-h-screen w-full flex-col items-center`}>
-				<div className='z-10 flex w-full max-w-6xl items-center justify-center p-5'>
+				<BackgroundGrid className='fixed' />
+				<div className='z-10 flex w-full items-center justify-center 2xl:max-w-6xl'>
 					{children}
 				</div>
 			</body>
