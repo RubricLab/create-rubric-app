@@ -14,4 +14,4 @@ To get started, use the following command:
 
 ## Collaborate
 
-We are hacking on this on [Gather]([url](https://island.rubriclabs.com)https://island.rubriclabs.com), come join.
+We are hacking on this on [Gather](https://island.rubriclabs.com), come join.
