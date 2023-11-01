@@ -1,5 +1,6 @@
 'use client'
 
+import {AnimatePresence, motion} from 'framer-motion'
 import {CheckIcon} from 'lucide-react'
 import {useState} from 'react'
 import Loader from './Loader'
@@ -10,10 +11,10 @@ type Props = {
 
 // List of messages to be rendered in the UI
 const messages = new Map([
-	['createTask', {message: 'Creating task', className: 'text-green-500'}],
-	['deleteTask', {message: 'Deleting task', className: 'text-red-500'}],
-	['updateTask', {message: 'Updating task', className: 'text-stone-500'}],
-	['listTasks', {message: 'Listing tasks', className: 'text-stone-500'}]
+	['createTask', {message: 'Creating task', className: 'bg-green-500'}],
+	['deleteTask', {message: 'Deleting task', className: 'bg-red-500'}],
+	['updateTask', {message: 'Updating task', className: 'bg-stone-500'}],
+	['listTasks', {message: 'Listing tasks', className: 'bg-stone-500'}]
 ])
 
 export default function ChatBox({refetch}: Props) {
@@ -75,15 +76,23 @@ export default function ChatBox({refetch}: Props) {
 	return (
 		<>
 			{streamedData ? (
-				<div className='flex flex-col gap-2'>
-					{streamedData.map((line, index) => (
-						<p
-							className={`text-sm ${getMessage(line).className}`}
-							key={index}>
-							{getMessage(line).message}
-						</p>
-					))}
-				</div>
+				<AnimatePresence>
+					<div className='flex h-full w-full flex-col justify-end gap-2'>
+						{streamedData.map((line, index) => (
+							<motion.div
+								initial={{opacity: 0, y: 10}}
+								animate={{opacity: 1, y: 0}}
+								transition={{duration: 0.3}}
+								key={index}
+								className='flex items-center gap-2'>
+								<span
+									className={`flex h-2 w-2 rounded-full ${getMessage(line).className}`}
+								/>
+								<p className='text-sm'>{getMessage(line).message}</p>
+							</motion.div>
+						))}
+					</div>
+				</AnimatePresence>
 			) : null}
 
 			<form
