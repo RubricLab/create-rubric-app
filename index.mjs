@@ -80,10 +80,11 @@ async function downloadFile(url, dest) {
 const {
 	values: {
 		name: _name,
-		yes: _yes,
 		template: _template,
-		verbose: _verbose,
-		key: _key
+		yes: _yes,
+		// verbose: _verbose,
+		key: _key,
+		ai: _ai
 	}
 } = parseArgs({
 	options: {
@@ -99,13 +100,16 @@ const {
 			short: 'y',
 			type: 'boolean'
 		},
-		verbose: {
-			short: 'v',
-			type: 'boolean'
-		},
+		// verbose: {
+		// 	short: 'v',
+		// 	type: 'boolean'
+		// },
 		key: {
 			short: 'k',
 			type: 'string'
+		},
+		ai: {
+			type: 'boolean'
 		}
 	}
 })
@@ -154,6 +158,8 @@ const template =
 	_template ||
 	(_yes
 		? 'agent'
+		: _ai
+		? 'agent'
 		: await select({
 				choices: CHOICES,
 				default: 'agent',
@@ -167,9 +173,7 @@ const key =
 		message:
 			'What is your Open AI API key? (\u001b]8;;https://platform.openai.com/account/api-keys\u0007Generate one here\u001b]8;;\u0007)'
 	}))
-// Ideally -> store default key in rubric.rc file in ~
-// Must handle bad key error (it looks like your key is invalid)
-// Must handle no GPT 4 avail in account error (it looks like you don't have access to GPT 4, navigate to this page to fix)
+// TODO: Ideally -> store default key in rubric.rc file in ~
 
 const settings = _yes
 	? ['scaffold', 'download', 'vscode', 'install', 'dev']
