@@ -86,12 +86,12 @@ export default function ChatBox({refetch}: Props) {
 	}
 
 	return (
-		<div className='flex w-full flex-col items-end justify-end gap-5'>
+		<div className='flex w-full flex-col relative items-end justify-end gap-5'>
 			{/* Toast list */}
-			{streamedData ? (
-				<div className='flex h-32 w-full overflow-y-scroll'>
+			<div className='flex h-32 w-full relative overflow-y-scroll'>
+				{streamedData ? (
 					<AnimatePresence>
-						<div className='flex h-full w-full flex-col justify-end gap-2'>
+						<div className='flex h-fit w-full flex-col justify-end gap-2'>
 							{streamedData.map((line, index) => (
 								<motion.div
 									initial={{opacity: 0, y: 10}}
@@ -107,8 +107,8 @@ export default function ChatBox({refetch}: Props) {
 							))}
 						</div>
 					</AnimatePresence>
-				</div>
-			) : null}
+				) : null}				
+			</div>
 
 			{/* Chatbox */}
 			<form
@@ -120,7 +120,7 @@ export default function ChatBox({refetch}: Props) {
 				}}>
 				<input
 					name='input'
-					placeholder='Try "Create a checklist to make a smoothie"'
+					placeholder='Try "Add a todo" or "Update a todo"'
 					type='text'
 				/>
 				<button
