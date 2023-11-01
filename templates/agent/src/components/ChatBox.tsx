@@ -89,7 +89,7 @@ export default function ChatBox({refetch}: Props) {
 		<div className='flex w-full flex-col items-end justify-end gap-5'>
 			{/* Toast list */}
 			{streamedData ? (
-				<div className='flex h-32 w-full overflow-y-scroll'>
+				<div className='flex h-28 w-full overflow-y-scroll'>
 					<AnimatePresence>
 						<div className='flex h-full w-full flex-col justify-end gap-2'>
 							{streamedData.map((line, index) => (
@@ -100,11 +100,9 @@ export default function ChatBox({refetch}: Props) {
 									key={index}
 									className='flex items-center gap-2'>
 									<span
-										className={`absolute h-2 w-2 rounded-full ${
-											getMessage(line).className
-										}`}
+										className={`h-2 w-2 rounded-full ${getMessage(line).className}`}
 									/>
-									<p className='ml-5 text-sm'>{getMessage(line).message}</p>
+									<p className='text-sm'>{getMessage(line).message}</p>
 								</motion.div>
 							))}
 						</div>
