@@ -84,7 +84,8 @@ const {
 		yes: _yes,
 		// verbose: _verbose,
 		key: _key,
-		ai: _ai
+		ai: _ai,
+		bun: _bun
 	}
 } = parseArgs({
 	options: {
@@ -109,6 +110,10 @@ const {
 			type: 'string'
 		},
 		ai: {
+			type: 'boolean'
+		},
+		bun: {
+			short: 'b',
 			type: 'boolean'
 		}
 	}
@@ -176,7 +181,9 @@ const key =
 // TODO: Ideally -> store default key in rubric.rc file in ~
 
 const settings = _yes
-	? ['scaffold', 'download', 'vscode', 'install', 'db', 'dev']
+	? _bun
+		? ['scaffold', 'download', 'vscode', 'install', 'db', 'bun', 'dev']
+		: ['scaffold', 'download', 'vscode', 'install', 'db', 'dev']
 	: await checkbox({
 			choices: [
 				{checked: true, name: 'scaffold project files', value: 'scaffold'},
@@ -185,7 +192,7 @@ const settings = _yes
 				{checked: true, name: 'configure DB', value: 'db'},
 				{checked: true, name: 'run install', value: 'install'},
 				{checked: true, name: 'run dev', value: 'dev'},
-				{checked: false, name: 'use yarn instead of bun', value: 'yarn'}
+				{checked: _bun, name: 'use bun instead of npm', value: 'bun'}
 			],
 			message: 'Do you want to change any settings?'
 	  })
@@ -211,19 +218,21 @@ else console.log(`✅ 2/6 - no-download flag passed`)
 
 if (settings.includes('install')) {
 	child_process.execSync(
-		`cd ${name} && ${settings.includes('yarn') ? 'yarn' : 'bun i'}`,
+		`cd ${name} && ${settings.includes('bun') ? 'bun i' : 'npm i'}`,
 		{stdio: [0, 1, 2]}
 	)
 	console.log(
 		`✅ 3/6 - Installed dependencies with ${
-			settings.includes('yarn') ? 'yarn' : 'bun'
+			settings.includes('bun') ? 'bun' : 'npm'
 		}`
 	)
 } else console.log(`✅ 3/6 - no-install flag passed`)
 
 if (settings.includes('db')) {
 	child_process.execSync(
-		`cd ${name} && ${settings.includes('yarn') ? 'yarn db:push' : 'bun db:push'}`,
+		`cd ${name} && ${
+			settings.includes('bun') ? 'bun db:push' : 'npm run db:push'
+		}`,
 		{stdio: [0, 1, 2]}
 	)
 	console.log(`✅ 4/6 - Configured DB with sqlite3`)
@@ -273,7 +282,7 @@ if (settings.includes('dev'))
 			)
 		}),
 		child_process.exec(
-			`cd ${name} && ${settings.includes('yarn') ? 'yarn' : 'bun'} dev`,
+			`cd ${name} && ${settings.includes('bun') ? 'bun' : 'npm run'} dev`,
 			{stdio: [0, 1, 2]}
 		)
 	])
