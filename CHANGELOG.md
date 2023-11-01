@@ -1,5 +1,17 @@
 # create-rubric-app
 
+## 1.2.2
+
+### Patch Changes
+
+- fix db setting
+
+## 1.2.1
+
+### Patch Changes
+
+- pre-release with updated app and cli args
+
 ## 1.2.0
 
 ### Minor Changes

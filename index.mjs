@@ -176,7 +176,7 @@ const key =
 // TODO: Ideally -> store default key in rubric.rc file in ~
 
 const settings = _yes
-	? ['scaffold', 'download', 'vscode', 'install', 'dev']
+	? ['scaffold', 'download', 'vscode', 'install', 'db', 'dev']
 	: await checkbox({
 			choices: [
 				{checked: true, name: 'scaffold project files', value: 'scaffold'},
