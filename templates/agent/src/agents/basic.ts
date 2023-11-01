@@ -25,9 +25,10 @@ export default async function basicAgent({input}) {
 				},
 				async handleLLMEnd(data) {
 					await writer.ready
+					// Return the function name if a function is called, otherwise return the text response
 					await writer.write(
 						(data.generations[0][0] as any)?.message?.additional_kwargs?.function_call
-							?.name || '?'
+							?.name || data.generations[0][0]?.text
 					)
 				}
 			}

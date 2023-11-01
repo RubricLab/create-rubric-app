@@ -11,10 +11,10 @@ type Props = {
 
 // List of messages to be rendered in the UI
 const messages = new Map([
-	['createTask', {message: 'Creating task', className: 'bg-green-500'}],
-	['deleteTask', {message: 'Deleting task', className: 'bg-red-500'}],
-	['updateTask', {message: 'Updating task', className: 'bg-stone-500'}],
-	['listTasks', {message: 'Listing tasks', className: 'bg-stone-500'}]
+	['createTask', {message: 'Creating task', className: 'bg-green-400'}],
+	['deleteTask', {message: 'Deleting task', className: 'bg-red-400'}],
+	['updateTask', {message: 'Updating task', className: 'bg-stone-300'}],
+	['listTasks', {message: 'Listing tasks', className: 'bg-stone-300'}]
 ])
 
 export default function ChatBox({refetch}: Props) {
@@ -28,7 +28,7 @@ export default function ChatBox({refetch}: Props) {
 	const getMessage = (line: string) => {
 		const found = messages.get(line)
 		if (found) return found
-		return {message: 'Action not recognized', className: 'text-red-500'}
+		return {message: line, className: 'bg-stone-300'}
 	}
 
 	async function agentChat(formData: FormData) {
