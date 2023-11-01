@@ -1,8 +1,6 @@
 {
 	"dependencies": {
 		"@prisma/client": "5.5.2",
-		"@rubriclab/ui": "latest",
-		"@rubriclab/utils": "latest",
 		"dotenv": "^16.3.1",
 		"framer-motion": "^10.16.4",
 		"langchain": "^0.0.176",

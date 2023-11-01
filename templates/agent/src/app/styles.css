@@ -2,13 +2,17 @@
 @tailwind base;
 @tailwind components;
 
-@import '@rubriclab/ui/build.css';
-
 html {
-	@apply bg-white;
+	@apply bg-white text-black dark:bg-black dark:text-white;
 }
 
 @layer base {
+	.bg-primary {
+		@apply bg-white dark:bg-black;
+	}
+	.border-primary {
+		@apply border border-2 border-neutral-200 dark:border-neutral-800;
+	}
 	h1 {
 		@apply text-5xl font-bold;
 	}
@@ -19,7 +23,7 @@ html {
 		@apply text-xl font-semibold;
 	}
 	input {
-		@apply w-full rounded-md border px-3 py-2 focus:outline-none;
+		@apply w-full rounded-md border bg-neutral-200 px-3 py-2 focus:outline-none dark:bg-neutral-800;
 	}
 	button {
 		@apply w-full rounded-md border bg-white px-3 py-2 transition-colors duration-300 hover:bg-stone-100 disabled:cursor-not-allowed disabled:hover:bg-white;

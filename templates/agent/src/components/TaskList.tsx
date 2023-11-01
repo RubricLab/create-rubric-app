@@ -11,11 +11,11 @@ const TaskList = ({tasks}: Props) => {
 	const [showData, setShowData] = useState(false)
 
 	return (
-		<div className='flex h-full max-h-96 w-full max-w-2xl flex-col gap-3 overflow-y-scroll rounded-md border bg-white p-3'>
+		<div className='flex h-full max-h-96 w-full max-w-2xl flex-col gap-3 overflow-y-scroll rounded-md border border-2 border-neutral-200 bg-white p-3 dark:border-neutral-800 dark:bg-black'>
 			<div className='flex w-full items-center justify-between'>
 				<h3>Checklist</h3>
 				<button
-					className='w-fit'
+					className='bg-primary border-primary w-fit'
 					onClick={() => setShowData(prev => !prev)}>
 					<BracesIcon className='h-5 w-5' />
 				</button>

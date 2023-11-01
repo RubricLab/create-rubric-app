@@ -20,7 +20,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
 		<html lang='en'>
 			<body
 				className={`${font.className} relative flex h-full min-h-screen w-full flex-col items-center`}>
-				<BackgroundGrid className='fixed h-full w-full' />
+				<BackgroundGrid className='fixed h-full w-full opacity-30 dark:opacity-50' />
 				<div className='z-10 flex w-full items-center justify-center 2xl:max-w-6xl'>
 					{children}
 				</div>
