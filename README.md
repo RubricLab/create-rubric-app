@@ -1,6 +1,6 @@
 WE ARE HACKING ON CREATE-RUBRIC-APP TODAY ON GATHER:
 
-https://island.rubriclab.com
+https://island.rubriclabs.com
 
 # Create Rubric App CLI
 
