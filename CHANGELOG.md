@@ -1,5 +1,17 @@
 # create-rubric-app
 
+## 1.3.1
+
+### Patch Changes
+
+- rerender inputs fix
+
+## 1.3.0
+
+### Minor Changes
+
+- 🚀
+
 ## 1.2.2
 
 ### Patch Changes
