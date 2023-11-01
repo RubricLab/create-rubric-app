@@ -11,10 +11,22 @@ type Props = {
 
 // List of messages to be rendered in the UI
 const messages = new Map([
-	['createTask', {message: 'Creating task', className: 'bg-green-400'}],
-	['deleteTask', {message: 'Deleting task', className: 'bg-red-400'}],
-	['updateTask', {message: 'Updating task', className: 'bg-stone-300'}],
-	['listTasks', {message: 'Listing tasks', className: 'bg-stone-300'}]
+	[
+		'createTask',
+		{message: 'Creating task', className: 'bg-green-300 dark:bg-green-600'}
+	],
+	[
+		'deleteTask',
+		{message: 'Deleting task', className: 'bg-red-300 dark:bg-red-600'}
+	],
+	[
+		'updateTask',
+		{message: 'Updating task', className: 'bg-purple-300 dark:bg-purple-600'}
+	],
+	[
+		'listTasks',
+		{message: 'Listing tasks', className: 'bg-blue-300 dark:bg-blue-600'}
+	]
 ])
 
 export default function ChatBox({refetch}: Props) {
@@ -28,7 +40,7 @@ export default function ChatBox({refetch}: Props) {
 	const getMessage = (line: string) => {
 		const found = messages.get(line)
 		if (found) return found
-		return {message: line, className: 'bg-stone-300'}
+		return {message: line, className: 'bg-neutral-300 dark:bg-neutral-600'}
 	}
 
 	async function agentChat(formData: FormData) {
@@ -48,7 +60,7 @@ export default function ChatBox({refetch}: Props) {
 		while (true) {
 			const {done, value} = await reader.read()
 			if (done) {
-				refetch()
+				await refetch()
 				setLoading(false)
 				break
 			}
@@ -88,9 +100,11 @@ export default function ChatBox({refetch}: Props) {
 									key={index}
 									className='flex items-center gap-2'>
 									<span
-										className={`flex h-2 w-2 rounded-full ${getMessage(line).className}`}
+										className={`absolute h-2 w-2 rounded-full ${
+											getMessage(line).className
+										}`}
 									/>
-									<p className='text-sm'>{getMessage(line).message}</p>
+									<p className='ml-5 text-sm'>{getMessage(line).message}</p>
 								</motion.div>
 							))}
 						</div>

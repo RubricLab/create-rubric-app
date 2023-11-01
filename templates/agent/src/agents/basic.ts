@@ -30,6 +30,11 @@ export default async function basicAgent({input}) {
 						(data.generations[0][0] as any)?.message?.additional_kwargs?.function_call
 							?.name || data.generations[0][0]?.text
 					)
+				},
+				async handleLLMError(error) {
+					await writer.ready
+					await writer.write(encoder.encode(`${error}`))
+					await writer.close()
 				}
 			}
 		],
@@ -42,6 +47,7 @@ export default async function basicAgent({input}) {
 	const tools = [createTaskTool, deleteTaskTool, listTasksTool, updateTaskTool]
 
 	console.log('initializing agent executor')
+
 	const executor = await initializeAgentExecutorWithOptions(tools, model, {
 		agentArgs: {
 			prefix: `You are a generally intelligent AI.`
