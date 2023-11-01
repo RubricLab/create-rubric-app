@@ -19,9 +19,8 @@ export default async function basicAgent({input}) {
 	const model = new ChatOpenAI({
 		callbacks: [
 			{
-				async handleLLMNewToken(token) {
+				async handleLLMNewToken() {
 					await writer.ready
-					// await writer.write(encoder.encode(`${token}`))
 				},
 				async handleLLMEnd(data) {
 					await writer.ready
@@ -46,15 +45,13 @@ export default async function basicAgent({input}) {
 
 	const tools = [createTaskTool, deleteTaskTool, listTasksTool, updateTaskTool]
 
-	console.log('initializing agent executor')
-
 	const executor = await initializeAgentExecutorWithOptions(tools, model, {
 		agentArgs: {
-			prefix: `You are a generally intelligent AI.`
+			prefix: "You are a smart task management AI. Users will task you with managing their to-do list or answering basic questions."
 		},
-		agentType: 'openai-functions'
-		// returnIntermediateSteps: env.NODE_ENV === 'development',
-		// verbose: env.NODE_ENV === 'development'
+		agentType: 'openai-functions',
+		returnIntermediateSteps: env.NODE_ENV === 'development',
+		verbose: env.NODE_ENV === 'development'
 	})
 
 	executor.call({input}).then(async () => {
