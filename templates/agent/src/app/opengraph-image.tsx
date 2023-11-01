@@ -1,7 +1,6 @@
 import {ImageResponse} from 'next/og'
 import colors from 'tailwindcss/colors'
 import BackgroundGrid from '~/components/BackgroundGrid'
-import {FONTS} from '~/constants/fonts'
 
 export const runtime = 'edge'
 
@@ -42,13 +41,7 @@ export default async function Image({params}: Props) {
 			</div>
 		),
 		{
-			...size,
-			fonts: [
-				{
-					data: await (await fetch(FONTS.jakartaURL)).arrayBuffer(),
-					name: 'cal-sans'
-				}
-			]
+			...size
 		}
 	)
 }

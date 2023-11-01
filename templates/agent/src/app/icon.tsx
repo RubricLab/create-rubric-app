@@ -1,7 +1,4 @@
 import {ImageResponse} from 'next/og'
-import colors from 'tailwindcss/colors'
-import {FONTS} from '~/constants/fonts'
-import config from '../../tailwind.config'
 
 export const runtime = 'edge'
 
@@ -11,34 +8,26 @@ export const size = {
 	width: 32
 }
 
-const offWhite = config.theme.colors['off-white']
-
 export default async function Icon() {
 	return new ImageResponse(
 		(
 			<div
 				style={{
 					alignItems: 'center',
-					background: colors['orange']['700'] || 'orange',
-					color: offWhite,
+					background: "black",
+					color: "white",
 					display: 'flex',
+					fontWeight: 700,
 					fontSize: 28,
 					height: '100%',
 					justifyContent: 'center',
-					paddingBottom: '5px',
 					width: '100%'
 				}}>
-				📱
+				R
 			</div>
 		),
 		{
-			...size,
-			fonts: [
-				{
-					data: await (await fetch(FONTS.jakartaURL)).arrayBuffer(),
-					name: 'jakarta'
-				}
-			]
+			...size
 		}
 	)
 }

@@ -1,7 +1,6 @@
 import {ImageResponse} from 'next/og'
 import colors from 'tailwindcss/colors'
 import BackgroundGrid from '~/components/BackgroundGrid'
-import {FONTS} from '~/constants/fonts'
 
 export const runtime = 'edge'
 
@@ -17,14 +16,12 @@ type Props = {
 }
 
 export default async function Image({params}: Props) {
-	console.log('Path params: ', params)
-
 	return new ImageResponse(
 		(
 			<div
 				style={{
 					alignItems: 'center',
-					background: colors['block'],
+					background: colors['black'],
 					display: 'flex',
 					flexDirection: 'column',
 					height: '100%',
@@ -39,18 +36,12 @@ export default async function Image({params}: Props) {
 						width: size.width
 					}}
 				/>
-				<div style={{color: colors['white'], fontSize: 128}}>iPhone Stock Bot</div>
+				<div style={{color: colors['white'], fontSize: 128}}>Jarvis</div>
 				<div style={{color: colors['white'], fontSize: 48}}>Built with Rubric.</div>
 			</div>
 		),
 		{
-			...size,
-			fonts: [
-				{
-					data: await (await fetch(FONTS.jakartaURL)).arrayBuffer(),
-					name: 'jakarta'
-				}
-			]
+			...size
 		}
 	)
 }
