@@ -30,14 +30,14 @@ export default function ChatBox({refetch}: Props) {
 		const reader = response.body.getReader()
 
 		while (true) {
-			const { done, value } = await reader.read()
+			const {done, value} = await reader.read()
 			setLoading(false)
 
 			if (done) {
 				refetch()
 				break
 			}
-			
+
 			const text = new TextDecoder().decode(value)
 
 			if (text === '[') {
