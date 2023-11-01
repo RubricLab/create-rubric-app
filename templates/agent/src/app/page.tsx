@@ -25,7 +25,7 @@ export default function Page() {
 				</h1>
 				<ChatBox refetch={fetchTasks} />
 			</div>
-			<div className='flex h-full items-center border-l p-10'>
+			<div className='flex h-full items-center p-10'>
 				<TaskList tasks={tasks} />
 			</div>
 		</div>

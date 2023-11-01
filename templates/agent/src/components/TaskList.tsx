@@ -55,6 +55,7 @@ const TaskList = ({tasks}: Props) => {
 										title: e.target.value
 									})
 								}
+								className='w-3/4 border-none'
 								defaultValue={title}
 							/>
 							<span className='text-xs text-stone-400'>
