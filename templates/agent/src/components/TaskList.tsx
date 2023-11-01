@@ -1,7 +1,7 @@
 import {Task} from '@prisma/client'
 import {BracesIcon} from 'lucide-react'
 import {useState} from 'react'
-import {updateTask} from '~/tools/updateTask'
+import {updateTask} from '~/app/actions/updateTask'
 
 type Props = {
 	tasks: Task[]

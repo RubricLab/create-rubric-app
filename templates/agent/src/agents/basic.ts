@@ -26,7 +26,8 @@ export default async function basicAgent({input}) {
 				async handleLLMEnd(data) {
 					await writer.ready
 					await writer.write(
-						data.generations[0][0].message.additional_kwargs.function_call.name
+						(data.generations[0][0] as any)?.message?.additional_kwargs?.function_call
+							?.name || '?'
 					)
 				}
 			}
@@ -37,12 +38,7 @@ export default async function basicAgent({input}) {
 		temperature: 0
 	})
 
-	const tools = [
-		await createTaskTool(),
-		await deleteTaskTool(),
-		await listTasksTool(),
-		await updateTaskTool()
-	]
+	const tools = [createTaskTool, deleteTaskTool, listTasksTool, updateTaskTool]
 
 	console.log('initializing agent executor')
 	const executor = await initializeAgentExecutorWithOptions(tools, model, {
