@@ -3,7 +3,6 @@
 import {useEffect, useState} from 'react'
 import {listTasks} from '~/app/actions/listTasks'
 import ChatBox from '~/components/ChatBox'
-import Nav from '~/components/Nav'
 import TaskList from '~/components/TaskList'
 
 export default function Page() {
@@ -20,8 +19,7 @@ export default function Page() {
 	}, [])
 
 	return (
-		<div className='flex min-h-screen w-full max-w-3xl flex-col items-center justify-center gap-12'>
-			<Nav title={'create-rubric-app'} />
+		<div className='relative flex h-screen w-full flex-col items-center justify-center gap-12 p-5'>
 			<TaskList tasks={tasks} />
 			<ChatBox refetch={fetchTasks} />
 		</div>

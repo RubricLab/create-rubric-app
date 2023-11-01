@@ -74,7 +74,7 @@ export default function ChatBox({refetch}: Props) {
 	}
 
 	return (
-		<>
+		<div className='absolute bottom-0 w-full p-5'>
 			{streamedData ? (
 				<AnimatePresence>
 					<div className='flex h-full w-full flex-col justify-end gap-2'>
@@ -113,6 +113,6 @@ export default function ChatBox({refetch}: Props) {
 					{loading ? <Loader /> : <CheckIcon />}
 				</button>
 			</form>
-		</>
+		</div>
 	)
 }

@@ -1,5 +1,6 @@
 import {Plus_Jakarta_Sans} from 'next/font/google'
 import BackgroundGrid from '~/components/BackgroundGrid'
+import Nav from '~/components/Nav'
 import {META} from '~/constants/metadata'
 import './styles.css'
 
@@ -21,7 +22,8 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
 			<body
 				className={`${font.className} relative flex h-full min-h-screen w-full flex-col items-center`}>
 				<BackgroundGrid className='fixed h-full w-full opacity-30 dark:opacity-50' />
-				<div className='z-10 flex w-full items-center justify-center 2xl:max-w-6xl'>
+				<Nav title={'create-rubric-app'} />
+				<div className='z-10 flex w-full max-w-3xl items-center justify-center'>
 					{children}
 				</div>
 			</body>
