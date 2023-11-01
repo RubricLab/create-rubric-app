@@ -1,21 +1,17 @@
-WE ARE HACKING ON CREATE-RUBRIC-APP TODAY ON GATHER:
+# Create Rubric App
 
-https://island.rubriclabs.com
+This CLI tool is the easiest way to get started with a full-stack AI project, using AI Agents in React with complete type safety.
 
-# Create Rubric App CLI
+To get started, use the following command:
 
-CLI for initializing projects
-
-## Usage
+## Interactive
 
 `npx create-rubric-app@latest`
 
-## Advanced Usage
+## Non-interactive
 
-`npx create-rubric-app@latest --n my-cool-app --t fullstack`
+`npx create-rubric-app@latest -n my-cool-app -k OPENAI_API_KEY -y --bun --ai`
 
-`npx create-rubric-app@latest -y`
+## Collaborate
 
-## Defining GPT model
-
-In `src/agents/basic.ts`, you can update `gptModel` to "gpt-4" for more advanced usage. Currently, it's set to "gpt-3.5-turbo", to get a fast response.
+We are hacking on this on [Gather]([url](https://island.rubriclabs.com)https://island.rubriclabs.com), come join.
