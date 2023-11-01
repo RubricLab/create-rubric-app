@@ -13,7 +13,6 @@ export default async function basicAgent({input}) {
 
 	const writer = stream.writable.getWriter()
 
-
 	const gptModel = 'gpt-3.5-turbo'
 	// const gptModel = 'gpt-4' // use GPT-4 for more complex tasks!
 
@@ -22,12 +21,14 @@ export default async function basicAgent({input}) {
 			{
 				async handleLLMNewToken(token) {
 					await writer.ready
-					await writer.write(encoder.encode(`${token}`))
+					// await writer.write(encoder.encode(`${token}`))
 				},
 				async handleLLMEnd(data) {
 					await writer.ready
-					await writer.write(`[${JSON.stringify(data)}]`)
-				},
+					await writer.write(
+						data.generations[0][0].message.additional_kwargs.function_call.name
+					)
+				}
 			}
 		],
 		modelName: gptModel,
@@ -37,9 +38,9 @@ export default async function basicAgent({input}) {
 	})
 
 	const tools = [
-		await createTaskTool(), 
-		await deleteTaskTool(), 
-		await listTasksTool(), 
+		await createTaskTool(),
+		await deleteTaskTool(),
+		await listTasksTool(),
 		await updateTaskTool()
 	]
 
@@ -48,15 +49,14 @@ export default async function basicAgent({input}) {
 		agentArgs: {
 			prefix: `You are a generally intelligent AI.`
 		},
-		agentType: 'openai-functions',
+		agentType: 'openai-functions'
 		// returnIntermediateSteps: env.NODE_ENV === 'development',
 		// verbose: env.NODE_ENV === 'development'
 	})
 
-	executor.call({ input }).then(async () => {
+	executor.call({input}).then(async () => {
 		await writer.ready
 		await writer.close()
-				
 	})
 
 	return stream.readable

@@ -8,16 +8,31 @@ type Props = {
 	refetch: () => void
 }
 
+// List of messages to be rendered in the UI
+const messages = new Map([
+	['createTask', {message: 'Creating task', className: 'text-green-500'}],
+	['deleteTask', {message: 'Deleting task', className: 'text-red-500'}],
+	['updateTask', {message: 'Updating task', className: 'text-stone-500'}],
+	['listTasks', {message: 'Listing tasks', className: 'text-stone-500'}]
+])
+
 export default function ChatBox({refetch}: Props) {
-	const [streamedData, setStreamedData] = useState('')
+	const [streamedData, setStreamedData] = useState([])
 	const [objects, setObjects] = useState([])
 	const [objectIndex, setObjectIndex] = useState(0)
 	const [inObject, setInObject] = useState(false)
 	const [loading, setLoading] = useState(false)
 
+	// Find corresponding message and className
+	const getMessage = (line: string) => {
+		const found = messages.get(line)
+		if (found) return found
+		return {message: 'Action not recognized', className: 'text-red-500'}
+	}
+
 	async function agentChat(formData: FormData) {
 		setLoading(true)
-		setStreamedData('')
+		setStreamedData([])
 
 		const input = formData.get('input') as string
 
@@ -43,20 +58,17 @@ export default function ChatBox({refetch}: Props) {
 				setObjectIndex(prevIndex => prevIndex + 1)
 			} else if (text === ']') {
 				setInObject(false)
-				setStreamedData(
-					prevData =>
-						prevData +
-						`\n<code>${
-							JSON.parse(objects[objectIndex])[0].generations[0][0]
-						}</code>\n`
-				)
+				setStreamedData(prevData => [
+					...prevData,
+					`\n<code>${JSON.parse(objects[objectIndex])[0].generations[0][0]}</code>\n`
+				])
 			} else if (inObject)
 				setObjects(prevObjects => {
 					const newObjects = [...prevObjects]
 					newObjects[objectIndex] += text
 					return newObjects
 				})
-			else setStreamedData(prevData => prevData + text)
+			else setStreamedData(prevData => [...prevData, text])
 		}
 	}
 
@@ -64,11 +76,11 @@ export default function ChatBox({refetch}: Props) {
 		<>
 			{streamedData ? (
 				<div className='flex flex-col gap-2'>
-					{streamedData.split('\n').map((line, index) => (
+					{streamedData.map((line, index) => (
 						<p
-							className='text-sm'
+							className={`text-sm ${getMessage(line).className}`}
 							key={index}>
-							{line}
+							{getMessage(line).message}
 						</p>
 					))}
 				</div>
