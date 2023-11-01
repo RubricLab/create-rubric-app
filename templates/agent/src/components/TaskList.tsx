@@ -11,7 +11,7 @@ const TaskList = ({tasks}: Props) => {
 	const [showData, setShowData] = useState(false)
 
 	return (
-		<div className='flex w-full max-w-2xl flex-col gap-3 rounded-md border bg-white p-3'>
+		<div className='flex h-full max-h-96 w-full max-w-2xl flex-col gap-3 overflow-y-scroll rounded-md border bg-white p-3'>
 			<div className='flex w-full items-center justify-between'>
 				<h3>Checklist</h3>
 				<button
