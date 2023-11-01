@@ -116,6 +116,7 @@ export default function ChatBox({refetch}: Props) {
 				onSubmit={e => {
 					e.preventDefault()
 					agentChat(new FormData(e.currentTarget))
+					e.currentTarget.reset()
 				}}>
 				<input
 					name='input'
