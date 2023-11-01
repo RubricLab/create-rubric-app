@@ -74,27 +74,31 @@ export default function ChatBox({refetch}: Props) {
 	}
 
 	return (
-		<div className='absolute bottom-0 w-full p-5'>
+		<div className='flex w-full flex-col items-end justify-end gap-5'>
+			{/* Toast list */}
 			{streamedData ? (
-				<AnimatePresence>
-					<div className='flex h-full w-full flex-col justify-end gap-2'>
-						{streamedData.map((line, index) => (
-							<motion.div
-								initial={{opacity: 0, y: 10}}
-								animate={{opacity: 1, y: 0}}
-								transition={{duration: 0.5}}
-								key={index}
-								className='flex items-center gap-2'>
-								<span
-									className={`flex h-2 w-2 rounded-full ${getMessage(line).className}`}
-								/>
-								<p className='text-sm'>{getMessage(line).message}</p>
-							</motion.div>
-						))}
-					</div>
-				</AnimatePresence>
+				<div className='flex h-32 w-full overflow-y-scroll'>
+					<AnimatePresence>
+						<div className='flex h-full w-full flex-col justify-end gap-2'>
+							{streamedData.map((line, index) => (
+								<motion.div
+									initial={{opacity: 0, y: 10}}
+									animate={{opacity: 1, y: 0}}
+									transition={{duration: 0.5}}
+									key={index}
+									className='flex items-center gap-2'>
+									<span
+										className={`flex h-2 w-2 rounded-full ${getMessage(line).className}`}
+									/>
+									<p className='text-sm'>{getMessage(line).message}</p>
+								</motion.div>
+							))}
+						</div>
+					</AnimatePresence>
+				</div>
 			) : null}
 
+			{/* Chatbox */}
 			<form
 				className='flex w-full items-start gap-3'
 				onSubmit={e => {
