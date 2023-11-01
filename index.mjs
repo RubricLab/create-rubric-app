@@ -201,7 +201,7 @@ if (settings.includes('scaffold')) {
 	copyTemplate(name, template)
 	console.log(`✅ 1/6 - Scaffolded project files`)
 	child_process.execSync(
-		`cd ${name} && cp .env.example .env && echo ${key} >> .env`,
+		`cd ${name} && cp .env.example .env && echo ${key} >> .env && mv gitignore .gitignore && git init -b main`,
 		{stdio: [0, 1, 2]}
 	)
 } else console.log(`✅ 1/6 - no-scaffold flag passed`)
