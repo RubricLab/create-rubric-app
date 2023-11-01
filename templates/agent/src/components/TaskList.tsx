@@ -44,7 +44,7 @@ const TaskList = ({tasks}: Props) => {
 									})
 								}}
 								className='h-5 w-5'
-								key={`checkbox-${id}-${title}`}
+								key={`checkbox-${id}-${status}`}
 								defaultChecked={status}
 								type='checkbox'
 							/>
