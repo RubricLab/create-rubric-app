@@ -1,5 +1,17 @@
 # create-rubric-app
 
+## 1.2.0
+
+### Minor Changes
+
+- ai agents
+
+### Patch Changes
+
+- publish
+- publish 1.1.1
+- publish to npm
+
 ## 1.1.0
 
 ### Minor Changes
