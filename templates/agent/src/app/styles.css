@@ -29,10 +29,10 @@ html {
 		@apply w-full rounded-md border bg-white px-3 py-2 transition-colors duration-300 hover:bg-stone-100 disabled:cursor-not-allowed disabled:hover:bg-white;
 	}
 	code {
-		@apply rounded-md border-stone-700/80 bg-stone-200/60;
+		@apply rounded-md border-stone-700/80 bg-stone-200/60 px-1 py-0.5;
 	}
 	a {
-		@apply underline-offset-4 hover:underline !important;
+		@apply underline underline-offset-4 hover:opacity-80;
 	}
 	blockquote {
 		@apply border-stone-500/80;

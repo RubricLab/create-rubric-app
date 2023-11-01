@@ -119,7 +119,7 @@ export default function ChatBox({refetch}: Props) {
 				}}>
 				<input
 					name='input'
-					placeholder='Start typing...'
+					placeholder='Try "Create a checklist to make a smoothie"'
 					type='text'
 				/>
 				<button
