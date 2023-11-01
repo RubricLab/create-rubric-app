@@ -1,5 +1,11 @@
 # create-rubric-app
 
+## 1.4.1
+
+### Patch Changes
+
+- unignore gitignore in .gitignore
+
 ## 1.4.0
 
 ### Minor Changes
