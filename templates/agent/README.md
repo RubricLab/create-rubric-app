@@ -6,31 +6,31 @@ This project is bootstrapped with [`create-rubric-app`](https://github.com/Rubri
 
 ### 1. Install dependencies
 
-```
+```sh
 npm i
 ```
 
-```
+```sh
 bun i
 ```
 
 ### 2. Set up the DB
 
-```
+```sh
 npm run db:push
 ```
 
-```
+```sh
 bun db:push
 ```
 
 ### 3. Run the development server
 
-```
+```sh
 npm run dev
 ```
 
-```
+```sh
 bun dev
 ```
 
