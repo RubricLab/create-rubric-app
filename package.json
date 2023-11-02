@@ -21,16 +21,15 @@
 		"next": "^14.0.1",
 		"prettier": "^3.0.3"
 	},
-	"homepage": "https://github.com/RubricLab/rubric/tree/main/packages/create-rubric-app#readme",
+	"homepage": "https://github.com/RubricLab/create-rubric-app#readme",
 	"license": "gonuts",
 	"name": "create-rubric-app",
 	"publishConfig": {
 		"access": "public"
 	},
 	"repository": {
-		"directory": "packages/create-rubric-app",
 		"type": "git",
-		"url": "https://github.com/RubricLab/rubric.git"
+		"url": "https://github.com/RubricLab/create-rubric-app.git"
 	},
 	"scripts": {
 		"bleed": "npx yarn-upgrade-all -W && rm yarn.lock && bun install",
