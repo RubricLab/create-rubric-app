@@ -1,5 +1,11 @@
 # create-rubric-app
 
+## 1.4.5
+
+### Patch Changes
+
+- Add keywords to NPM README
+
 ## 1.4.4
 
 ### Patch Changes

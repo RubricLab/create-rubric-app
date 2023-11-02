@@ -22,6 +22,12 @@
     "prettier": "^3.0.3"
   },
   "homepage": "https://github.com/RubricLab/create-rubric-app#readme",
+  "keywords": [
+    "agent",
+    "ai",
+    "create",
+    "rubric"
+  ],
   "license": "gonuts",
   "name": "create-rubric-app",
   "publishConfig": {
@@ -37,5 +43,5 @@
     "lint": "eslint . --ext .js,.jsx,.cjs,.mjs,.json,.ts,.tsx",
     "publish": "changeset && changeset version && changeset publish"
   },
-  "version": "1.4.4"
+  "version": "1.4.5"
 }
