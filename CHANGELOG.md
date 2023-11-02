@@ -1,5 +1,11 @@
 # create-rubric-app
 
+## 1.4.3
+
+### Patch Changes
+
+- aesthetics and formatting
+
 ## 1.4.2
 
 ### Patch Changes
