@@ -14,7 +14,7 @@ To get started, use the following command:
 
 ## Non-interactive
 
-`npx create-rubric-app@latest -n my-cool-app -k OPENAI_API_KEY -y --bun --ai`
+`npx create-rubric-app@latest -n my-app -k OPENAI_API_KEY -y --bun --ai`
 
 ## Collaborate
 
