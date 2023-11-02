@@ -1,7 +1,7 @@
 'use client'
 
 import {AnimatePresence, motion} from 'framer-motion'
-import {CheckIcon} from 'lucide-react'
+import {ArrowRightIcon} from 'lucide-react'
 import {useState} from 'react'
 import {useChatScroll} from '~/utils/useChatScroll'
 import Loader from './Loader'
@@ -125,14 +125,18 @@ export default function ChatBox({refetch}: Props) {
 				}}>
 				<input
 					name='input'
-					placeholder='Try "Add a todo" or "Update a todo"'
+					placeholder='Try "Add a task" or "Update a task"'
 					type='text'
 				/>
 				<button
-					className='w-fit'
+					className='bg-primary w-fit'
 					type='submit'
 					disabled={loading}>
-					{loading ? <Loader /> : <CheckIcon />}
+					{loading ? (
+						<Loader className='text-secondary h-6 w-6' />
+					) : (
+						<ArrowRightIcon />
+					)}
 				</button>
 			</form>
 		</div>
