@@ -3,6 +3,7 @@
 import {AnimatePresence, motion} from 'framer-motion'
 import {CheckIcon} from 'lucide-react'
 import {useState} from 'react'
+import {useChatScroll} from '~/utils/useChatScroll'
 import Loader from './Loader'
 
 type Props = {
@@ -85,17 +86,21 @@ export default function ChatBox({refetch}: Props) {
 		}
 	}
 
+	const scrollRef = useChatScroll(streamedData)
+
 	return (
-		<div className='relative flex w-full flex-col items-end justify-end gap-5'>
+		<div className='relative flex h-48 w-full flex-col items-end justify-end gap-5'>
 			{/* Toast list */}
-			<div className='relative flex h-32 w-full overflow-y-scroll'>
+			<div
+				ref={scrollRef}
+				className='relative flex max-h-32 w-full overflow-y-scroll'>
 				{streamedData ? (
 					<AnimatePresence>
 						<div className='flex h-fit w-full flex-col justify-end gap-2'>
 							{streamedData.map((line, index) => (
 								<motion.div
-									initial={{opacity: 0, y: 10}}
-									animate={{opacity: 1, y: 0}}
+									initial={{opacity: 0}}
+									animate={{opacity: 1}}
 									transition={{duration: 0.5}}
 									key={index}
 									className='flex items-center gap-2'>
