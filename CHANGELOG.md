@@ -1,5 +1,11 @@
 # create-rubric-app
 
+## 1.4.4
+
+### Patch Changes
+
+- Update READMEs
+
 ## 1.4.3
 
 ### Patch Changes
