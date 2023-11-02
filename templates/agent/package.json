@@ -30,14 +30,17 @@
 		"zod": "^3.22.4"
 	},
 	"name": "my-cool-agent",
+	"prisma": {
+		"seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
+	},
 	"private": true,
 	"scripts": {
 		"build": "next build",
-		"db:push": "prisma db push",
+		"db:push": "prisma db push && prisma db seed",
 		"db:studio": "prisma studio",
 		"dev": "next dev",
 		"format": "prettier --write . --ignore-path .gitignore",
-		"generate": "cd prisma && touch dev.db",
+		"generate": "touch prisma/dev.db",
 		"lint": "eslint . --ext .js,.jsx,.cjs,.mjs,.json,.ts,.tsx",
 		"postinstall": "prisma generate",
 		"start": "next start"

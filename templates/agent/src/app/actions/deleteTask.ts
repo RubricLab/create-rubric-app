@@ -1,6 +1,6 @@
 'use server'
 
-import db from '~/utils/db'
+import {db} from '~/utils/db'
 
 // Delete a task
 export async function deleteTask({id}: {id: number}) {
