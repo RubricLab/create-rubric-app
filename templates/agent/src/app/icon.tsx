@@ -14,8 +14,8 @@ export default async function Icon() {
 			<div
 				style={{
 					alignItems: 'center',
-					background: "black",
-					color: "white",
+					background: 'black',
+					color: 'white',
 					display: 'flex',
 					fontWeight: 700,
 					fontSize: 28,

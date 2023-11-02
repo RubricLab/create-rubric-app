@@ -207,13 +207,13 @@ if (settings.includes('scaffold')) {
 } else console.log(`✅ 1/6 - no-scaffold flag passed`)
 
 if (settings.includes('download'))
-	if (template === 'agent') 
+	if (template === 'agent')
 		// await downloadFile(
 		// 	'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700&display=swap',
 		// 	`${name}/public/fonts`
 		// )
 		console.log(`✅ 2/6 - Downloaded assets`)
-	 else console.log(`✅ 2/5 - Nothing to download`)
+	else console.log(`✅ 2/5 - Nothing to download`)
 else console.log(`✅ 2/6 - no-download flag passed`)
 
 if (settings.includes('install')) {

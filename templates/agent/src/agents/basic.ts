@@ -47,7 +47,8 @@ export default async function basicAgent({input}) {
 
 	const executor = await initializeAgentExecutorWithOptions(tools, model, {
 		agentArgs: {
-			prefix: "You are a smart task management AI. Users will task you with managing their to-do list or answering basic questions."
+			prefix:
+				'You are a smart task management AI. Users will task you with managing their to-do list or answering basic questions.'
 		},
 		agentType: 'openai-functions',
 		returnIntermediateSteps: env.NODE_ENV === 'development',

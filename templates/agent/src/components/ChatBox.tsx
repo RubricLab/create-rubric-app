@@ -86,9 +86,9 @@ export default function ChatBox({refetch}: Props) {
 	}
 
 	return (
-		<div className='flex w-full flex-col relative items-end justify-end gap-5'>
+		<div className='relative flex w-full flex-col items-end justify-end gap-5'>
 			{/* Toast list */}
-			<div className='flex h-32 w-full relative overflow-y-scroll'>
+			<div className='relative flex h-32 w-full overflow-y-scroll'>
 				{streamedData ? (
 					<AnimatePresence>
 						<div className='flex h-fit w-full flex-col justify-end gap-2'>
@@ -107,7 +107,7 @@ export default function ChatBox({refetch}: Props) {
 							))}
 						</div>
 					</AnimatePresence>
-				) : null}				
+				) : null}
 			</div>
 
 			{/* Chatbox */}

@@ -11,7 +11,7 @@ const TaskList = ({tasks}: Props) => {
 	const [showData, setShowData] = useState(false)
 
 	return (
-		<div className='border-primary bg-primary flex h-full max-h-80 sm:max-h-96 w-full flex-col gap-5 overflow-y-scroll rounded-md p-3 pl-5'>
+		<div className='border-primary bg-primary flex h-full max-h-80 w-full flex-col gap-5 overflow-y-scroll rounded-md p-3 pl-5 sm:max-h-96'>
 			<div className='flex w-full items-center justify-between'>
 				<h3>Checklist</h3>
 				<button
@@ -29,13 +29,10 @@ const TaskList = ({tasks}: Props) => {
 				<p className='text-base text-stone-400'>No tasks yet</p>
 			) : null}
 
-			{showData
-				? null
-				: <>
-					<div className="w-full text-xs flex justify-end">
-						Created at
-					</div>
-					{tasks.map(({ id, title, status, createdAt }) => (
+			{showData ? null : (
+				<>
+					<div className='flex w-full justify-end text-xs'>Created at</div>
+					{tasks.map(({id, title, status, createdAt}) => (
 						<div
 							key={id}
 							className='flex items-center justify-between gap-1'>
@@ -67,15 +64,15 @@ const TaskList = ({tasks}: Props) => {
 							<div className='text-xs text-stone-400'>
 								{new Date(createdAt).toLocaleDateString('en-US', {
 									day: 'numeric',
-									hour: "numeric",
+									hour: 'numeric',
 									minute: '2-digit',
 									month: 'short'
 								})}
 							</div>
 						</div>
 					))}
-					</>
-			}
+				</>
+			)}
 		</div>
 	)
 }
