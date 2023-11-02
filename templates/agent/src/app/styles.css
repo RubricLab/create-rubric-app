@@ -2,10 +2,6 @@
 @tailwind base;
 @tailwind components;
 
-html {
-	@apply bg-white text-black dark:bg-black dark:text-white;
-}
-
 @layer base {
 	.bg-primary {
 		@apply bg-white dark:bg-black;
