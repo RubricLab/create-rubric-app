@@ -11,7 +11,7 @@ const TaskList = ({tasks}: Props) => {
 	const [showData, setShowData] = useState(false)
 
 	return (
-		<div className='border-primary bg-primary flex h-full max-h-80 w-full flex-col gap-5 overflow-y-scroll rounded-md p-3 pl-5 sm:max-h-96'>
+		<div className='border-primary bg-primary flex h-full max-h-80 w-full flex-col gap-5 overflow-y-scroll rounded-md p-3 px-5 sm:max-h-96'>
 			<div className='flex w-full items-center justify-between'>
 				<h3>Checklist</h3>
 				<button
@@ -22,7 +22,14 @@ const TaskList = ({tasks}: Props) => {
 			</div>
 
 			{/* Show structured data as an array */}
-			{showData ? <code className='w-full'>{JSON.stringify(tasks)}</code> : null}
+			{showData ?
+				<>
+					<div className='flex w-full text-xs'>
+						JSON Preview
+					</div>
+					<code className='w-full whitespace-pre overflow-auto'>{JSON.stringify(tasks, null, 2)}</code>
+				</>
+				: null}
 
 			{/* Render UI on top of structured data */}
 			{!showData && tasks.length === 0 ? (
@@ -31,7 +38,11 @@ const TaskList = ({tasks}: Props) => {
 
 			{showData ? null : (
 				<>
-					<div className='flex w-full justify-end text-xs'>Created at</div>
+					<div className='flex w-full justify-between text-xs'>
+						<div>Status</div>
+						<div>Name</div>
+						<div>Created at</div>
+					</div>
 					{tasks.map(({id, title, status, createdAt}) => (
 						<div
 							key={id}
