@@ -1,5 +1,15 @@
 # create-rubric-app
 
+## 1.4.8
+
+### Patch Changes
+
+- f8b97b2: Lint files
+- 8b0d9a6: Trigger build
+- fcc18f0: Only render theme toggler on client
+- 7b492e9: Add read-content permission to changeset action
+- 49a69fb: Add permissions to Changeset Action
+
 ## 1.4.7
 
 ### Patch Changes
