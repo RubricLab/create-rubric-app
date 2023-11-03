@@ -19,19 +19,20 @@ export default function TodoListClient({tasks}: {tasks: Task[]}) {
 			</div>
 
 			{/* Show structured data as an array */}
-			{showData &&
+			{showData && (
 				<>
-					<div className='flex w-full text-xs'>
-						JSON Preview
-					</div>
-					<code className='w-full whitespace-pre overflow-auto'>{JSON.stringify(tasks, null, 2)}</code>
-				</>}
+					<div className='flex w-full text-xs'>JSON Preview</div>
+					<code className='w-full overflow-auto whitespace-pre'>
+						{JSON.stringify(tasks, null, 2)}
+					</code>
+				</>
+			)}
 
 			{/* Render UI on top of structured data */}
-			{!showData && tasks.length === 0 && (
+			{!showData && tasks?.length === 0 && (
 				<p className='text-base text-stone-400'>No tasks yet</p>
 			)}
-			{!showData &&
+			{!showData && (
 				<>
 					<div className='flex w-full justify-between text-xs'>
 						<div>Status</div>
@@ -50,18 +51,18 @@ export default function TodoListClient({tasks}: {tasks: Task[]}) {
 							<div className='flex w-full items-center justify-between'>
 								<p>{task.title}</p>
 								<span className='text-xs text-stone-400'>
-								{new Date(task.createdAt).toLocaleDateString('en-US', {
-									day: '2-digit',
-									hour: '2-digit',
-									minute: '2-digit',
-									month: 'short'
-								})}
-							</span>
+									{new Date(task.createdAt).toLocaleDateString('en-US', {
+										day: '2-digit',
+										hour: '2-digit',
+										minute: '2-digit',
+										month: 'short'
+									})}
+								</span>
 							</div>
 						</div>
 					))}
 				</>
-			}
+			)}
 		</div>
 	)
 }

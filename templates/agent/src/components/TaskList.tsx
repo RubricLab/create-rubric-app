@@ -11,7 +11,7 @@ const TaskList = ({tasks}: Props) => {
 	const [codeView, setCodeView] = useState(false)
 
 	return (
-		<div className='border-primary bg-primary flex h-full max-h-96 w-full flex-col rounded-md px-3 sm:max-h-[50vh]'>
+		<div className='border-primary bg-primary flex h-full max-h-96 w-full flex-col gap-2 rounded-md px-3 sm:max-h-[50vh]'>
 			<div className='flex w-full items-start justify-between py-4'>
 				<h3>Checklist</h3>
 				<button
@@ -37,7 +37,7 @@ const TaskList = ({tasks}: Props) => {
 					</div>
 					<div className='flex max-h-full flex-col gap-3 overflow-y-scroll py-4'>
 						{/* Render UI on top of structured data */}
-						{tasks.length > 0 || codeView ? null : (
+						{tasks?.length > 0 || codeView ? null : (
 							<p className='text-secondary text-base'>No tasks yet</p>
 						)}
 
