@@ -1,5 +1,11 @@
 # create-rubric-app
 
+## 1.4.7
+
+### Patch Changes
+
+- Add darkmode toggle
+
 ## 1.4.6
 
 ### Patch Changes

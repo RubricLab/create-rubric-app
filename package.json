@@ -43,5 +43,5 @@
     "lint": "eslint . --ext .js,.jsx,.cjs,.mjs,.json,.ts,.tsx",
     "publish": "changeset && changeset version && changeset publish"
   },
-  "version": "1.4.6"
+  "version": "1.4.7"
 }
