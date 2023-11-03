@@ -9,7 +9,7 @@ jobs:
 
     permissions:
       pull-requests: write
-      contents: read
+      contents: write
 
     steps:
       - name: Checkout 🛒
