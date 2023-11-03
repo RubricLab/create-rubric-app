@@ -16,13 +16,13 @@
 		@apply border-primary bg-primary w-full rounded-md px-3 py-2 focus:outline-none;
 	}
 	input[type='checkbox'] {
-		@apply bg-primary h-5 w-5 shrink-0 appearance-none bg-opacity-60 p-0 checked:bg-green-500;
+		@apply bg-primary h-6 w-6 shrink-0 appearance-none bg-opacity-60 p-0 checked:bg-green-500;
 	}
 	button {
 		@apply border-primary hover:bg-secondary bg-primary rounded-md px-4 py-2 transition-colors disabled:cursor-not-allowed;
 	}
 	code {
-		@apply border-primary rounded-md bg-neutral-200 bg-opacity-60 p-1 text-sm dark:bg-neutral-800;
+		@apply border-primary rounded-sm bg-neutral-200 bg-opacity-60 p-1 text-sm dark:bg-neutral-800;
 	}
 	a {
 		@apply underline underline-offset-4 hover:opacity-80;
