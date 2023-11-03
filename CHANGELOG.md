@@ -1,5 +1,11 @@
 # create-rubric-app
 
+## 1.4.6
+
+### Patch Changes
+
+- Adjust task list styling
+
 ## 1.4.5
 
 ### Patch Changes
