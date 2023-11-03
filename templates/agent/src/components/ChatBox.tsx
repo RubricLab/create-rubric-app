@@ -1,7 +1,7 @@
 'use client'
 
 import {AnimatePresence, motion} from 'framer-motion'
-import {CheckIcon} from 'lucide-react'
+import {ArrowRightIcon} from 'lucide-react'
 import {useState} from 'react'
 import {useChatScroll} from '~/utils/useChatScroll'
 import Loader from './Loader'
@@ -31,24 +31,25 @@ const messages = new Map([
 ])
 
 export default function ChatBox({refetch}: Props) {
-	const [streamedData, setStreamedData] = useState([])
+	const [prompt, setPrompt] = useState('')
+	const [loading, setLoading] = useState(false)
+
+	// Used for streaming response from the agent endpoint
+	const [agentOutput, setAgentOutput] = useState([])
 	const [objects, setObjects] = useState([])
 	const [objectIndex, setObjectIndex] = useState(0)
 	const [inObject, setInObject] = useState(false)
-	const [loading, setLoading] = useState(false)
 
 	// Find corresponding message and className
 	const getMessage = (line: string) => {
 		const found = messages.get(line)
 		if (found) return found
-		return {message: line, className: 'bg-neutral-300 dark:bg-neutral-600'}
+		return {message: line, className: 'bg-secondary'}
 	}
 
-	async function agentChat(formData: FormData) {
+	async function agentChat(input: string) {
 		setLoading(true)
-		setStreamedData([])
-
-		const input = formData.get('input') as string
+		setAgentOutput([])
 
 		const response = await fetch('/api/agent', {
 			body: JSON.stringify({input}),
@@ -58,13 +59,16 @@ export default function ChatBox({refetch}: Props) {
 
 		const reader = response.body.getReader()
 
+		// Render streamed data as it comes in
 		while (true) {
 			const {done, value} = await reader.read()
+
 			if (done) {
 				await refetch()
 				setLoading(false)
 				break
 			}
+
 			const text = new TextDecoder().decode(value)
 
 			if (text === '[') {
@@ -72,7 +76,7 @@ export default function ChatBox({refetch}: Props) {
 				setObjectIndex(prevIndex => prevIndex + 1)
 			} else if (text === ']') {
 				setInObject(false)
-				setStreamedData(prevData => [
+				setAgentOutput(prevData => [
 					...prevData,
 					`\n<code>${JSON.parse(objects[objectIndex])[0].generations[0][0]}</code>\n`
 				])
@@ -82,11 +86,12 @@ export default function ChatBox({refetch}: Props) {
 					newObjects[objectIndex] += text
 					return newObjects
 				})
-			else setStreamedData(prevData => [...prevData, text])
+			else setAgentOutput(prevData => [...prevData, text])
 		}
 	}
 
-	const scrollRef = useChatScroll(streamedData)
+	// To keep updates scrolled to the bottom
+	const scrollRef = useChatScroll(agentOutput)
 
 	return (
 		<div className='relative flex h-48 w-full flex-col items-end justify-end gap-5'>
@@ -94,10 +99,10 @@ export default function ChatBox({refetch}: Props) {
 			<div
 				ref={scrollRef}
 				className='relative flex max-h-32 w-full overflow-y-scroll'>
-				{streamedData ? (
+				{agentOutput ? (
 					<AnimatePresence>
 						<div className='flex h-fit w-full flex-col justify-end gap-2'>
-							{streamedData.map((line, index) => (
+							{agentOutput.map((line, index) => (
 								<motion.div
 									initial={{opacity: 0}}
 									animate={{opacity: 1}}
@@ -105,7 +110,7 @@ export default function ChatBox({refetch}: Props) {
 									key={index}
 									className='flex items-center gap-2'>
 									<span
-										className={`h-2 w-2 rounded-full ${getMessage(line).className}`}
+										className={`h-2.5 w-2.5 rounded-full ${getMessage(line).className}`}
 									/>
 									<p className='text-sm'>{getMessage(line).message}</p>
 								</motion.div>
@@ -120,19 +125,23 @@ export default function ChatBox({refetch}: Props) {
 				className='flex w-full items-start gap-3'
 				onSubmit={e => {
 					e.preventDefault()
-					agentChat(new FormData(e.currentTarget))
-					e.currentTarget.reset()
+					agentChat(prompt)
+					setPrompt('')
 				}}>
 				<input
-					name='input'
-					placeholder='Try "Add a todo" or "Update a todo"'
+					value={prompt}
+					placeholder='Try "Add a task" or "Update a task"'
+					onChange={e => setPrompt(e.target.value)}
 					type='text'
 				/>
 				<button
-					className='w-fit'
 					type='submit'
 					disabled={loading}>
-					{loading ? <Loader /> : <CheckIcon />}
+					{loading ? (
+						<Loader className='text-secondary h-6 w-6' />
+					) : (
+						<ArrowRightIcon />
+					)}
 				</button>
 			</form>
 		</div>

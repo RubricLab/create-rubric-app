@@ -23,7 +23,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
 			<body
 				className={`${font.className} relative flex h-full min-h-screen w-full flex-col items-center`}>
 				<Providers>
-					<BackgroundGrid className='fixed h-full w-full opacity-30 dark:opacity-50' />
+					<BackgroundGrid className='fixed h-full w-full opacity-30 dark:opacity-40' />
 					<Nav title={'> npx create-rubric-app'} />
 					<div className='z-10 flex w-full max-w-3xl items-center justify-center'>
 						{children}

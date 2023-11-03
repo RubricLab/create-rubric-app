@@ -8,80 +8,79 @@ type Props = {
 }
 
 const TaskList = ({tasks}: Props) => {
-	const [showData, setShowData] = useState(false)
+	const [codeView, setCodeView] = useState(false)
 
 	return (
-		<div className='border-primary bg-primary flex h-full max-h-80 w-full flex-col gap-5 overflow-y-scroll rounded-md p-3 px-5 sm:max-h-96'>
-			<div className='flex w-full items-center justify-between'>
+		<div className='border-primary bg-primary flex h-full max-h-96 w-full flex-col gap-2 rounded-md px-3 sm:max-h-[50vh]'>
+			<div className='flex w-full items-start justify-between py-4'>
 				<h3>Checklist</h3>
 				<button
 					className='bg-primary border-primary w-fit'
-					onClick={() => setShowData(prev => !prev)}>
+					onClick={() => setCodeView(prev => !prev)}>
 					<BracesIcon className='h-5 w-5' />
 				</button>
 			</div>
 
-			{/* Show structured data as an array */}
-			{showData ?
+			{codeView ? (
 				<>
-					<div className='flex w-full text-xs'>
-						JSON Preview
-					</div>
-					<code className='w-full whitespace-pre overflow-auto'>{JSON.stringify(tasks, null, 2)}</code>
+					<div className='flex w-full text-xs'>JSON Preview</div>
+					<code className='mb-4 w-full overflow-auto whitespace-pre'>
+						{JSON.stringify(tasks, null, 2)}
+					</code>
 				</>
-				: null}
-
-			{/* Render UI on top of structured data */}
-			{!showData && tasks.length === 0 ? (
-				<p className='text-base text-stone-400'>No tasks yet</p>
-			) : null}
-
-			{showData ? null : (
+			) : (
 				<>
-					<div className='flex w-full justify-between text-xs'>
+					<div className='flex w-full justify-between border-b-2 border-neutral-200 pb-2 dark:border-neutral-800'>
 						<div>Status</div>
 						<div>Name</div>
 						<div>Created at</div>
 					</div>
-					{tasks.map(({id, title, status, createdAt}) => (
-						<div
-							key={id}
-							className='flex items-center justify-between gap-1'>
-							<input
-								name='status'
-								onChange={e => {
-									updateTask({
-										id,
-										status: e.target.checked
-									})
-								}}
-								className='h-5 w-5'
-								key={`checkbox-${id}-${status}`}
-								defaultChecked={status}
-								type='checkbox'
-							/>
-							<input
-								name='title'
-								onChange={e =>
-									updateTask({
-										id,
-										title: e.target.value
-									})
-								}
-								key={`task-${id}-${title}`}
-								className='w-3/4 border-none'
-								defaultValue={title}
-							/>
-							<div className='text-xs text-stone-400'>
-								{new Date(createdAt).toLocaleDateString('en-US', {
-									day: 'numeric',
-									hour: 'numeric',
-									minute: '2-digit',
-									month: 'short'
-								})}
-							</div>
-						</div>
-					))}
+					<div className='flex max-h-full flex-col gap-3 overflow-y-scroll py-4'>
+						{/* Render UI on top of structured data */}
+						{tasks?.length > 0 || codeView ? null : (
+							<p className='text-secondary text-base'>No tasks yet</p>
+						)}
+
+						{codeView ? null : (
+							<>
+								{tasks.map(({id, title, status, createdAt}) => (
+									<div
+										key={id}
+										className='flex items-center justify-between gap-4'>
+										<input
+											type='checkbox'
+											key={`checkbox-${id}-${status}`}
+											onChange={e => {
+												updateTask({
+													id,
+													status: e.target.checked
+												})
+											}}
+											defaultChecked={status}
+										/>
+										<input
+											onChange={e =>
+												updateTask({
+													id,
+													title: e.target.value
+												})
+											}
+											key={`task-${id}-${title}`}
+											defaultValue={title}
+										/>
+										<div className='text-secondary whitespace-nowrap text-xs'>
+											{new Date(createdAt).toLocaleDateString('en-US', {
+												day: 'numeric',
+												hour: 'numeric',
+												minute: 'numeric',
+												month: 'short'
+											})}
+										</div>
+									</div>
+								))}
+							</>
+						)}
+					</div>
 				</>
 			)}
 		</div>

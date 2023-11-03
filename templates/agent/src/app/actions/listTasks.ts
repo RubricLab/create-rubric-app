@@ -1,6 +1,6 @@
 'use server'
 
-import db from '~/utils/db'
+import {db} from '~/utils/db'
 
 // Get all tasks
 export async function listTasks() {

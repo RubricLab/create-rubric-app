@@ -6,15 +6,12 @@ import {deleteTaskTool} from '~/tools/deleteTask'
 import {listTasksTool} from '~/tools/listTasks'
 import {updateTaskTool} from '~/tools/updateTask'
 
-export default async function basicAgent({input}) {
+const gptModel = 'gpt-3.5-turbo' // use gpt-4 for more complex tasks
+
+export async function basicAgent({input}) {
 	const encoder = new TextEncoder()
-
 	const stream = new TransformStream()
-
 	const writer = stream.writable.getWriter()
-
-	const gptModel = 'gpt-3.5-turbo'
-	// const gptModel = 'gpt-4' // use GPT-4 for more complex tasks!
 
 	const model = new ChatOpenAI({
 		callbacks: [
@@ -45,11 +42,11 @@ export default async function basicAgent({input}) {
 
 	const tools = [createTaskTool, deleteTaskTool, listTasksTool, updateTaskTool]
 
+	const prefix =
+		'You are a smart task management AI. Users will task you with managing their to-do list or answering basic questions.'
+
 	const executor = await initializeAgentExecutorWithOptions(tools, model, {
-		agentArgs: {
-			prefix:
-				'You are a smart task management AI. Users will task you with managing their to-do list or answering basic questions.'
-		},
+		agentArgs: {prefix},
 		agentType: 'openai-functions',
 		returnIntermediateSteps: env.NODE_ENV === 'development',
 		verbose: env.NODE_ENV === 'development'
