@@ -38,7 +38,7 @@ const TaskList = ({tasks}: Props) => {
 					<div className='grid max-h-full w-full grid-cols-12 items-center gap-3 overflow-y-scroll py-4'>
 						{/* Render UI on top of structured data */}
 						{tasks?.length > 0 ? null : (
-							<p className='text-secondary text-base'>No tasks yet</p>
+							<p className='text-secondary col-span-12 text-base'>No tasks yet</p>
 						)}
 						{tasks.map(({id, title, status, createdAt}) => (
 							<Fragment key={id}>
