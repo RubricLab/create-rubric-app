@@ -34,7 +34,9 @@ jobs:
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
    - name: Log NPM user 🖐️
-     run: npm whoami
+     run: |
+      npm login
+      npm whoami
      env:
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
