@@ -1,5 +1,11 @@
 # create-rubric-app
 
+## 1.4.9
+
+### Patch Changes
+
+- Debug publish action
+
 ## 1.4.8
 
 ### Patch Changes
