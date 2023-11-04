@@ -38,14 +38,17 @@ export default function ChatBox({refetch}: Props) {
 	const [agentOutput, setAgentOutput] = useState([])
 
 	// Find corresponding message and className
-	const getMessage = (line: string) : [boolean, { message: string; className: string }] => {
+	const getMessage = (
+		line: string
+	): [boolean, {message: string; className: string}] => {
 		// Check if the line made any action calls
-		const found = messages.get(Array.from(messages.keys()).find(key => line.includes(key)))
+		const found = messages.get(
+			Array.from(messages.keys()).find(key => line.includes(key))
+		)
 		if (found) {
 			found.message = line
 			return [true, found]
-		}
-		else return [false, {message: line, className: 'bg-secondary'}]
+		} else return [false, {message: line, className: 'bg-secondary'}]
 	}
 
 	async function agentChat(input: string) {
@@ -78,16 +81,20 @@ export default function ChatBox({refetch}: Props) {
 			// Check if an action call is made and get the according message object
 			let [f, m] = getMessage(text)
 
-			if (f){
+			if (f) {
 				setAgentOutput(prevData => [...prevData, m])
 
 				// Message is rendered, increment index
 				objInd++
-			} else 
-				// Message is not completed, append to previous message
+			}
+			// Message is not completed, append to previous message
+			else
 				setAgentOutput(prevData => {
 					const newData = [...prevData]
-					newData[objInd] = {message: (prevData[objInd]?.message ?? '') + text, className: m.className}
+					newData[objInd] = {
+						message: (prevData[objInd]?.message ?? '') + text,
+						className: m.className
+					}
 					return newData
 				})
 		}

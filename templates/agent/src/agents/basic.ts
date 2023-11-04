@@ -47,8 +47,8 @@ export async function basicAgent({input}) {
 			{
 				async handleAgentAction(action, runId, parentRunId, tags) {
 					await writer.ready
-					await writer.write(`${action.log}`);
-				},
+					await writer.write(`${action.log}`)
+				}
 			}
 		]
 	})
