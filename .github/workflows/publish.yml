@@ -6,7 +6,7 @@ on:
 jobs:
  build:
   runs-on: ubuntu-latest
-  timeout-minutes: 0.5 # because `changeset publish` hangs indefinitely
+  timeout-minutes: 1 # because `changeset publish` hangs indefinitely
 
   permissions:
    pull-requests: write

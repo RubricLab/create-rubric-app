@@ -1,5 +1,11 @@
 # create-rubric-app
 
+## 1.4.11
+
+### Patch Changes
+
+- Add publish action timeout
+
 ## 1.4.10
 
 ### Patch Changes
