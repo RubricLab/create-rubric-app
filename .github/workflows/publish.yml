@@ -20,7 +20,7 @@ jobs:
      uses: actions/setup-node@v3
      with:
       node-version: 18
-      registry-url: 'https://npm.pkg.github.com'
+      registry-url: 'https://registry.npmjs.org'
 
    - name: Set up Bun 🍞
      uses: oven-sh/setup-bun@v1
@@ -31,10 +31,10 @@ jobs:
    - name: Create .npmrc 🔑
      run: |
       cat << EOF > "$HOME/.npmrc"
-        //npm.pkg.github.com/:_authToken=$NPM_TOKEN
+        //registry.npmjs.org/:_authToken=$NPM_TOKEN
       EOF
      env:
-      NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
    - name: Open PR or Publish to NPM 🚀
      id: changesets
