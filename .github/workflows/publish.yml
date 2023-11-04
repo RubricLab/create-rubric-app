@@ -35,15 +35,18 @@ jobs:
 
    - name: Log NPM user 🖐️
      run: npm whoami
+     env:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
    - name: Open PR or Publish to NPM 🚀
      id: changesets
      uses: changesets/action@v1
      with:
-      publish: bunx changeset publish
+      publish: bunx changeset publish --access public
      env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 
    - name: Check ✅
      run: echo ${{ steps.changesets.outputs.published }}
