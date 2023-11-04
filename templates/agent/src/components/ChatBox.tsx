@@ -36,15 +36,16 @@ export default function ChatBox({refetch}: Props) {
 
 	// Used for streaming response from the agent endpoint
 	const [agentOutput, setAgentOutput] = useState([])
-	const [objects, setObjects] = useState([])
-	const [objectIndex, setObjectIndex] = useState(0)
-	const [inObject, setInObject] = useState(false)
 
 	// Find corresponding message and className
-	const getMessage = (line: string) => {
-		const found = messages.get(line)
-		if (found) return found
-		return {message: line, className: 'bg-secondary'}
+	const getMessage = (line: string) : [boolean, { message: string; className: string }] => {
+		// Check if the line made any action calls
+		const found = messages.get(Array.from(messages.keys()).find(key => line.includes(key)))
+		if (found) {
+			found.message = line
+			return [true, found]
+		}
+		else return [false, {message: line, className: 'bg-secondary'}]
 	}
 
 	async function agentChat(input: string) {
@@ -59,6 +60,9 @@ export default function ChatBox({refetch}: Props) {
 
 		const reader = response.body.getReader()
 
+		// Set/Reset the index of the messages object
+		let objInd = 0
+
 		// Render streamed data as it comes in
 		while (true) {
 			const {done, value} = await reader.read()
@@ -71,22 +75,21 @@ export default function ChatBox({refetch}: Props) {
 
 			const text = new TextDecoder().decode(value)
 
-			if (text === '[') {
-				setInObject(true)
-				setObjectIndex(prevIndex => prevIndex + 1)
-			} else if (text === ']') {
-				setInObject(false)
-				setAgentOutput(prevData => [
-					...prevData,
-					`\n<code>${JSON.parse(objects[objectIndex])[0].generations[0][0]}</code>\n`
-				])
-			} else if (inObject)
-				setObjects(prevObjects => {
-					const newObjects = [...prevObjects]
-					newObjects[objectIndex] += text
-					return newObjects
+			// Check if an action call is made and get the according message object
+			let [f, m] = getMessage(text)
+
+			if (f){
+				setAgentOutput(prevData => [...prevData, m])
+
+				// Message is rendered, increment index
+				objInd++
+			} else 
+				// Message is not completed, append to previous message
+				setAgentOutput(prevData => {
+					const newData = [...prevData]
+					newData[objInd] = {message: (prevData[objInd]?.message ?? '') + text, className: m.className}
+					return newData
 				})
-			else setAgentOutput(prevData => [...prevData, text])
 		}
 	}
 
@@ -109,10 +112,8 @@ export default function ChatBox({refetch}: Props) {
 									transition={{duration: 0.5}}
 									key={index}
 									className='flex items-center gap-2'>
-									<span
-										className={`h-2.5 w-2.5 rounded-full ${getMessage(line).className}`}
-									/>
-									<p className='text-sm'>{getMessage(line).message}</p>
+									<span className={`h-2.5 w-2.5 rounded-full ${line.className}`} />
+									<p className='text-sm'>{line.message}</p>
 								</motion.div>
 							))}
 						</div>
