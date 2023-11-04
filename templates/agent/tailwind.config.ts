@@ -2,6 +2,7 @@ import config from '@rubriclab/tailwind-config'
 import {Config} from 'tailwindcss'
 
 const tailwindConfig = {
+	darkMode: 'class',
 	content: ['./src/**/*.tsx'],
 	presets: [config],
 	theme: {

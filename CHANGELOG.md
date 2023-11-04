@@ -1,5 +1,39 @@
 # create-rubric-app
 
+## 1.4.11
+
+### Patch Changes
+
+- Add publish action timeout
+
+## 1.4.10
+
+### Patch Changes
+
+- Streamline publish action
+
+## 1.4.9
+
+### Patch Changes
+
+- Debug publish action
+
+## 1.4.8
+
+### Patch Changes
+
+- f8b97b2: Lint files
+- 8b0d9a6: Trigger build
+- fcc18f0: Only render theme toggler on client
+- 7b492e9: Add read-content permission to changeset action
+- 49a69fb: Add permissions to Changeset Action
+
+## 1.4.7
+
+### Patch Changes
+
+- Add darkmode toggle
+
 ## 1.4.6
 
 ### Patch Changes
