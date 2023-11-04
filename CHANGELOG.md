@@ -1,5 +1,11 @@
 # create-rubric-app
 
+## 1.4.10
+
+### Patch Changes
+
+- Streamline publish action
+
 ## 1.4.9
 
 ### Patch Changes
