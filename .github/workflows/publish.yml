@@ -29,13 +29,12 @@ jobs:
      run: bun install
 
    - name: Create .npmrc 🔑
-     run: |
-      cat << EOF > "$HOME/.npmrc"
-        @RubricLab:registry=https://registry.npmjs.org
-        //registry.npmjs.org/:_authToken=$NPM_TOKEN
-      EOF
+     run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
      env:
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+   - name: Log NPM user 🖐️
+     run: npm whoami
 
    - name: Open PR or Publish to NPM 🚀
      id: changesets
