@@ -16,16 +16,9 @@ export async function basicAgent({input}) {
 	const model = new ChatOpenAI({
 		callbacks: [
 			{
-				async handleLLMNewToken() {
+				async handleLLMNewToken(token) {
 					await writer.ready
-				},
-				async handleLLMEnd(data) {
-					await writer.ready
-					// Return the function name if a function is called, otherwise return the text response
-					await writer.write(
-						(data.generations[0][0] as any)?.message?.additional_kwargs?.function_call
-							?.name || data.generations[0][0]?.text
-					)
+					writer.write(token)
 				},
 				async handleLLMError(error) {
 					await writer.ready
@@ -49,7 +42,15 @@ export async function basicAgent({input}) {
 		agentArgs: {prefix},
 		agentType: 'openai-functions',
 		returnIntermediateSteps: env.NODE_ENV === 'development',
-		verbose: env.NODE_ENV === 'development'
+		verbose: env.NODE_ENV === 'development',
+		callbacks: env.NODE_ENV === 'development' && [
+			{
+				async handleAgentAction(action, runId, parentRunId, tags) {
+					await writer.ready
+					await writer.write(`${action.log}`);
+				},
+			}
+		]
 	})
 
 	executor.call({input}).then(async () => {
