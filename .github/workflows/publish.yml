@@ -42,4 +42,4 @@ jobs:
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
    - name: Check ✅
-     run: echo 'Published: ${{ steps.changesets.outputs.published }}'
+     run: echo 'Published ${{ steps.changesets.outputs.published }}'
