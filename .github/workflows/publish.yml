@@ -10,7 +10,8 @@ jobs:
 
   permissions:
    pull-requests: write
-   contents: read
+   packages: write
+   contents: write
 
   steps:
    - name: Check out branch 🛒
