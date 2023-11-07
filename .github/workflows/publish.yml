@@ -11,7 +11,7 @@ jobs:
   permissions:
    pull-requests: write
    packages: write
-   contents: read
+   contents: write
 
   steps:
    - name: Check out branch 🛒
