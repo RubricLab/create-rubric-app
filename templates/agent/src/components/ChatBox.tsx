@@ -5,6 +5,7 @@ import {ArrowRightIcon} from 'lucide-react'
 import {useState} from 'react'
 import {useChatScroll} from '~/utils/useChatScroll'
 import Loader from './Loader'
+import ChooseBot from './ChooseBot';
 
 type Props = {
 	refetch: () => void
@@ -33,6 +34,7 @@ const messages = new Map([
 export default function ChatBox({refetch}: Props) {
 	const [prompt, setPrompt] = useState('')
 	const [loading, setLoading] = useState(false)
+	const [bot, setBot] = useState<string>('gpt-3.5-turbo')
 
 	// Used for streaming response from the agent endpoint
 	const [agentOutput, setAgentOutput] = useState([])
@@ -152,6 +154,7 @@ export default function ChatBox({refetch}: Props) {
 					)}
 				</button>
 			</form>
+			<ChooseBot bot={bot} setBot={setBot} />
 		</div>
 	)
 }
