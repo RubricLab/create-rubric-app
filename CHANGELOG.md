@@ -1,5 +1,17 @@
 # create-rubric-app
 
+## 1.4.13
+
+### Patch Changes
+
+- 92b8d70: Use Platform-specific Native Commands
+
+## 1.4.12
+
+### Patch Changes
+
+- cb6391c: Stream LLM Messages and Descriptive Agent Action Logging
+
 ## 1.4.11
 
 ### Patch Changes
