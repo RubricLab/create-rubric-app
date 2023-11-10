@@ -58,7 +58,7 @@ export default function ChatBox({refetch}: Props) {
 		setAgentOutput([])
 
 		const response = await fetch('/api/agent', {
-			body: JSON.stringify({input}),
+			body: JSON.stringify({input, botName: bot}),
 			headers: {'Content-Type': 'application/json'},
 			method: 'POST'
 		})
