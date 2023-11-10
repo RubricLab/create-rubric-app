@@ -81,10 +81,10 @@ export default function ChatBox({refetch}: Props) {
 			const text = new TextDecoder().decode(value)
 
 			// Check if an action call is made and get the according message object
-			let [f, m] = getMessage(text)
+			let [found, messsage] = getMessage(text)
 
-			if (f) {
-				setAgentOutput(prevData => [...prevData, m])
+			if (found) {
+				setAgentOutput(prevData => [...prevData, messsage])
 
 				// Message is rendered, increment index
 				objInd++
@@ -95,7 +95,7 @@ export default function ChatBox({refetch}: Props) {
 					const newData = [...prevData]
 					newData[objInd] = {
 						message: (prevData[objInd]?.message ?? '') + text,
-						className: m.className
+						className: messsage.className
 					}
 					return newData
 				})
