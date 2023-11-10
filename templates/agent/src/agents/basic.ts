@@ -43,7 +43,7 @@ export async function basicAgent({input, botName}) {
 		verbose: env.NODE_ENV === 'development',
 		callbacks: env.NODE_ENV === 'development' && [
 			{
-				async handleAgentAction(action, runId, parentRunId, tags) {
+				async handleAgentAction(action) {
 					await writer.ready
 					await writer.write(`${action.log}`)
 				}
