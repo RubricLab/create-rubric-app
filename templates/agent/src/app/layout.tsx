@@ -2,7 +2,6 @@ import {Plus_Jakarta_Sans} from 'next/font/google'
 import Providers from '~/app/providers'
 import BackgroundGrid from '~/components/BackgroundGrid'
 import Nav from '~/components/Nav'
-import {META} from '~/constants/metadata'
 import './styles.css'
 
 const font = Plus_Jakarta_Sans({subsets: ['latin']})
@@ -14,7 +13,11 @@ export const metadata = {
 			'en-US': '/en-US'
 		}
 	},
-	metadataBase: new URL(META.siteURL)
+	metadataBase: new URL(
+		process.env.VERCEL_URL
+			? `https://${process.env.VERCEL_URL}`
+			: `http://localhost:${process.env.PORT || 3000}`
+	)
 }
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
