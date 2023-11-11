@@ -1,5 +1,7 @@
 # Create Rubric App
 
+[![NPM Version](https://img.shields.io/npm/v/create-rubric-app.svg)]()
+
 The easiest way to start a full-stack AI project.
 
 This CLI stands up an AI Agent along with a UI and API to interface with it.
