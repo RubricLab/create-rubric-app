@@ -6,6 +6,7 @@ import {useState} from 'react'
 import {useChatScroll} from '~/utils/useChatScroll'
 import Loader from './Loader'
 import ChooseBot from './ChooseBot';
+import { Model } from '~/utils/types'
 
 type Props = {
 	refetch: () => void
@@ -34,7 +35,7 @@ const messages = new Map([
 export default function ChatBox({refetch}: Props) {
 	const [prompt, setPrompt] = useState('')
 	const [loading, setLoading] = useState(false)
-	const [bot, setBot] = useState<string>('gpt-3.5-turbo')
+	const [bot, setBot] = useState<Model>('gpt-3.5-turbo')
 
 	// Used for streaming response from the agent endpoint
 	const [agentOutput, setAgentOutput] = useState([])
