@@ -6,7 +6,7 @@ import {deleteTaskTool} from '~/tools/deleteTask'
 import {listTasksTool} from '~/tools/listTasks'
 import {updateTaskTool} from '~/tools/updateTask'
 
-export async function basicAgent({input, botName}) {
+export async function basicAgent({input, modelName}) {
 	const encoder = new TextEncoder()
 	const stream = new TransformStream()
 	const writer = stream.writable.getWriter()
@@ -25,7 +25,7 @@ export async function basicAgent({input, botName}) {
 				}
 			}
 		],
-		modelName: botName,
+		modelName: modelName,
 		openAIApiKey: env.OPENAI_API_KEY,
 		streaming: true,
 		temperature: 0
