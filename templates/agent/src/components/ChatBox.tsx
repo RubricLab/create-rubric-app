@@ -5,6 +5,8 @@ import {ArrowRightIcon} from 'lucide-react'
 import {useState} from 'react'
 import {useChatScroll} from '~/utils/useChatScroll'
 import Loader from './Loader'
+import ChooseBot from './ChooseBot';
+import { type Model } from '~/utils/types'
 
 type Props = {
 	refetch: () => void
@@ -33,6 +35,7 @@ const messages = new Map([
 export default function ChatBox({refetch}: Props) {
 	const [prompt, setPrompt] = useState('')
 	const [loading, setLoading] = useState(false)
+	const [model, setModel] = useState<Model>('gpt-3.5-turbo')
 
 	// Used for streaming response from the agent endpoint
 	const [agentOutput, setAgentOutput] = useState([])
@@ -56,7 +59,7 @@ export default function ChatBox({refetch}: Props) {
 		setAgentOutput([])
 
 		const response = await fetch('/api/agent', {
-			body: JSON.stringify({input}),
+			body: JSON.stringify({input, modelName: model}),
 			headers: {'Content-Type': 'application/json'},
 			method: 'POST'
 		})
@@ -79,10 +82,10 @@ export default function ChatBox({refetch}: Props) {
 			const text = new TextDecoder().decode(value)
 
 			// Check if an action call is made and get the according message object
-			let [f, m] = getMessage(text)
+			let [found, messsage] = getMessage(text)
 
-			if (f) {
-				setAgentOutput(prevData => [...prevData, m])
+			if (found) {
+				setAgentOutput(prevData => [...prevData, messsage])
 
 				// Message is rendered, increment index
 				objInd++
@@ -93,7 +96,7 @@ export default function ChatBox({refetch}: Props) {
 					const newData = [...prevData]
 					newData[objInd] = {
 						message: (prevData[objInd]?.message ?? '') + text,
-						className: m.className
+						className: messsage.className
 					}
 					return newData
 				})
@@ -152,6 +155,7 @@ export default function ChatBox({refetch}: Props) {
 					)}
 				</button>
 			</form>
+			<ChooseBot {...{ model, setModel }} />
 		</div>
 	)
 }

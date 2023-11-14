@@ -6,9 +6,7 @@ import {deleteTaskTool} from '~/tools/deleteTask'
 import {listTasksTool} from '~/tools/listTasks'
 import {updateTaskTool} from '~/tools/updateTask'
 
-const gptModel = 'gpt-3.5-turbo' // use gpt-4 for more complex tasks
-
-export async function basicAgent({input}) {
+export async function basicAgent({input, modelName}) {
 	const encoder = new TextEncoder()
 	const stream = new TransformStream()
 	const writer = stream.writable.getWriter()
@@ -27,7 +25,7 @@ export async function basicAgent({input}) {
 				}
 			}
 		],
-		modelName: gptModel,
+		modelName: modelName,
 		openAIApiKey: env.OPENAI_API_KEY,
 		streaming: true,
 		temperature: 0
@@ -45,7 +43,7 @@ export async function basicAgent({input}) {
 		verbose: env.NODE_ENV === 'development',
 		callbacks: env.NODE_ENV === 'development' && [
 			{
-				async handleAgentAction(action, runId, parentRunId, tags) {
+				async handleAgentAction(action) {
 					await writer.ready
 					await writer.write(`${action.log}`)
 				}
