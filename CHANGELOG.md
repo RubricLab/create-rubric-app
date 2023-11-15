@@ -1,5 +1,51 @@
 # create-rubric-app
 
+## 1.4.14
+
+### Patch Changes
+
+- 3975129: Stream LLM Messages and Descriptive Agent Action Logging
+
+## 1.4.13
+
+### Patch Changes
+
+- 92b8d70: Use Platform-specific Native Commands
+
+## 1.4.12
+
+### Patch Changes
+
+- cb6391c: Stream LLM Messages and Descriptive Agent Action Logging
+
+## 1.4.11
+
+### Patch Changes
+
+- Add publish action timeout
+
+## 1.4.10
+
+### Patch Changes
+
+- Streamline publish action
+
+## 1.4.9
+
+### Patch Changes
+
+- Debug publish action
+
+## 1.4.8
+
+### Patch Changes
+
+- f8b97b2: Lint files
+- 8b0d9a6: Trigger build
+- fcc18f0: Only render theme toggler on client
+- 7b492e9: Add read-content permission to changeset action
+- 49a69fb: Add permissions to Changeset Action
+
 ## 1.4.7
 
 ### Patch Changes

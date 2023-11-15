@@ -25,6 +25,25 @@ const __dirname = path.dirname(__filename)
 
 const CURR_DIR = process.cwd()
 
+// Gets the native commands, e.g. `cp` or `copy` depending on the platform
+function getPlatformNativeCmds(platform) {
+	switch (platform) {
+		case 'win32':
+			return {
+				copy: 'copy',
+				move: 'move',
+			}
+		default:
+			return {
+				copy: 'cp',
+				move: 'mv',
+			}
+		//TODO: add more platforms & relevant commands
+	}
+}
+
+const PLC = getPlatformNativeCmds(process.platform)
+
 function createDirectoryContents(templatePath, newProjectPath) {
 	const filesToCreate = readdirSync(templatePath)
 
@@ -201,7 +220,7 @@ if (settings.includes('scaffold')) {
 	copyTemplate(name, template)
 	console.log(`✅ 1/6 - Scaffolded project files`)
 	child_process.execSync(
-		`cd ${name} && cp .env.example .env && echo ${key} >> .env && mv gitignore .gitignore && git init -b main`,
+		`cd ${name} && ${PLC.copy} .env.example .env && echo ${key} >> .env && ${PLC.move} gitignore .gitignore && git init -b main`,
 		{stdio: [0, 1, 2]}
 	)
 } else console.log(`✅ 1/6 - no-scaffold flag passed`)
