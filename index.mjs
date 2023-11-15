@@ -44,6 +44,17 @@ function getPlatformNativeCmds(platform) {
 
 const PLC = getPlatformNativeCmds(process.platform)
 
+function replaceTextInFile(filePath, searchValue, replaceValue) {
+	if (process.platform === "win32") {
+		// Windows command using PowerShell
+		return `powershell "(Get-Content -Path ${filePath}) -replace '${searchValue}', '${replaceValue}' | Set-Content -Path ${filePath}"`;
+	} else {
+		// macOS and Linux command using sed
+		const sedBackupExtension = process.platform === "darwin" ? "''" : ""; // Empty string for macOS, no extension for Linux
+		return `sed -i ${sedBackupExtension} 's/${searchValue}/${replaceValue}/g' ${filePath}`;
+	}
+}
+
 function createDirectoryContents(templatePath, newProjectPath) {
 	const filesToCreate = readdirSync(templatePath)
 
@@ -248,6 +259,11 @@ if (settings.includes('install')) {
 } else console.log(`✅ 3/6 - no-install flag passed`)
 
 if (settings.includes('db')) {
+	// use sqlite provider locally
+	child_process.execSync(
+		`cd ${name} && ${replaceTextInFile('prisma/schema.prisma', 'postgresql', 'sqlite')}`
+	)
+
 	child_process.execSync(
 		`cd ${name} && ${
 			settings.includes('bun') ? 'bun db:push' : 'npm run db:push'
