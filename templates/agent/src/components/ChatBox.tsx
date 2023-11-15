@@ -5,6 +5,8 @@ import {ArrowRightIcon} from 'lucide-react'
 import {useState} from 'react'
 import {useChatScroll} from '~/utils/useChatScroll'
 import Loader from './Loader'
+import ChooseBot from './ChooseBot';
+import { type Model } from '~/utils/types'
 
 type Props = {
 	refetch: () => void
@@ -33,18 +35,23 @@ const messages = new Map([
 export default function ChatBox({refetch}: Props) {
 	const [prompt, setPrompt] = useState('')
 	const [loading, setLoading] = useState(false)
+	const [model, setModel] = useState<Model>('gpt-3.5-turbo')
 
 	// Used for streaming response from the agent endpoint
 	const [agentOutput, setAgentOutput] = useState([])
-	const [objects, setObjects] = useState([])
-	const [objectIndex, setObjectIndex] = useState(0)
-	const [inObject, setInObject] = useState(false)
 
 	// Find corresponding message and className
-	const getMessage = (line: string) => {
-		const found = messages.get(line)
-		if (found) return found
-		return {message: line, className: 'bg-secondary'}
+	const getMessage = (
+		line: string
+	): [boolean, {message: string; className: string}] => {
+		// Check if the line made any action calls
+		const found = messages.get(
+			Array.from(messages.keys()).find(key => line.includes(key))
+		)
+		if (found) {
+			found.message = line
+			return [true, found]
+		} else return [false, {message: line, className: 'bg-secondary'}]
 	}
 
 	async function agentChat(input: string) {
@@ -52,12 +59,15 @@ export default function ChatBox({refetch}: Props) {
 		setAgentOutput([])
 
 		const response = await fetch('/api/agent', {
-			body: JSON.stringify({input}),
+			body: JSON.stringify({input, modelName: model}),
 			headers: {'Content-Type': 'application/json'},
 			method: 'POST'
 		})
 
 		const reader = response.body.getReader()
+
+		// Set/Reset the index of the messages object
+		let objInd = 0
 
 		// Render streamed data as it comes in
 		while (true) {
@@ -71,22 +81,25 @@ export default function ChatBox({refetch}: Props) {
 
 			const text = new TextDecoder().decode(value)
 
-			if (text === '[') {
-				setInObject(true)
-				setObjectIndex(prevIndex => prevIndex + 1)
-			} else if (text === ']') {
-				setInObject(false)
-				setAgentOutput(prevData => [
-					...prevData,
-					`\n<code>${JSON.parse(objects[objectIndex])[0].generations[0][0]}</code>\n`
-				])
-			} else if (inObject)
-				setObjects(prevObjects => {
-					const newObjects = [...prevObjects]
-					newObjects[objectIndex] += text
-					return newObjects
+			// Check if an action call is made and get the according message object
+			let [found, messsage] = getMessage(text)
+
+			if (found) {
+				setAgentOutput(prevData => [...prevData, messsage])
+
+				// Message is rendered, increment index
+				objInd++
+			}
+			// Message is not completed, append to previous message
+			else
+				setAgentOutput(prevData => {
+					const newData = [...prevData]
+					newData[objInd] = {
+						message: (prevData[objInd]?.message ?? '') + text,
+						className: messsage.className
+					}
+					return newData
 				})
-			else setAgentOutput(prevData => [...prevData, text])
 		}
 	}
 
@@ -109,10 +122,8 @@ export default function ChatBox({refetch}: Props) {
 									transition={{duration: 0.5}}
 									key={index}
 									className='flex items-center gap-2'>
-									<span
-										className={`h-2.5 w-2.5 rounded-full ${getMessage(line).className}`}
-									/>
-									<p className='text-sm'>{getMessage(line).message}</p>
+									<span className={`h-2.5 w-2.5 rounded-full ${line.className}`} />
+									<p className='text-sm'>{line.message}</p>
 								</motion.div>
 							))}
 						</div>
@@ -144,6 +155,7 @@ export default function ChatBox({refetch}: Props) {
 					)}
 				</button>
 			</form>
+			<ChooseBot {...{ model, setModel }} />
 		</div>
 	)
 }

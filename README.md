@@ -2,6 +2,8 @@
 
 The easiest way to start a full-stack AI project.
 
+[![NPM Version](https://img.shields.io/npm/v/create-rubric-app.svg)]()
+
 This CLI stands up an AI Agent along with a UI and API to interface with it.
 
 - Drop-in your own tools
