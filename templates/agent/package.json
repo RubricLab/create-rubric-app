@@ -38,6 +38,8 @@
 	"private": true,
 	"scripts": {
 		"build": "next build",
+		"db:dev:push": "prisma db push --schema ./prisma/dev.schema.prisma && prisma db seed --schema ./prisma/dev.schema.prisma",
+		"db:dev:studio": "prisma studio --schema ./prisma/dev.schema.prisma",
 		"db:push": "prisma db push && prisma db seed",
 		"db:studio": "prisma studio",
 		"dev": "next dev",

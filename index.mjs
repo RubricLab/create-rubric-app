@@ -250,7 +250,7 @@ if (settings.includes('install')) {
 if (settings.includes('db')) {
 	child_process.execSync(
 		`cd ${name} && ${
-			settings.includes('bun') ? 'bun db:push' : 'npm run db:push'
+			settings.includes('bun') ? 'bun db:dev:push ' : 'npm run db:dev:push'
 		}`,
 		{stdio: [0, 1, 2]}
 	)
