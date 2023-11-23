@@ -3,7 +3,7 @@
 		"@prisma/client": "5.5.2",
 		"dotenv": "^16.3.1",
 		"framer-motion": "^10.16.4",
-		"langchain": "^0.0.176",
+		"langchain": "^0.0.197-rc.1",
 		"lucide-react": "^0.291.0",
 		"next": "^14.0.1",
 		"next-themes": "^0.2.1",
@@ -38,15 +38,14 @@
 	"private": true,
 	"scripts": {
 		"build": "next build",
-		"db:dev:push": "prisma db push --schema ./prisma/dev.schema.prisma && prisma db seed --schema ./prisma/dev.schema.prisma",
-		"db:dev:studio": "prisma studio --schema ./prisma/dev.schema.prisma",
-		"db:push": "prisma db push && prisma db seed",
+		"db:dev:push": "prisma generate --schema=./prisma/dev/schema.prisma && prisma db push --schema=./prisma/dev/schema.prisma",
+		"db:dev:studio": "prisma studio --schema=./prisma/dev/schema.prisma",
+		"db:push": "prisma generate && prisma db push && prisma db seed",
 		"db:studio": "prisma studio",
 		"dev": "next dev",
 		"format": "prettier --write . --ignore-path .gitignore",
 		"generate": "touch prisma/dev.db",
 		"lint": "eslint . --ext .js,.jsx,.cjs,.mjs,.json,.ts,.tsx",
-		"postinstall": "prisma generate",
 		"start": "next start"
 	},
 	"version": "0.0.0"
