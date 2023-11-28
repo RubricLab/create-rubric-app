@@ -31,12 +31,12 @@ function getPlatformNativeCmds(platform) {
 		case 'win32':
 			return {
 				copy: 'copy',
-				move: 'move',
+				move: 'move'
 			}
 		default:
 			return {
 				copy: 'cp',
-				move: 'mv',
+				move: 'mv'
 			}
 		//TODO: add more platforms & relevant commands
 	}
@@ -183,12 +183,12 @@ const template =
 	(_yes
 		? 'agent'
 		: _ai
-		? 'agent'
-		: await select({
-				choices: CHOICES,
-				default: 'agent',
-				message: 'What project template would you like to generate?'
-		  }))
+		  ? 'agent'
+		  : await select({
+					choices: CHOICES,
+					default: 'agent',
+					message: 'What project template would you like to generate?'
+		    }))
 
 const key =
 	_key ||
@@ -205,13 +205,13 @@ const settings = _yes
 		: ['scaffold', 'download', 'vscode', 'install', 'db', 'dev']
 	: await checkbox({
 			choices: [
+				{checked: _bun, name: 'use bun instead of npm', value: 'bun'},
 				{checked: true, name: 'scaffold project files', value: 'scaffold'},
 				{checked: true, name: 'download assets', value: 'download'},
 				{checked: true, name: 'configure vscode', value: 'vscode'},
 				{checked: true, name: 'configure DB', value: 'db'},
 				{checked: true, name: 'run install', value: 'install'},
-				{checked: true, name: 'run dev', value: 'dev'},
-				{checked: _bun, name: 'use bun instead of npm', value: 'bun'}
+				{checked: true, name: 'run dev', value: 'dev'}
 			],
 			message: 'Do you want to change any settings?'
 	  })
@@ -250,7 +250,7 @@ if (settings.includes('install')) {
 if (settings.includes('db')) {
 	child_process.execSync(
 		`cd ${name} && ${
-			settings.includes('bun') ? 'bun db:push' : 'npm run db:push'
+			settings.includes('bun') ? 'bun db:dev:push' : 'npm run db:dev:push'
 		}`,
 		{stdio: [0, 1, 2]}
 	)
@@ -259,12 +259,18 @@ if (settings.includes('db')) {
 
 if (settings.includes('vscode'))
 	try {
-		child_process.execSync('code --install-extension dbaeumer.vscode-eslint', {
-			stdio: [0, 1, 2]
-		})
-		child_process.execSync('code --install-extension esbenp.prettier-vscode', {
-			stdio: [0, 1, 2]
-		})
+		child_process.execSync(
+			'code --install-extension dbaeumer.vscode-eslint --force',
+			{
+				stdio: [0, 1, 2]
+			}
+		)
+		child_process.execSync(
+			'code --install-extension esbenp.prettier-vscode --force',
+			{
+				stdio: [0, 1, 2]
+			}
+		)
 		child_process.execSync(`code ${name}`, {stdio: [0, 1, 2]})
 		console.log(`✅ 5/6 - Configured vscode`)
 	} catch (e) {
