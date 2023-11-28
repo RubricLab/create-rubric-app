@@ -1,0 +1,32 @@
+name: Update README with Screenshot
+on:
+ push:
+  branches:
+   - main
+
+jobs:
+ update-screenshot:
+  runs-on: ubuntu-latest
+
+  steps:
+   - name: Checkout code
+     uses: actions/checkout@v4
+
+   - name: Use Node.js 18
+     uses: actions/setup-node@v4
+     with:
+      node-version: 18
+
+   - name: Take screenshot and update README
+     run: |
+      IMAGE_URL=$(curl -X GET $API_URL)
+      sed -i "0,/<img /s|<img .*|<img src=\"$IMAGE_URL\">|" README.md
+     env:
+      API_URL: ${{ secrets.SCREENSHOT_API_URL }}
+
+   - name: Commit changes
+     run: |
+      git config --local user.email "action@github.com"
+      git config --local user.name "GitHub Action"
+      git commit -am "Update README with screenshot"
+      git push
