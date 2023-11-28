@@ -1,5 +1,11 @@
 # create-rubric-app
 
+## 1.4.15
+
+### Patch Changes
+
+- 967560c: Use SQLite in dev and Postgres in prod
+
 ## 1.4.14
 
 ### Patch Changes
