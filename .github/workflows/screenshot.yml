@@ -17,16 +17,21 @@ jobs:
      with:
       node-version: 18
 
-   - name: Take screenshot and update README
-     run: |
-      IMAGE_URL=$(curl -X GET $API_URL)
-      sed -i "0,/<img /s|<img .*|<img src=\"$IMAGE_URL\">|" README.md
-     env:
-      API_URL: ${{ secrets.SCREENSHOT_API_URL }}
-
-   - name: Commit changes
+   - name: Pull changes
      run: |
       git config --local user.email "action@github.com"
       git config --local user.name "GitHub Action"
+      git pull
+
+   - name: Take screenshot and update README
+     run: |
+      IMAGE_URL=$(curl -H "Authorization: Bearer $API_KEY" -X GET $API_URL)
+      sed -i "0,/<img /s|<img .*|<img src=\"$IMAGE_URL\">|" README.md
+     env:
+      API_URL: ${{ secrets.SCREENSHOT_API_URL }}
+      API_KEY: ${{ secrets.SHOT_KEY }}
+
+   - name: Commit changes
+     run: |
       git commit -am "Update README with screenshot"
       git push
