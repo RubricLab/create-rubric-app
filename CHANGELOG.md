@@ -1,5 +1,11 @@
 # create-rubric-app
 
+## 1.5.0
+
+### Minor Changes
+
+- c2b3d0a: Add a new blank template
+
 ## 1.4.15
 
 ### Patch Changes
