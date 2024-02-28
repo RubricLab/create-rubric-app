@@ -31,6 +31,7 @@
 		"typescript": "^5.2.2",
 		"zod": "^3.22.4"
 	},
+	"license": "UNLICENSED",
 	"name": "my-blank-app",
 	"prisma": {
 		"seed": "npx ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
