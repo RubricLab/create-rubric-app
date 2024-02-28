@@ -23,7 +23,7 @@ function SubmitButton() {
 	)
 }
 
-export default function NameForm() {
+export default function DemoForm() {
 	const [state, formAction] = useFormState(sayHello, initialState)
 
 	// Loading state

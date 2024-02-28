@@ -1,4 +1,4 @@
-import NameForm from '~/ui/home/name-form'
+import DemoForm from '~/ui/home/demo-form'
 
 export default function Page() {
 	return (
@@ -7,7 +7,7 @@ export default function Page() {
 			<p>
 				To get started, edit <code>src/page.tsx</code> and save to reload.
 			</p>
-			<NameForm />
+			<DemoForm />
 		</div>
 	)
 }
