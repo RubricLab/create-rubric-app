@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import {ThemeSwitcher} from '~/components/ThemeSwitcher'
+import {ThemeSwitcher} from './theme-switcher'
 
 export default function Nav({title}: {title: string}) {
 	return (

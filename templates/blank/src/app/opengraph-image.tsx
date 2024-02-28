@@ -1,6 +1,6 @@
 import {ImageResponse} from 'next/og'
 import colors from 'tailwindcss/colors'
-import BackgroundGrid from '~/components/BackgroundGrid'
+import BackgroundGrid from '~/ui/layout/background-grid'
 
 export const runtime = 'edge'
 

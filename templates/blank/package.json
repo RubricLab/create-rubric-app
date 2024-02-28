@@ -6,9 +6,10 @@
 		"lucide-react": "^0.291.0",
 		"next": "^14.0.1",
 		"next-themes": "^0.2.1",
-		"prisma": "^5.5.2",
+		"prisma": "5.5.2",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
+		"sonner": "^1.4.2",
 		"sqlite3": "^5.1.6"
 	},
 	"description": "This project was bootstrapped with create-rubric-app",

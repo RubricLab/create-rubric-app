@@ -1,7 +1,7 @@
 import {Plus_Jakarta_Sans} from 'next/font/google'
 import Providers from '~/app/providers'
-import BackgroundGrid from '~/components/BackgroundGrid'
-import Nav from '~/components/Nav'
+import BackgroundGrid from '~/ui/layout/background-grid'
+import Nav from '~/ui/layout/nav'
 import './styles.css'
 
 const font = Plus_Jakarta_Sans({subsets: ['latin']})
