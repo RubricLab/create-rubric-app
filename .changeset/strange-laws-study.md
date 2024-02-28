@@ -1,5 +1,5 @@
 ---
-'create-rubric-app': major
+'create-rubric-app': minor
 ---
 
 Add a new blank template
