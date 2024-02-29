@@ -21,13 +21,13 @@ To get started, run the following command:
 ### Interactive
 
 ```sh
-bunx create-rubric-app
+bun x create-rubric-app
 ```
 
 ### Non-interactive
 
 ```sh
-bunx create-rubric-app@latest -n my-app -t agent -k OPENAI_API_KEY -y -b
+bun x create-rubric-app@latest -n my-app -t agent -k OPENAI_API_KEY -y -b
 ```
 
 ## Contributing
