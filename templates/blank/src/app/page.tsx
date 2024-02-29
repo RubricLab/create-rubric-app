@@ -13,7 +13,7 @@ export default async function Page() {
 			<p>
 				To get started, edit{' '}
 				<Link
-					href={`vscode://file/${dir}/src/app/page.tsx`}
+					href={`vscode://file${dir}/src/app/page.tsx`}
 					target='_blank'>
 					<code>src/app/page.tsx</code>
 				</Link>{' '}
