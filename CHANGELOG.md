@@ -1,5 +1,11 @@
 # create-rubric-app
 
+## 1.5.1
+
+### Patch Changes
+
+- add support for --blank flag
+
 ## 1.5.0
 
 ### Minor Changes
