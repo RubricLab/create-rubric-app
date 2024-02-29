@@ -1,5 +1,11 @@
 # create-rubric-app
 
+## 1.5.3
+
+### Patch Changes
+
+- 2c52436: Link to page.tsx file in VSCode
+
 ## 1.5.2
 
 ### Patch Changes
