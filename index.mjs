@@ -104,6 +104,7 @@ const {
 		// verbose: _verbose,
 		key: _key,
 		ai: _ai,
+		blank: _blank,
 		bun: _bun
 	}
 } = parseArgs({
@@ -129,6 +130,9 @@ const {
 			type: 'string'
 		},
 		ai: {
+			type: 'boolean'
+		},
+		blank: {
 			type: 'boolean'
 		},
 		bun: {
@@ -184,11 +188,13 @@ const template =
 		? 'agent'
 		: _ai
 		  ? 'agent'
-		  : await select({
-					choices: CHOICES,
-					default: 'agent',
-					message: 'What project template would you like to generate?'
-		    }))
+		  : _blank
+		    ? 'blank'
+		    : await select({
+						choices: CHOICES,
+						default: 'blank',
+						message: 'What project template would you like to generate?'
+		      }))
 
 const key =
 	_key ||
