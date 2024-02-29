@@ -1,4 +1,5 @@
 'use server'
+
 import {z} from 'zod'
 
 const schema = z.object({
@@ -19,7 +20,7 @@ export default async function sayHello(prevState: any, formData: FormData) {
 	try {
 		if (parsed.name)
 			return {
-				message: `Hello from the server: Welcome ${parsed.name} 👋`,
+				message: `Hello ${parsed.name}, from the server 👋`,
 				type: 'success'
 			}
 	} catch (err) {
