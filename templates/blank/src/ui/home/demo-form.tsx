@@ -1,4 +1,5 @@
 'use client'
+
 import {useEffect} from 'react'
 import {useFormState, useFormStatus} from 'react-dom'
 import {toast} from 'sonner'
@@ -12,14 +13,12 @@ const initialState = {
 function SubmitButton() {
 	const {pending} = useFormStatus()
 	return (
-		<div className='flex w-full items-center justify-end gap-4'>
-			<button
-				type='submit'
-				className='w-fit'
-				disabled={pending}>
-				Greet
-			</button>
-		</div>
+		<button
+			type='submit'
+			className='primary'
+			disabled={pending}>
+			Submit
+		</button>
 	)
 }
 
@@ -37,11 +36,11 @@ export default function DemoForm() {
 
 	return (
 		<form
-			className='flex w-full flex-col gap-4'
+			className='flex w-full gap-4'
 			action={formAction}>
 			<input
 				name='name'
-				placeholder='Enter name'
+				placeholder='Enter your name'
 			/>
 			<SubmitButton />
 		</form>
