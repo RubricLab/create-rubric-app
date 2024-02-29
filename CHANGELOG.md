@@ -1,5 +1,11 @@
 # create-rubric-app
 
+## 1.5.2
+
+### Patch Changes
+
+- b4ef826: Attach metadata and OG images
+
 ## 1.5.1
 
 ### Patch Changes
