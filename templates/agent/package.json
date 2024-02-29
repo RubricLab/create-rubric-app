@@ -37,7 +37,7 @@
 	},
 	"private": true,
 	"scripts": {
-		"build": "next build",
+		"build": "prisma generate && next build",
 		"db:dev:push": "prisma generate --schema=./prisma/dev/schema.prisma && prisma db push --schema=./prisma/dev/schema.prisma",
 		"db:dev:studio": "prisma studio --schema=./prisma/dev/schema.prisma",
 		"db:push": "prisma generate && prisma db push",

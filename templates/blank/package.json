@@ -32,7 +32,7 @@
 		"zod": "^3.22.4"
 	},
 	"license": "UNLICENSED",
-	"name": "my-blank-app",
+	"name": "my-app",
 	"prisma": {
 		"seed": "npx ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
 	},

@@ -2,7 +2,7 @@ import {Metadata} from 'next'
 
 export const META = {
 	desc: 'Bootstrapped with create-rubric-app',
-	title: 'My Cool Agent',
+	title: 'My App',
 	twitter: '@rubriclabs'
 }
 

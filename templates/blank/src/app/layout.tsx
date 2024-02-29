@@ -1,12 +1,14 @@
 import {Plus_Jakarta_Sans} from 'next/font/google'
+import {Metadata} from 'next/types'
 import Providers from '~/app/providers'
+import {DEFAULT_META} from '~/lib/constants/metadata'
 import BackgroundGrid from '~/ui/layout/background-grid'
 import Nav from '~/ui/layout/nav'
 import './styles.css'
 
 const font = Plus_Jakarta_Sans({subsets: ['latin']})
 
-export const metadata = {
+export const metadata: Metadata = {
 	alternates: {
 		canonical: '/',
 		languages: {
@@ -17,7 +19,8 @@ export const metadata = {
 		process.env.VERCEL_URL
 			? `https://${process.env.VERCEL_URL}`
 			: `http://localhost:${process.env.PORT || 3000}`
-	)
+	),
+	...DEFAULT_META
 }
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
