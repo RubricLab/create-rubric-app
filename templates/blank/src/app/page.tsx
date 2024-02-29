@@ -1,3 +1,5 @@
+'use server'
+
 import DemoForm from '~/ui/home/demo-form'
 
 export default function Page() {
@@ -5,7 +7,7 @@ export default function Page() {
 		<div className='flex h-screen w-full flex-col justify-center gap-10 p-5 sm:p-20'>
 			<h1>Welcome</h1>
 			<p>
-				To get started, edit <code>src/page.tsx</code> and save to reload.
+				To get started, edit <code>src/app/page.tsx</code> and save to reload.
 			</p>
 			<DemoForm />
 		</div>
