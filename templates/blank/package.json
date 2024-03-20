@@ -1,12 +1,12 @@
 {
 	"dependencies": {
-		"@prisma/client": "5.5.2",
+		"@prisma/client": "^5.6.0",
 		"dotenv": "^16.3.1",
 		"framer-motion": "^10.16.4",
 		"lucide-react": "^0.291.0",
 		"next": "^14.0.1",
 		"next-themes": "^0.2.1",
-		"prisma": "5.5.2",
+		"prisma": "^5.6.0",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"sonner": "^1.4.2",
