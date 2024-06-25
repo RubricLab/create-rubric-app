@@ -1,5 +1,23 @@
 # create-rubric-app
 
+## 1.6.2
+
+### Patch Changes
+
+- oops 2
+
+## 1.6.1
+
+### Patch Changes
+
+- oops
+
+## 1.6.0
+
+### Minor Changes
+
+- init package template
+
 ## 1.5.3
 
 ### Patch Changes
