@@ -1,0 +1,11 @@
+{
+	"compilerOptions": {
+		"baseUrl": ".",
+		"paths": {
+			"~/*": ["./src/lib/*"]
+		}
+	},
+	"exclude": ["node_modules"],
+	"extends": "@rubriclab/typescript-config/",
+	"include": ["./src/**/*.ts", "./src/**/*.tsx"]
+}
