@@ -1,0 +1,18 @@
+name: Notify Main Repo
+
+on:
+ push:
+  branches:
+   - main
+
+jobs:
+ notify:
+  runs-on: ubuntu-latest
+  steps:
+   - name: Trigger main repo workflow
+     run: |
+      curl -X POST \
+        -H "Authorization: token ${{ secrets.RUBROT_PAT }}" \
+        -H "Accept: application/vnd.github.v3+json" \
+        https://api.github.com/repos/RubricLab/rubric/actions/workflows/update-submodules.yml/dispatches \
+        -d '{"ref":"main","inputs":{"repository":"${{ github.repository }}","ref":"${{ github.ref }}"}}'
