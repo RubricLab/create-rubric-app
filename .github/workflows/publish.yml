@@ -1,46 +1,16 @@
-name: Publish to NPM
+name: Release Package
+
 on:
  push:
   branches:
    - main
+
+permissions:
+ contents: read
+ packages: write
+ id-token: write
+
 jobs:
- build:
-  runs-on: ubuntu-latest
-  timeout-minutes: 1 # because `changeset publish` hangs indefinitely
-
-  permissions:
-   pull-requests: write
-   packages: write
-   contents: write
-
-  steps:
-   - name: Check out branch 🛒
-     uses: actions/checkout@v4
-
-   - name: Set up Node 🦠
-     uses: actions/setup-node@v3
-     with:
-      node-version: 18
-
-   - name: Set up Bun 🍞
-     uses: oven-sh/setup-bun@v1
-
-   - name: Install Dependencies 👶
-     run: bun i
-
-   - name: Log into NPM 🔑
-     run: npm config set //registry.npmjs.org/:_authToken=${NPM_TOKEN}
-     env:
-      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-   - name: Open PR or Publish to NPM 🚀
-     id: changesets
-     uses: changesets/action@v1
-     with:
-      publish: bunx changeset publish
-     env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-   - name: Check ✅
-     run: echo 'Published ${{ steps.changesets.outputs.published }}'
+ release:
+  uses: rubriclab/package/.github/workflows/release-package.yml@main
+  secrets: inherit

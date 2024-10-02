@@ -6,7 +6,8 @@ const schema = z.object({
 	name: z.string()
 })
 
-export default async function sayHello(prevState: any, formData: FormData) {
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+export default async function sayHello(_prevState: any, formData: FormData) {
 	const parsed = schema.parse({
 		name: formData.get('name')
 	})
@@ -34,4 +35,6 @@ export default async function sayHello(prevState: any, formData: FormData) {
 			type: 'error'
 		}
 	}
+
+	return
 }

@@ -16,7 +16,11 @@ export function ThemeSwitcher() {
 
 	return (
 		<div>
-			<button className="bg-primary" onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
+			<button
+				type="button"
+				className="bg-primary"
+				onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+			>
 				{theme === 'light' ? <Moon /> : <Sun />}
 			</button>
 		</div>

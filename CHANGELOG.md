@@ -1,3 +1,4 @@
+- [2024-10-02] [Setup package and lint blank template](https://github.com/RubricLab/create-rubric-app/commit/a1a7dfc5e9ce6fdcac88e9e5bdba9a5298a6c512)
 # create-rubric-app
 
 ## 1.6.2
