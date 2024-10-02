@@ -1,3 +1,4 @@
+- [2024-10-02] [Bleed all template deps](https://github.com/RubricLab/create-rubric-app/commit/dd89f08b7fdc2a514c2049df18dda42342c64f79)
 - [2024-10-02] [Format and lint fullstack](https://github.com/RubricLab/create-rubric-app/commit/efb70ff6ee55e2f309c16ee219758aec005cd889)
 - [2024-10-02] [Setup package and lint blank template](https://github.com/RubricLab/create-rubric-app/commit/a1a7dfc5e9ce6fdcac88e9e5bdba9a5298a6c512)
 # create-rubric-app
