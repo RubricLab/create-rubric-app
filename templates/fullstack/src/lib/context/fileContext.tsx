@@ -21,7 +21,7 @@ type FilesContextType = {
 	isDragging: boolean
 }
 
-const FilesContext = createContext<FilesContextType>(undefined)
+const FilesContext = createContext<FilesContextType | undefined>(undefined)
 
 export const useFiles = () => {
 	return useContext(FilesContext)
@@ -75,93 +75,99 @@ export const FilesProvider = ({ children }: { children: ReactNode }) => {
 
 	const handleDrop = useCallback(
 		async (event: Event | DragEvent) => {
-			event = event as DragEvent
-
 			event.preventDefault()
 			event.stopPropagation()
 			setIsDragging(false)
 
-			if (event.dataTransfer.files && event.dataTransfer.files.length > 0) {
-				dragCounter.current = 0
-				const acceptedFiles: FileList = event.dataTransfer.files
+			if (
+				!('dataTransfer' in event) ||
+				!event.dataTransfer.files ||
+				!(event.dataTransfer.files.length > 0)
+			)
+				return
 
-				const file = Object.values(acceptedFiles)[0]
+			dragCounter.current = 0
+			const acceptedFiles: FileList = event.dataTransfer.files
 
-				const rejectedFiles: string[] = []
+			const file = Object.values(acceptedFiles)[0]
+			if (!file) return
 
-				if (file.size > 100000000) {
-					rejectedFiles.push(file.name)
-					return false
-				}
+			const rejectedFiles: string[] = []
 
-				console.log('dropped')
+			if (file.size > 100000000) {
+				rejectedFiles.push(file.name)
+				return false
+			}
 
-				const presignedUrl = await presignMutation.mutateAsync({
-					file: {
-						name: file.name,
-						type: file.type
-					}
-				})
+			console.log('dropped')
 
-				const temporaryFile = {
-					id: presignedUrl.id,
-					url: URL.createObjectURL(file || new Blob()),
+			const presignedUrl = await presignMutation.mutateAsync({
+				file: {
 					name: file.name,
-					type: file.type,
-					userId: '',
-					uploaded: false
-				} as File & { url: string; error?: boolean }
-
-				setTemporaryFiles([temporaryFile])
-
-				const data = {
-					...presignedUrl.presignedPost.fields,
-					'Content-Type': file.type,
-					file: file
+					type: file.type
 				}
+			})
 
-				const formData = new FormData()
+			const temporaryFile = {
+				id: presignedUrl.id,
+				url: URL.createObjectURL(file || new Blob()),
+				name: file.name,
+				type: file.type,
+				userId: '',
+				uploaded: false
+			} as File & { url: string; error?: boolean }
 
-				for (const name in data) formData.append(name, data[name])
+			setTemporaryFiles([temporaryFile])
 
-				const response = async () => {
-					try {
-						const upload = await fetch(presignedUrl.presignedPost.url, {
-							method: 'POST',
-							body: formData
+			const data = {
+				...presignedUrl.presignedPost.fields,
+				'Content-Type': file.type,
+				file: file
+			}
+
+			const formData = new FormData()
+
+			for (const name in data) formData.append(name, data[name as keyof typeof data])
+
+			const response = async () => {
+				try {
+					const upload = await fetch(presignedUrl.presignedPost.url, {
+						method: 'POST',
+						body: formData
+					})
+
+					if (upload.ok) {
+						await confirmMutation.mutateAsync({
+							id: presignedUrl.id
 						})
-
-						if (upload.ok) {
-							await confirmMutation.mutateAsync({
-								id: presignedUrl.id
-							})
-
-							setFiles(prev => {
-								const index = prev.findIndex(f => f.id === presignedUrl.id)
-								const updatedFiles = [...prev]
-								updatedFiles[index] = {
-									...(prev[index] as File & { url: string }),
-									uploaded: true
-								}
-								return updatedFiles
-							})
-
-							return upload
-						}
-						return
-					} catch (e) {
-						await rejectMutation.mutateAsync({ id: presignedUrl.id })
 
 						setFiles(prev => {
 							const index = prev.findIndex(f => f.id === presignedUrl.id)
 							const updatedFiles = [...prev]
-							delete updatedFiles[index]
+							updatedFiles[index] = {
+								...(prev[index] as File & { url: string }),
+								uploaded: true
+							}
 							return updatedFiles
 						})
+
+						return upload
 					}
+					return
+				} catch (e) {
+					await rejectMutation.mutateAsync({ id: presignedUrl.id })
+
+					setFiles(prev => {
+						const index = prev.findIndex(f => f.id === presignedUrl.id)
+						const updatedFiles = [...prev]
+						delete updatedFiles[index]
+						return updatedFiles
+					})
+
+					return
 				}
-				return response()
 			}
+			return response()
 		},
 		[confirmMutation, presignMutation, rejectMutation, setTemporaryFiles]
 	)

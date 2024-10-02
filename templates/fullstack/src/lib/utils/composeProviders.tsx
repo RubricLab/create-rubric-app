@@ -13,7 +13,11 @@ const ComposeProviders = ({
 	return (
 		<>
 			{providers.reduceRight((acc, { provider: Component, props }) => {
-				return <Component {...props}>{acc}</Component>
+				return (
+					<Component key={Component.name} {...props}>
+						{acc}
+					</Component>
+				)
 			}, children)}
 		</>
 	)
