@@ -1,3 +1,4 @@
+- [2024-10-02] [Run lint](https://github.com/RubricLab/create-rubric-app/commit/629e7fbb3b1257d1cfcf31a80449631000a25e8c)
 - [2024-10-02] [Bun bleed on root](https://github.com/RubricLab/create-rubric-app/commit/30f5d7aebb9d48266dceafeda4e47050e6ea3fef)
 - [2024-10-02] [Bleed all template deps](https://github.com/RubricLab/create-rubric-app/commit/dd89f08b7fdc2a514c2049df18dda42342c64f79)
 - [2024-10-02] [Format and lint fullstack](https://github.com/RubricLab/create-rubric-app/commit/efb70ff6ee55e2f309c16ee219758aec005cd889)
