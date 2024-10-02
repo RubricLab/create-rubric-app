@@ -1,2 +1,2 @@
-import { models } from "~/components/ChooseBot"
-export type Model = typeof models[number]
+import type { models } from '~/components/ChooseBot'
+export type Model = (typeof models)[number]

@@ -1,11 +1,11 @@
-import {z} from 'zod'
-import {ACCOUNT_REQUIRED_ERROR} from '~/constants/errors'
-import {createTRPCRouter, protectedProcedure} from '~/server/trpc'
+import { z } from 'zod'
+import { ACCOUNT_REQUIRED_ERROR } from '~/constants/errors'
+import { createTRPCRouter, protectedProcedure } from '~/server/trpc'
 
 export default createTRPCRouter({
 	create: protectedProcedure
-		.input(z.object({title: z.string()}))
-		.mutation(async ({ctx, input}) => {
+		.input(z.object({ title: z.string() }))
+		.mutation(async ({ ctx, input }) => {
 			if (!ctx.session?.user) throw ACCOUNT_REQUIRED_ERROR
 
 			return await ctx.db.task.create({
@@ -19,7 +19,7 @@ export default createTRPCRouter({
 				}
 			})
 		}),
-	getAll: protectedProcedure.query(async ({ctx}) => {
+	getAll: protectedProcedure.query(async ({ ctx }) => {
 		if (!ctx.session?.user) throw ACCOUNT_REQUIRED_ERROR
 
 		return await ctx.db.task.findMany({
@@ -28,17 +28,15 @@ export default createTRPCRouter({
 			}
 		})
 	}),
-	delete: protectedProcedure
-		.input(z.object({id: z.number()}))
-		.mutation(async ({ctx, input}) => {
-			if (!ctx.session?.user) throw ACCOUNT_REQUIRED_ERROR
+	delete: protectedProcedure.input(z.object({ id: z.number() })).mutation(async ({ ctx, input }) => {
+		if (!ctx.session?.user) throw ACCOUNT_REQUIRED_ERROR
 
-			return await ctx.db.task.delete({
-				where: {
-					id: input.id
-				}
-			})
-		}),
+		return await ctx.db.task.delete({
+			where: {
+				id: input.id
+			}
+		})
+	}),
 	update: protectedProcedure
 		.input(
 			z.object({
@@ -47,7 +45,7 @@ export default createTRPCRouter({
 				status: z.boolean().optional()
 			})
 		)
-		.mutation(async ({ctx, input}) => {
+		.mutation(async ({ ctx, input }) => {
 			if (!ctx.session?.user) throw ACCOUNT_REQUIRED_ERROR
 
 			return await ctx.db.task.update({

@@ -6,24 +6,16 @@
 		"@types/bun": "latest",
 		"@types/react": "^18",
 		"@types/react-dom": "^18",
+		"@rubriclab/config": "*",
 		"autoprefixer": "^10.4.19",
 		"bun-plugin-dts": "latest",
 		"postcss": "^8.4.38",
 		"tailwindcss": "^3.4.4",
 		"typescript": "^5.2.2"
 	},
-	"files": [
-		"dist/*.css",
-		"dist/*.d.ts",
-		"dist/*.js"
-	],
+	"files": ["dist/*.css", "dist/*.d.ts", "dist/*.js"],
 	"homepage": "https://github.com/RubricLab/ui#readme",
-	"keywords": [
-		"bun",
-		"react",
-		"tailwindcss",
-		"ui"
-	],
+	"keywords": ["bun", "react", "tailwindcss", "ui"],
 	"license": "gonuts",
 	"main": "dist/index.js",
 	"module": "src/index.ts",
@@ -44,10 +36,14 @@
 	},
 	"scripts": {
 		"build": "bun run build.mjs",
-		"clean": "rm -rf node_modules && rm -rf bun.lockb",
 		"prepublishOnly": "bun run build",
 		"tailwind": "bunx tailwindcss -i ./src/styles.css -o ./dist/output.css",
-		"watch": "bun run build --watch"
+		"watch": "bun run build --watch",
+		"bleed": "bun x npm-check-updates -u && bun i",
+		"format": "bun x biome format --write .",
+		"lint": "bun x biome check .",
+		"lint:fix": "bun x biome lint . --write --unsafe",
+		"clean": "rm -rf .next && rm -rf node_modules"
 	},
 	"type": "module",
 	"types": "dist/index.d.ts",

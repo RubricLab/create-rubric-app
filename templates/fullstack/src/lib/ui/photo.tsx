@@ -1,16 +1,9 @@
 'use client'
 import Image from 'next/image'
-import {useFiles} from '~/context/fileContext'
+import { useFiles } from '~/context/fileContext'
 
 export default function Photo() {
-	const {
-		files,
-		handleDragIn,
-		handleDragOut,
-		handleDrop,
-		handleDrag,
-		isDragging
-	} = useFiles()
+	const { files, handleDragIn, handleDragOut, handleDrop, handleDrag, isDragging } = useFiles()
 
 	return (
 		<div
@@ -18,14 +11,15 @@ export default function Photo() {
 			onDragEnter={handleDragIn}
 			onDragLeave={handleDragOut}
 			onDragOver={handleDrag}
-			onDrop={handleDrop}>
+			onDrop={handleDrop}
+		>
 			{files?.length ? (
 				<Image
 					src={files[files.length - 1]?.url}
-					alt='profile picture'
+					alt="profile picture"
 					width={50}
 					height={50}
-					layout='contain'
+					layout="contain"
 				/>
 			) : (
 				''

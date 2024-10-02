@@ -1,8 +1,8 @@
 'use client'
 
-import {useEffect} from 'react'
-import {useFormState, useFormStatus} from 'react-dom'
-import {toast} from 'sonner'
+import { useEffect } from 'react'
+import { useFormState, useFormStatus } from 'react-dom'
+import { toast } from 'sonner'
 import sayHello from '~/lib/actions/say-hello'
 
 const initialState = {
@@ -11,12 +11,9 @@ const initialState = {
 }
 
 function SubmitButton() {
-	const {pending} = useFormStatus()
+	const { pending } = useFormStatus()
 	return (
-		<button
-			type='submit'
-			className='primary'
-			disabled={pending}>
+		<button type="submit" className="primary" disabled={pending}>
 			Submit
 		</button>
 	)
@@ -35,13 +32,8 @@ export default function DemoForm() {
 	}, [state])
 
 	return (
-		<form
-			className='flex w-full gap-4'
-			action={formAction}>
-			<input
-				name='name'
-				placeholder='Enter your name'
-			/>
+		<form className="flex w-full gap-4" action={formAction}>
+			<input name="name" placeholder="Enter your name" />
 			<SubmitButton />
 		</form>
 	)

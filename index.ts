@@ -1,23 +1,18 @@
-#! /usr/bin/env node
+#! /usr/bin/env bun
 
-import {checkbox, input, select} from '@inquirer/prompts'
+import { checkbox, input, select } from '@inquirer/prompts'
 import boxen from 'boxen'
 import chalk from 'chalk'
-import child_process from 'child_process'
+import child_process from 'node:child_process'
 import clear from 'clear'
 import figlet from 'figlet'
-import fs, {
-	mkdirSync,
-	readFileSync,
-	readdirSync,
-	statSync,
-	writeFileSync
-} from 'fs'
-import https from 'https'
-import {parseArgs} from 'node:util'
+import fs, { mkdirSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs'
+import https from 'node:https'
+import { parseArgs } from 'node:util'
 import open from 'open'
-import path from 'path'
-import {fileURLToPath} from 'url'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+import { spawn } from 'node:child_process'
 
 const __filename = fileURLToPath(import.meta.url)
 
@@ -47,7 +42,7 @@ const PLC = getPlatformNativeCmds(process.platform)
 function createDirectoryContents(templatePath, newProjectPath) {
 	const filesToCreate = readdirSync(templatePath)
 
-	filesToCreate.forEach(file => {
+	for (const file of filesToCreate) {
 		const origFilePath = `${templatePath}/${file}`
 
 		// get stats about the current file
@@ -62,12 +57,9 @@ function createDirectoryContents(templatePath, newProjectPath) {
 			mkdirSync(`${CURR_DIR}/${newProjectPath}/${file}`)
 
 			// recursive call
-			createDirectoryContents(
-				`${templatePath}/${file}`,
-				`${newProjectPath}/${file}`
-			)
+			createDirectoryContents(`${templatePath}/${file}`, `${newProjectPath}/${file}`)
 		}
-	})
+	}
 }
 
 function copyTemplate(name, template) {
@@ -82,8 +74,8 @@ function copyTemplate(name, template) {
 async function downloadFile(url, dest) {
 	if (!fs.existsSync(dest)) mkdirSync(dest)
 	const file = fs.createWriteStream(`${dest}/${path.basename(url)}`)
-	return await new Promise(resolve => {
-		https.get(url, function (response) {
+	return await new Promise<void>(resolve => {
+		https.get(url, response => {
 			response.pipe(file)
 
 			// after download completed close filestream
@@ -174,7 +166,7 @@ let name =
 		: await input({
 				default: 'jarvis',
 				message: 'What do you want to name your project?'
-		  }))
+			}))
 
 if (fs.existsSync(name)) {
 	let i = 1
@@ -187,14 +179,14 @@ const template =
 	(_yes
 		? 'agent'
 		: _ai
-		  ? 'agent'
-		  : _blank
-		    ? 'blank'
-		    : await select({
+			? 'agent'
+			: _blank
+				? 'blank'
+				: await select({
 						choices: CHOICES,
 						default: 'blank',
 						message: 'What project template would you like to generate?'
-		      }))
+					}))
 
 const key =
 	_key ||
@@ -211,25 +203,25 @@ const settings = _yes
 		: ['scaffold', 'download', 'vscode', 'install', 'db', 'dev']
 	: await checkbox({
 			choices: [
-				{checked: _bun, name: 'use bun instead of npm', value: 'bun'},
-				{checked: true, name: 'scaffold project files', value: 'scaffold'},
-				{checked: true, name: 'download assets', value: 'download'},
-				{checked: true, name: 'configure vscode', value: 'vscode'},
-				{checked: true, name: 'configure DB', value: 'db'},
-				{checked: true, name: 'run install', value: 'install'},
-				{checked: true, name: 'run dev', value: 'dev'}
+				{ checked: _bun, name: 'use bun instead of npm', value: 'bun' },
+				{ checked: true, name: 'scaffold project files', value: 'scaffold' },
+				{ checked: true, name: 'download assets', value: 'download' },
+				{ checked: true, name: 'configure vscode', value: 'vscode' },
+				{ checked: true, name: 'configure DB', value: 'db' },
+				{ checked: true, name: 'run install', value: 'install' },
+				{ checked: true, name: 'run dev', value: 'dev' }
 			],
 			message: 'Do you want to change any settings?'
-	  })
+		})
 
 if (settings.includes('scaffold')) {
 	copyTemplate(name, template)
-	console.log(`✅ 1/6 - Scaffolded project files`)
+	console.log('✅ 1/6 - Scaffolded project files')
 	child_process.execSync(
 		`cd ${name} && ${PLC.copy} .env.example .env && echo ${key} >> .env && ${PLC.move} gitignore .gitignore && git init -b main`,
-		{stdio: [0, 1, 2]}
+		{ stdio: [0, 1, 2] }
 	)
-} else console.log(`✅ 1/6 - no-scaffold flag passed`)
+} else console.log('✅ 1/6 - no-scaffold flag passed')
 
 if (settings.includes('download'))
 	if (template === 'agent')
@@ -237,64 +229,51 @@ if (settings.includes('download'))
 		// 	'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700&display=swap',
 		// 	`${name}/public/fonts`
 		// )
-		console.log(`✅ 2/6 - Downloaded assets`)
-	else console.log(`✅ 2/5 - Nothing to download`)
-else console.log(`✅ 2/6 - no-download flag passed`)
+		console.log('✅ 2/6 - Downloaded assets')
+	else console.log('✅ 2/5 - Nothing to download')
+else console.log('✅ 2/6 - no-download flag passed')
 
 if (settings.includes('install')) {
-	child_process.execSync(
-		`cd ${name} && ${settings.includes('bun') ? 'bun i' : 'npm i'}`,
-		{stdio: [0, 1, 2]}
-	)
-	console.log(
-		`✅ 3/6 - Installed dependencies with ${
-			settings.includes('bun') ? 'bun' : 'npm'
-		}`
-	)
-} else console.log(`✅ 3/6 - no-install flag passed`)
+	child_process.execSync(`cd ${name} && ${settings.includes('bun') ? 'bun i' : 'npm i'}`, {
+		stdio: [0, 1, 2]
+	})
+	console.log(`✅ 3/6 - Installed dependencies with ${settings.includes('bun') ? 'bun' : 'npm'}`)
+} else console.log('✅ 3/6 - no-install flag passed')
 
 if (settings.includes('db')) {
 	child_process.execSync(
-		`cd ${name} && ${
-			settings.includes('bun') ? 'bun db:dev:push' : 'npm run db:dev:push'
-		}`,
-		{stdio: [0, 1, 2]}
+		`cd ${name} && ${settings.includes('bun') ? 'bun db:dev:push' : 'npm run db:dev:push'}`,
+		{ stdio: [0, 1, 2] }
 	)
-	console.log(`✅ 4/6 - Configured DB with sqlite3`)
-} else console.log(`✅ 4/6 - no-db flag passed`)
+	console.log('✅ 4/6 - Configured DB with sqlite3')
+} else console.log('✅ 4/6 - no-db flag passed')
 
 if (settings.includes('vscode'))
 	try {
-		child_process.execSync(
-			'code --install-extension dbaeumer.vscode-eslint --force',
-			{
-				stdio: [0, 1, 2]
-			}
-		)
-		child_process.execSync(
-			'code --install-extension esbenp.prettier-vscode --force',
-			{
-				stdio: [0, 1, 2]
-			}
-		)
-		child_process.execSync(`code ${name}`, {stdio: [0, 1, 2]})
-		console.log(`✅ 5/6 - Configured vscode`)
+		child_process.execSync('code --install-extension dbaeumer.vscode-eslint --force', {
+			stdio: [0, 1, 2]
+		})
+		child_process.execSync('code --install-extension esbenp.prettier-vscode --force', {
+			stdio: [0, 1, 2]
+		})
+		child_process.execSync(`code ${name}`, { stdio: [0, 1, 2] })
+		console.log('✅ 5/6 - Configured vscode')
 	} catch (e) {
 		console.log(
-			`❌ 5/6 - Could not configure vscode. You might have to do this: https://code.visualstudio.com/docs/setup/mac`
+			'❌ 5/6 - Could not configure vscode. You might have to do this: https://code.visualstudio.com/docs/setup/mac'
 		)
 	}
-else console.log(`✅ 5/6 - no-vscode flag passed`)
+else console.log('✅ 5/6 - no-vscode flag passed')
 
 if (settings.includes('dev'))
 	await Promise.all([
-		new Promise(resolve => {
+		new Promise<void>(resolve => {
 			setTimeout(() => {
 				resolve()
 			}, 2000)
 		}).then(() => {
-			open(`http://localhost:3000`)
-			console.log(`✅ 6/6 - Started development server`)
+			open('http://localhost:3000')
+			console.log('✅ 6/6 - Started development server')
 
 			console.log(
 				boxen(
@@ -312,9 +291,9 @@ if (settings.includes('dev'))
 				)
 			)
 		}),
-		child_process.exec(
-			`cd ${name} && ${settings.includes('bun') ? 'bun' : 'npm run'} dev`,
-			{stdio: [0, 1, 2]}
-		)
+		spawn('cd', [name, '&&', settings.includes('bun') ? 'bun' : 'npm', 'run', 'dev'], {
+			stdio: 'inherit',
+			shell: true
+		})
 	])
-else console.log(`✅ 6/6 - no-dev flag passed`)
+else console.log('✅ 6/6 - no-dev flag passed')

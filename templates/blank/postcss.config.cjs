@@ -1,1 +1,1 @@
-module.exports = require('@rubriclab/tailwind-config/postcss.cjs')
+module.exports = require('@rubriclab/config/postcss')

@@ -1,4 +1,4 @@
-import {ImageResponse} from 'next/og'
+import { ImageResponse } from 'next/og'
 
 export const runtime = 'edge'
 
@@ -10,22 +10,21 @@ export const size = {
 
 export default async function Icon() {
 	return new ImageResponse(
-		(
-			<div
-				style={{
-					alignItems: 'center',
-					background: 'black',
-					color: 'white',
-					display: 'flex',
-					fontWeight: 700,
-					fontSize: 28,
-					height: '100%',
-					justifyContent: 'center',
-					width: '100%'
-				}}>
-				R
-			</div>
-		),
+		<div
+			style={{
+				alignItems: 'center',
+				background: 'black',
+				color: 'white',
+				display: 'flex',
+				fontWeight: 700,
+				fontSize: 28,
+				height: '100%',
+				justifyContent: 'center',
+				width: '100%'
+			}}
+		>
+			R
+		</div>,
 		{
 			...size
 		}

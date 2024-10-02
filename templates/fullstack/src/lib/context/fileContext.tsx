@@ -1,19 +1,19 @@
 'use client'
 
-import type {File} from '@prisma/client'
+import type { File } from '@prisma/client'
 import {
-	DragEvent,
-	ReactNode,
+	type DragEvent,
+	type ReactNode,
 	createContext,
 	useCallback,
 	useContext,
 	useRef,
 	useState
 } from 'react'
-import {api} from '~/utils/trpc/react'
+import { api } from '~/utils/trpc/react'
 
 type FilesContextType = {
-	files: (File & {url: string; error?: boolean})[] | undefined
+	files: (File & { url: string; error?: boolean })[] | undefined
 	handleDragIn: (event: Event | DragEvent) => void
 	handleDragOut: (event: Event | DragEvent) => void
 	handleDrop: (event: Event | DragEvent) => void
@@ -27,11 +27,11 @@ export const useFiles = () => {
 	return useContext(FilesContext)
 }
 
-export const FilesProvider = ({children}: {children: ReactNode}) => {
-	const [files, setFiles] = useState<(File & {url: string})[]>([])
+export const FilesProvider = ({ children }: { children: ReactNode }) => {
+	const [files, setFiles] = useState<(File & { url: string })[]>([])
 
 	const setTemporaryFiles = useCallback(
-		(temporaryFiles: (File & {url: string})[]) => {
+		(temporaryFiles: (File & { url: string })[]) => {
 			setFiles([...(files || []), ...temporaryFiles])
 		},
 		[files]
@@ -85,7 +85,7 @@ export const FilesProvider = ({children}: {children: ReactNode}) => {
 				dragCounter.current = 0
 				const acceptedFiles: FileList = event.dataTransfer.files
 
-				let file = Object.values(acceptedFiles)[0]
+				const file = Object.values(acceptedFiles)[0]
 
 				const rejectedFiles: string[] = []
 
@@ -110,7 +110,7 @@ export const FilesProvider = ({children}: {children: ReactNode}) => {
 					type: file.type,
 					userId: '',
 					uploaded: false
-				} as File & {url: string; error?: boolean}
+				} as File & { url: string; error?: boolean }
 
 				setTemporaryFiles([temporaryFile])
 
@@ -140,7 +140,7 @@ export const FilesProvider = ({children}: {children: ReactNode}) => {
 								const index = prev.findIndex(f => f.id === presignedUrl.id)
 								const updatedFiles = [...prev]
 								updatedFiles[index] = {
-									...(prev[index] as File & {url: string}),
+									...(prev[index] as File & { url: string }),
 									uploaded: true
 								}
 								return updatedFiles
@@ -150,7 +150,7 @@ export const FilesProvider = ({children}: {children: ReactNode}) => {
 						}
 						return
 					} catch (e) {
-						await rejectMutation.mutateAsync({id: presignedUrl.id})
+						await rejectMutation.mutateAsync({ id: presignedUrl.id })
 
 						setFiles(prev => {
 							const index = prev.findIndex(f => f.id === presignedUrl.id)
@@ -175,7 +175,8 @@ export const FilesProvider = ({children}: {children: ReactNode}) => {
 				handleDrop,
 				handleDrag,
 				isDragging
-			}}>
+			}}
+		>
 			{children}
 		</FilesContext.Provider>
 	)

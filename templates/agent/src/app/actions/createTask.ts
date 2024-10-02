@@ -1,6 +1,6 @@
 'use server'
 
-import {db} from '~/utils/db'
+import { db } from '~/utils/db'
 
 // Create a new task
 export async function createTask({

@@ -1,9 +1,9 @@
-import {TRPCError, initTRPC, type inferAsyncReturnType} from '@trpc/server'
-import {type NextRequest} from 'next/server'
+import { TRPCError, initTRPC, type inferAsyncReturnType } from '@trpc/server'
+import type { NextRequest } from 'next/server'
 import superjson from 'superjson'
-import {ZodError} from 'zod'
-import {getServerAuthSession} from '~/server/auth'
-import {db} from '~/server/db'
+import { ZodError } from 'zod'
+import { getServerAuthSession } from '~/server/auth'
+import { db } from '~/server/db'
 import s3 from '~/server/s3'
 
 interface CreateContextOptions {
@@ -21,7 +21,7 @@ export async function createInnerTRPCContext(opts: CreateContextOptions) {
 	}
 }
 
-export async function createTRPCContext(opts: {req: NextRequest}) {
+export async function createTRPCContext(opts: { req: NextRequest }) {
 	return await createInnerTRPCContext({
 		headers: opts.req.headers
 	})
@@ -31,7 +31,7 @@ export type Context = inferAsyncReturnType<typeof createTRPCContext>
 
 const t = initTRPC.context<typeof createTRPCContext>().create({
 	transformer: superjson,
-	errorFormatter({shape, error}) {
+	errorFormatter({ shape, error }) {
 		return {
 			...shape,
 			data: {
@@ -46,13 +46,12 @@ export const createTRPCRouter = t.router
 
 export const publicProcedure = t.procedure
 
-const enforceUserIsAuthed = t.middleware(({ctx, next}) => {
-	if (!ctx.session || !ctx.session.user)
-		throw new TRPCError({code: 'UNAUTHORIZED'})
+const enforceUserIsAuthed = t.middleware(({ ctx, next }) => {
+	if (!ctx.session || !ctx.session.user) throw new TRPCError({ code: 'UNAUTHORIZED' })
 
 	return next({
 		ctx: {
-			session: {...ctx.session, user: ctx.session.user}
+			session: { ...ctx.session, user: ctx.session.user }
 		}
 	})
 })

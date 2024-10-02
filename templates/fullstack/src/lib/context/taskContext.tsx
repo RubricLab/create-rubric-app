@@ -1,9 +1,9 @@
 'use client'
 
-import {Task} from '@prisma/client'
-import {createContext, ReactNode, useContext, useState} from 'react'
-import {api} from '~/utils/trpc/react'
-import {RouterInputs, RouterOutputs} from '~/utils/trpc/shared'
+import type { Task } from '@prisma/client'
+import { createContext, type ReactNode, useContext, useState } from 'react'
+import { api } from '~/utils/trpc/react'
+import type { RouterInputs, RouterOutputs } from '~/utils/trpc/shared'
 
 interface TaskContextType {
 	tasks: RouterOutputs['task']['getAll']
@@ -75,7 +75,7 @@ export function TaskProvider({
 			setTasks(prevTasks => {
 				const updatedTasks = prevTasks.map(t => {
 					if (t.id === task.id) {
-						return {...t, ...task}
+						return { ...t, ...task }
 					}
 					return t
 				})

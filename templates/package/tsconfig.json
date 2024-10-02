@@ -6,6 +6,6 @@
 		}
 	},
 	"exclude": ["node_modules"],
-	"extends": "@rubriclab/typescript-config/",
+	"extends": "@rubriclab/config/tsconfig",
 	"include": ["./src/**/*.ts", "./src/**/*.tsx"]
 }

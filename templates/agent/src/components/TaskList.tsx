@@ -1,49 +1,51 @@
-import {Task} from '@prisma/client'
-import {BracesIcon} from 'lucide-react'
-import {Fragment, useState} from 'react'
-import {updateTask} from '~/app/actions/updateTask'
+import type { Task } from '@prisma/client'
+import { BracesIcon } from 'lucide-react'
+import { Fragment, useState } from 'react'
+import { updateTask } from '~/app/actions/updateTask'
 
 type Props = {
 	tasks: Task[]
 }
 
-const TaskList = ({tasks}: Props) => {
+const TaskList = ({ tasks }: Props) => {
 	const [codeView, setCodeView] = useState(false)
 
 	return (
-		<div className='border-primary bg-primary flex h-full max-h-96 w-full flex-col rounded-md px-3 sm:max-h-[50vh]'>
-			<div className='flex w-full items-center justify-between pb-6 pt-3'>
+		<div className="flex h-full max-h-96 w-full flex-col rounded-md border-primary bg-primary px-3 sm:max-h-[50vh]">
+			<div className="flex w-full items-center justify-between pt-3 pb-6">
 				<h3>Checklist</h3>
 				<button
-					className='bg-primary border-primary w-fit'
-					onClick={() => setCodeView(prev => !prev)}>
-					<BracesIcon className='h-5 w-5' />
+					type="button"
+					className="w-fit border-primary bg-primary"
+					onClick={() => setCodeView(prev => !prev)}
+				>
+					<BracesIcon className="h-5 w-5" />
 				</button>
 			</div>
 
 			{codeView ? (
 				<>
-					<div className='text-secondary mb-2'>JSON Preview</div>
-					<code className='mb-3 w-full overflow-auto whitespace-pre'>
+					<div className="mb-2 text-secondary">JSON Preview</div>
+					<code className="mb-3 w-full overflow-auto whitespace-pre">
 						{JSON.stringify(tasks, null, 2)}
 					</code>
 				</>
 			) : (
 				<>
-					<div className='bg-primary text-secondary sticky top-0 flex w-full items-center border-b-2 border-neutral-200 pb-2 text-center dark:border-neutral-800'>
+					<div className="sticky top-0 flex w-full items-center border-neutral-200 border-b-2 bg-primary pb-2 text-center text-secondary dark:border-neutral-800">
 						<div>Status</div>
-						<div className='grow'>Task</div>
+						<div className="grow">Task</div>
 						<div>Created at</div>
 					</div>
-					<div className='grid max-h-full w-full grid-cols-12 items-center gap-3 overflow-y-scroll py-4'>
+					<div className="grid max-h-full w-full grid-cols-12 items-center gap-3 overflow-y-scroll py-4">
 						{/* Render UI on top of structured data */}
 						{tasks?.length > 0 ? null : (
-							<p className='text-secondary col-span-12 text-base'>No tasks yet</p>
+							<p className="col-span-12 text-base text-secondary">No tasks yet</p>
 						)}
-						{tasks.map(({id, title, status, createdAt}) => (
+						{tasks.map(({ id, title, status, createdAt }) => (
 							<Fragment key={id}>
 								<input
-									type='checkbox'
+									type="checkbox"
 									key={`checkbox-${id}-${status}`}
 									onChange={e => {
 										updateTask({
@@ -52,7 +54,7 @@ const TaskList = ({tasks}: Props) => {
 										})
 									}}
 									defaultChecked={status}
-									className='col-span-1'
+									className="col-span-1"
 								/>
 								<input
 									onChange={e =>
@@ -63,9 +65,9 @@ const TaskList = ({tasks}: Props) => {
 									}
 									key={`task-${id}-${title}`}
 									defaultValue={title}
-									className='col-span-9'
+									className="col-span-9"
 								/>
-								<div className='text-secondary col-span-2 text-xs'>
+								<div className="col-span-2 text-secondary text-xs">
 									{new Date(createdAt).toLocaleDateString('en-US', {
 										day: 'numeric',
 										hour: 'numeric',

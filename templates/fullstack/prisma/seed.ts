@@ -1,4 +1,4 @@
-import {db} from '../src/utils/db'
+import { db } from '../src/utils/db'
 
 async function main() {
 	await db.task.create({

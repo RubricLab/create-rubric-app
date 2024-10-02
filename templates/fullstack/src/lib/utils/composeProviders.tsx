@@ -1,4 +1,4 @@
-import type {JSXElementConstructor, PropsWithChildren, ReactNode} from 'react'
+import type { JSXElementConstructor, PropsWithChildren, ReactNode } from 'react'
 
 const ComposeProviders = ({
 	providers,
@@ -12,7 +12,7 @@ const ComposeProviders = ({
 }) => {
 	return (
 		<>
-			{providers.reduceRight((acc, {provider: Component, props}) => {
+			{providers.reduceRight((acc, { provider: Component, props }) => {
 				return <Component {...props}>{acc}</Component>
 			}, children)}
 		</>

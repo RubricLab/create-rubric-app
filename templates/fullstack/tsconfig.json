@@ -4,14 +4,9 @@
 		"paths": {
 			"~/*": ["./src/lib/*"]
 		},
-		"plugins": [{"name": "next"}]
+		"plugins": [{ "name": "next" }]
 	},
 	"exclude": ["node_modules"],
-	"extends": "@rubriclab/typescript-config/nextjs",
-	"include": [
-		"./src/**/*.ts",
-		"./src/**/*.tsx",
-		".next/types/**/*.ts",
-		"next-env.d.ts"
-	]
+	"extends": "@rubriclab/config/tsconfig",
+	"include": ["./src/**/*.ts", "./src/**/*.tsx", ".next/types/**/*.ts", "next-env.d.ts"]
 }

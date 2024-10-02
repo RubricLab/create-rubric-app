@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import {getServerAuthSession} from '~/server/auth'
+import { getServerAuthSession } from '~/server/auth'
 
 export default async function Auth() {
 	const session = await getServerAuthSession()

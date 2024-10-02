@@ -14,18 +14,13 @@
 	},
 	"description": "This project was bootstrapped with create-rubric-app",
 	"devDependencies": {
-		"@rubriclab/eslint-config": "latest",
-		"@rubriclab/prettier-config": "latest",
-		"@rubriclab/tailwind-config": "latest",
-		"@rubriclab/typescript-config": "latest",
+		"@rubriclab/config": "*",
 		"@t3-oss/env-nextjs": "^0.7.1",
 		"@types/node": "20.8.10",
 		"@types/react": "18.2.33",
 		"@types/react-dom": "18.2.14",
 		"autoprefixer": "^10.4.16",
-		"eslint": "^8.52.0",
 		"postcss": "^8.4.31",
-		"prettier": "^3.0.3",
 		"tailwindcss": "^3.3.5",
 		"ts-node": "^10.9.1",
 		"typescript": "^5.2.2",
@@ -44,10 +39,13 @@
 		"db:push": "prisma generate && prisma db push",
 		"db:studio": "prisma studio",
 		"dev": "next dev",
-		"format": "prettier --write . --ignore-path .gitignore",
 		"generate": "touch prisma/dev.db",
-		"lint": "eslint . --ext .js,.jsx,.cjs,.mjs,.json,.ts,.tsx",
-		"start": "next start"
+		"start": "next start",
+		"bleed": "bun x npm-check-updates -u && bun i",
+		"format": "bun x biome format --write .",
+		"lint": "bun x biome check .",
+		"lint:fix": "bun x biome lint . --write --unsafe",
+		"clean": "rm -rf .next && rm -rf node_modules"
 	},
 	"version": "0.0.0"
 }

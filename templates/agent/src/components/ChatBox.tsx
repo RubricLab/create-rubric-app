@@ -1,12 +1,12 @@
 'use client'
 
-import {AnimatePresence, motion} from 'framer-motion'
-import {ArrowRightIcon} from 'lucide-react'
-import {useState} from 'react'
-import {useChatScroll} from '~/utils/useChatScroll'
+import { AnimatePresence, motion } from 'framer-motion'
+import { ArrowRightIcon } from 'lucide-react'
+import { useState } from 'react'
+import { useChatScroll } from '~/utils/useChatScroll'
 import Loader from './Loader'
-import ChooseBot from './ChooseBot';
-import { type Model } from '~/utils/types'
+import ChooseBot from './ChooseBot'
+import type { Model } from '~/utils/types'
 
 type Props = {
 	refetch: () => void
@@ -14,25 +14,13 @@ type Props = {
 
 // List of messages to be rendered in the UI
 const messages = new Map([
-	[
-		'createTask',
-		{message: 'Creating task', className: 'bg-green-300 dark:bg-green-600'}
-	],
-	[
-		'deleteTask',
-		{message: 'Deleting task', className: 'bg-red-300 dark:bg-red-600'}
-	],
-	[
-		'updateTask',
-		{message: 'Updating task', className: 'bg-purple-300 dark:bg-purple-600'}
-	],
-	[
-		'listTasks',
-		{message: 'Listing tasks', className: 'bg-blue-300 dark:bg-blue-600'}
-	]
+	['createTask', { message: 'Creating task', className: 'bg-green-300 dark:bg-green-600' }],
+	['deleteTask', { message: 'Deleting task', className: 'bg-red-300 dark:bg-red-600' }],
+	['updateTask', { message: 'Updating task', className: 'bg-purple-300 dark:bg-purple-600' }],
+	['listTasks', { message: 'Listing tasks', className: 'bg-blue-300 dark:bg-blue-600' }]
 ])
 
-export default function ChatBox({refetch}: Props) {
+export default function ChatBox({ refetch }: Props) {
 	const [prompt, setPrompt] = useState('')
 	const [loading, setLoading] = useState(false)
 	const [model, setModel] = useState<Model>('gpt-3.5-turbo')
@@ -41,17 +29,14 @@ export default function ChatBox({refetch}: Props) {
 	const [agentOutput, setAgentOutput] = useState([])
 
 	// Find corresponding message and className
-	const getMessage = (
-		line: string
-	): [boolean, {message: string; className: string}] => {
+	const getMessage = (line: string): [boolean, { message: string; className: string }] => {
 		// Check if the line made any action calls
-		const found = messages.get(
-			Array.from(messages.keys()).find(key => line.includes(key))
-		)
+		const found = messages.get(Array.from(messages.keys()).find(key => line.includes(key)))
 		if (found) {
 			found.message = line
 			return [true, found]
-		} else return [false, {message: line, className: 'bg-secondary'}]
+		}
+		return [false, { message: line, className: 'bg-secondary' }]
 	}
 
 	async function agentChat(input: string) {
@@ -59,8 +44,8 @@ export default function ChatBox({refetch}: Props) {
 		setAgentOutput([])
 
 		const response = await fetch('/api/agent', {
-			body: JSON.stringify({input, modelName: model}),
-			headers: {'Content-Type': 'application/json'},
+			body: JSON.stringify({ input, modelName: model }),
+			headers: { 'Content-Type': 'application/json' },
 			method: 'POST'
 		})
 
@@ -71,7 +56,7 @@ export default function ChatBox({refetch}: Props) {
 
 		// Render streamed data as it comes in
 		while (true) {
-			const {done, value} = await reader.read()
+			const { done, value } = await reader.read()
 
 			if (done) {
 				await refetch()
@@ -82,7 +67,7 @@ export default function ChatBox({refetch}: Props) {
 			const text = new TextDecoder().decode(value)
 
 			// Check if an action call is made and get the according message object
-			let [found, messsage] = getMessage(text)
+			const [found, messsage] = getMessage(text)
 
 			if (found) {
 				setAgentOutput(prevData => [...prevData, messsage])
@@ -107,23 +92,22 @@ export default function ChatBox({refetch}: Props) {
 	const scrollRef = useChatScroll(agentOutput)
 
 	return (
-		<div className='relative flex h-48 w-full flex-col items-end justify-end gap-5'>
+		<div className="relative flex h-48 w-full flex-col items-end justify-end gap-5">
 			{/* Toast list */}
-			<div
-				ref={scrollRef}
-				className='relative flex max-h-32 w-full overflow-y-scroll'>
+			<div ref={scrollRef} className="relative flex max-h-32 w-full overflow-y-scroll">
 				{agentOutput ? (
 					<AnimatePresence>
-						<div className='flex h-fit w-full flex-col justify-end gap-2'>
+						<div className="flex h-fit w-full flex-col justify-end gap-2">
 							{agentOutput.map((line, index) => (
 								<motion.div
-									initial={{opacity: 0}}
-									animate={{opacity: 1}}
-									transition={{duration: 0.5}}
+									initial={{ opacity: 0 }}
+									animate={{ opacity: 1 }}
+									transition={{ duration: 0.5 }}
 									key={index}
-									className='flex items-center gap-2'>
+									className="flex items-center gap-2"
+								>
 									<span className={`h-2.5 w-2.5 rounded-full ${line.className}`} />
-									<p className='text-sm'>{line.message}</p>
+									<p className="text-sm">{line.message}</p>
 								</motion.div>
 							))}
 						</div>
@@ -133,26 +117,21 @@ export default function ChatBox({refetch}: Props) {
 
 			{/* Chatbox */}
 			<form
-				className='flex w-full items-start gap-3'
+				className="flex w-full items-start gap-3"
 				onSubmit={e => {
 					e.preventDefault()
 					agentChat(prompt)
 					setPrompt('')
-				}}>
+				}}
+			>
 				<input
 					value={prompt}
 					placeholder='Try "Add a task" or "Update a task"'
 					onChange={e => setPrompt(e.target.value)}
-					type='text'
+					type="text"
 				/>
-				<button
-					type='submit'
-					disabled={loading}>
-					{loading ? (
-						<Loader className='text-secondary h-6 w-6' />
-					) : (
-						<ArrowRightIcon />
-					)}
+				<button type="submit" disabled={loading}>
+					{loading ? <Loader className="h-6 w-6 text-secondary" /> : <ArrowRightIcon />}
 				</button>
 			</form>
 			<ChooseBot {...{ model, setModel }} />

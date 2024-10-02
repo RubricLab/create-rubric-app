@@ -1,5 +1,5 @@
-import config from '@rubriclab/tailwind-config'
-import {Config} from 'tailwindcss'
+import config from '@rubriclab/config/tailwind'
+import type { Config } from 'tailwindcss'
 
 const tailwindConfig = {
 	content: ['./src/**/*.tsx'],

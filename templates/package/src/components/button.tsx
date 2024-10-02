@@ -1,5 +1,5 @@
 'use client'
 
 export const Button = () => {
-	return <button>Click me</button>
+	return <button type="button">Click me</button>
 }

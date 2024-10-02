@@ -1,13 +1,13 @@
-import {GetObjectCommand} from '@aws-sdk/client-s3'
-import {createPresignedPost} from '@aws-sdk/s3-presigned-post'
-import {getSignedUrl} from '@aws-sdk/s3-request-presigner'
+import { GetObjectCommand } from '@aws-sdk/client-s3'
+import { createPresignedPost } from '@aws-sdk/s3-presigned-post'
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 import cuid from 'cuid'
-import {z} from 'zod'
-import {env} from '~/env.mjs'
-import {createTRPCRouter, protectedProcedure} from '~/server/trpc'
+import { z } from 'zod'
+import { env } from '~/env.mjs'
+import { createTRPCRouter, protectedProcedure } from '~/server/trpc'
 
 export default createTRPCRouter({
-	getAll: protectedProcedure.query(async ({ctx}) => {
+	getAll: protectedProcedure.query(async ({ ctx }) => {
 		const files = await ctx.db.file.findMany({
 			where: {
 				userId: ctx.session.user.id
@@ -43,7 +43,7 @@ export default createTRPCRouter({
 				})
 			})
 		)
-		.mutation(async ({input: {file}, ctx}) => {
+		.mutation(async ({ input: { file }, ctx }) => {
 			if (!ctx.session?.user) throw 'You must be logged in to upload files.'
 
 			const filesData = {
@@ -75,8 +75,8 @@ export default createTRPCRouter({
 			return presignedUrl
 		}),
 	confirm: protectedProcedure
-		.input(z.object({id: z.string()}))
-		.mutation(async ({input, ctx}) => {
+		.input(z.object({ id: z.string() }))
+		.mutation(async ({ input, ctx }) => {
 			if (!ctx.session?.user) throw 'You must be logged in to upload files.'
 
 			const file = await ctx.db.file.findUnique({
@@ -99,26 +99,24 @@ export default createTRPCRouter({
 
 			return !!file
 		}),
-	reject: protectedProcedure
-		.input(z.object({id: z.string()}))
-		.mutation(async ({input, ctx}) => {
-			if (!ctx.session?.user) throw 'You must be logged in to upload files.'
+	reject: protectedProcedure.input(z.object({ id: z.string() })).mutation(async ({ input, ctx }) => {
+		if (!ctx.session?.user) throw 'You must be logged in to upload files.'
 
-			const file = await ctx.db.file.findUnique({
-				where: {
-					id: input.id,
-					userId: ctx.session.user.id
-				}
-			})
-
-			if (!file) throw 'File not found.'
-
-			await ctx.db.file.delete({
-				where: {
-					id: input.id
-				}
-			})
-
-			return !!file
+		const file = await ctx.db.file.findUnique({
+			where: {
+				id: input.id,
+				userId: ctx.session.user.id
+			}
 		})
+
+		if (!file) throw 'File not found.'
+
+		await ctx.db.file.delete({
+			where: {
+				id: input.id
+			}
+		})
+
+		return !!file
+	})
 })

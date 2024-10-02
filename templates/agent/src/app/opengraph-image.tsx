@@ -1,4 +1,4 @@
-import {ImageResponse} from 'next/og'
+import { ImageResponse } from 'next/og'
 import colors from 'tailwindcss/colors'
 import BackgroundGrid from '~/components/BackgroundGrid'
 
@@ -15,31 +15,30 @@ type Props = {
 	params: object
 }
 
-export default async function Image({params}: Props) {
+export default async function Image({ params }: Props) {
 	return new ImageResponse(
-		(
-			<div
+		<div
+			style={{
+				alignItems: 'center',
+				background: colors.black,
+				display: 'flex',
+				flexDirection: 'column',
+				height: '100%',
+				justifyContent: 'center',
+				overflowY: 'hidden',
+				position: 'relative',
+				width: '100%'
+			}}
+		>
+			<BackgroundGrid
 				style={{
-					alignItems: 'center',
-					background: colors['black'],
-					display: 'flex',
-					flexDirection: 'column',
-					height: '100%',
-					justifyContent: 'center',
-					overflowY: 'hidden',
-					position: 'relative',
-					width: '100%'
-				}}>
-				<BackgroundGrid
-					style={{
-						position: 'absolute',
-						width: size.width
-					}}
-				/>
-				<div style={{color: colors['white'], fontSize: 128}}>Jarvis</div>
-				<div style={{color: colors['white'], fontSize: 48}}>Built with Rubric.</div>
-			</div>
-		),
+					position: 'absolute',
+					width: size.width
+				}}
+			/>
+			<div style={{ color: colors.white, fontSize: 128 }}>Jarvis</div>
+			<div style={{ color: colors.white, fontSize: 48 }}>Built with Rubric.</div>
+		</div>,
 		{
 			...size
 		}

@@ -1,11 +1,10 @@
-import {DynamicStructuredTool} from 'langchain/tools'
+import { DynamicStructuredTool } from 'langchain/tools'
 import z from 'zod'
-import {listTasks} from '~/app/actions/listTasks'
+import { listTasks } from '~/app/actions/listTasks'
 
 export const listTasksTool = new DynamicStructuredTool({
 	name: 'listTasks',
-	description:
-		'List all or some of the tasks sorted in descending order by created timestamp',
+	description: 'List all or some of the tasks sorted in descending order by created timestamp',
 	func: async () => {
 		const allTasks = await listTasks()
 

@@ -1,4 +1,4 @@
-import {Metadata} from 'next'
+import type { Metadata } from 'next'
 
 export const META = {
 	desc: 'Bootstrapped with create-rubric-app',

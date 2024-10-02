@@ -1,10 +1,10 @@
 'use client'
-import {Moon, Sun} from 'lucide-react'
-import {useTheme} from 'next-themes'
-import {useEffect, useState} from 'react'
+import { Moon, Sun } from 'lucide-react'
+import { useTheme } from 'next-themes'
+import { useEffect, useState } from 'react'
 
 export function ThemeSwitcher() {
-	const {theme, setTheme} = useTheme()
+	const { theme, setTheme } = useTheme()
 
 	const [mounted, setMounted] = useState(false)
 
@@ -17,8 +17,10 @@ export function ThemeSwitcher() {
 	return (
 		<div>
 			<button
-				className='bg-primary'
-				onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
+				type="button"
+				className="bg-primary"
+				onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+			>
 				{theme === 'light' ? <Moon /> : <Sun />}
 			</button>
 		</div>
