@@ -14,7 +14,7 @@
 	},
 	"description": "This project was bootstrapped with create-rubric-app",
 	"devDependencies": {
-		"@rubriclab/config": "0.0.9",
+		"@rubriclab/config": "*",
 		"@t3-oss/env-nextjs": "^0.11.1",
 		"@types/node": "22.7.4",
 		"@types/react": "18.3.11",
