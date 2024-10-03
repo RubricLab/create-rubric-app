@@ -3,10 +3,10 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowRightIcon } from 'lucide-react'
 import { useState } from 'react'
-import { useChatScroll } from '~/utils/useChatScroll'
-import Loader from './Loader'
-import ChooseBot from './ChooseBot'
 import type { Model } from '~/utils/types'
+import { useChatScroll } from '~/utils/useChatScroll'
+import ChooseBot from './ChooseBot'
+import Loader from './Loader'
 
 type Props = {
 	refetch: () => void

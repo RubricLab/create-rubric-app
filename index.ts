@@ -1,18 +1,18 @@
 #! /usr/bin/env bun
 
+import child_process from 'node:child_process'
+import { spawn } from 'node:child_process'
+import fs, { mkdirSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs'
+import https from 'node:https'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+import { parseArgs } from 'node:util'
 import { checkbox, input, select } from '@inquirer/prompts'
 import boxen from 'boxen'
 import chalk from 'chalk'
-import child_process from 'node:child_process'
 import clear from 'clear'
 import figlet from 'figlet'
-import fs, { mkdirSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs'
-import https from 'node:https'
-import { parseArgs } from 'node:util'
 import open from 'open'
-import path from 'node:path'
-import { fileURLToPath } from 'node:url'
-import { spawn } from 'node:child_process'
 
 const __filename = fileURLToPath(import.meta.url)
 

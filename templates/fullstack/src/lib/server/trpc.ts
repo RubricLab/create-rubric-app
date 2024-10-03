@@ -1,4 +1,4 @@
-import { TRPCError, initTRPC, type inferAsyncReturnType } from '@trpc/server'
+import { TRPCError, type inferAsyncReturnType, initTRPC } from '@trpc/server'
 import type { NextRequest } from 'next/server'
 import superjson from 'superjson'
 import { ZodError } from 'zod'

@@ -1,6 +1,6 @@
-import dts from 'bun-plugin-dts'
-import { rm, rename, readdir } from 'node:fs/promises'
+import { readdir, rename, rm } from 'node:fs/promises'
 import path from 'node:path'
+import dts from 'bun-plugin-dts'
 
 const distDir = './dist'
 
