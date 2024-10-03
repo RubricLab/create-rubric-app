@@ -1,6 +1,6 @@
 import { initializeAgentExecutorWithOptions } from 'langchain/agents'
 import { ChatOpenAI } from 'langchain/chat_models/openai'
-import { env } from '~/env.mjs'
+import { env } from '~/env'
 import { createTaskTool } from '~/tools/createTask'
 import { deleteTaskTool } from '~/tools/deleteTask'
 import { listTasksTool } from '~/tools/listTasks'

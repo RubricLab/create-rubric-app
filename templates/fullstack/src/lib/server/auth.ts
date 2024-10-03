@@ -1,7 +1,7 @@
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
-import { getServerSession, type DefaultSession, type NextAuthOptions } from 'next-auth'
+import { type DefaultSession, type NextAuthOptions, getServerSession } from 'next-auth'
 import GithubProvider from 'next-auth/providers/github'
-import { env } from '~/env.mjs'
+import { env } from '~/env'
 import { db } from '~/server/db'
 
 declare module 'next-auth' {

@@ -1,3 +1,4 @@
+- [2024-10-03] [env.ts](https://github.com/RubricLab/create-rubric-app/commit/e85a3577b3e142cdbeef44b9f62b7a0ef6fe2ead)
 - [2024-10-02] [config version](https://github.com/RubricLab/create-rubric-app/commit/759d9e963079451fe5506b1681c1ff420fb045e7)
 - [2024-10-02] [Run lint](https://github.com/RubricLab/create-rubric-app/commit/629e7fbb3b1257d1cfcf31a80449631000a25e8c)
 - [2024-10-02] [Bun bleed on root](https://github.com/RubricLab/create-rubric-app/commit/30f5d7aebb9d48266dceafeda4e47050e6ea3fef)

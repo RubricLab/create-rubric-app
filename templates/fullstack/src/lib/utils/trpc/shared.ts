@@ -1,6 +1,6 @@
 import type { inferRouterInputs, inferRouterOutputs } from '@trpc/server'
 import superjson from 'superjson'
-import { env } from '~/env.mjs'
+import { env } from '~/env'
 
 import type { AppRouter } from '~/server/api'
 

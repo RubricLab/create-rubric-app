@@ -3,7 +3,7 @@ import { createPresignedPost } from '@aws-sdk/s3-presigned-post'
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 import cuid from 'cuid'
 import { z } from 'zod'
-import { env } from '~/env.mjs'
+import { env } from '~/env'
 import { createTRPCRouter, protectedProcedure } from '~/server/trpc'
 
 export default createTRPCRouter({
