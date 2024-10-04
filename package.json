@@ -12,7 +12,7 @@
     "open": "^10.1.0"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.27.8",
+    "@changesets/cli": "^2.27.9",
     "@rubriclab/config": "*",
     "@rubriclab/package": "*",
     "next": "^14.2.14"
@@ -32,13 +32,13 @@
   },
   "scripts": {
     "prepare": "bun x simple-git-hooks",
-    "bleed": "bun x npm-check-updates -u && bun i",
+    "bleed": "bun x npm-check-updates -u",
     "format": "bun x biome format --write .",
     "lint": "bun x biome check . && bun x biome lint .",
     "lint:fix": "bun x biome check --fix --unsafe . && bun x biome lint --write --unsafe .",
     "clean": "rm -rf .next && rm -rf node_modules"
   },
-  "version": "1.6.11",
+  "version": "1.6.12",
   "simple-git-hooks": {
     "post-commit": "bun run rubriclab-postcommit"
   }

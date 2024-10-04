@@ -41,7 +41,7 @@
 		"dev": "next dev",
 		"generate": "touch prisma/dev.db",
 		"start": "next start",
-		"bleed": "bun x npm-check-updates -u && bun i",
+		"bleed": "bun x npm-check-updates -u",
 		"format": "bun x biome format --write .",
 		"lint": "bun x biome check .",
 		"lint:fix": "bun x biome lint . --write --unsafe",
