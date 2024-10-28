@@ -1,5 +1,3 @@
-'use server'
-
 import Link from 'next/link'
 import { getDir } from '~/lib/utils'
 import DemoForm from '~/ui/home/demo-form'

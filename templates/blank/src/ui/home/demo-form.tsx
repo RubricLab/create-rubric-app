@@ -1,13 +1,13 @@
 'use client'
 
-import { useEffect } from 'react'
-import { useFormState, useFormStatus } from 'react-dom'
+import { useActionState, useEffect } from 'react'
+import { useFormStatus } from 'react-dom'
 import { toast } from 'sonner'
 import sayHello from '~/lib/actions/say-hello'
 
 const initialState = {
-	type: null,
-	message: null
+	type: '',
+	message: ''
 }
 
 function SubmitButton() {
@@ -20,7 +20,7 @@ function SubmitButton() {
 }
 
 export default function DemoForm() {
-	const [state, formAction] = useFormState(sayHello, initialState)
+	const [state, formAction] = useActionState(sayHello, initialState)
 
 	// Loading state
 	useEffect(() => {

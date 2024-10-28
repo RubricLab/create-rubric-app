@@ -1,3 +1,4 @@
+- [2024-10-28] [bleed and refactor blank template for next15](https://github.com/RubricLab/create-rubric-app/commit/cba414a06f1d8a4c558aaab6470c0dc3d28acea8)
 - [2024-10-04] [bleed for mono](https://github.com/RubricLab/create-rubric-app/commit/189c34da11a69441cd4fb2bf8f71e7cd15f2c384)
 - [2024-10-03] [mod lint script](https://github.com/RubricLab/create-rubric-app/commit/3bf7e0e007a8c54e8ec419cdc6ebf7b3f6e696ef)
 - [2024-10-03] [gitignore turbo, format](https://github.com/RubricLab/create-rubric-app/commit/6560ea57053862c17689d4c58d93de6aea2667b0)

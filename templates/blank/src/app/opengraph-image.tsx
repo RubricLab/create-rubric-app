@@ -41,7 +41,7 @@ export const Component = () => {
 	)
 }
 
-export default async function Response({ params }: ImageProps) {
+export default async function Response(_: ImageProps) {
 	const localFont = await fetch(
 		new URL('/public/fonts/PlusJakartaSans-Bold.ttf', import.meta.url)
 	).then(res => res.arrayBuffer())
