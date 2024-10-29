@@ -38,7 +38,7 @@
     "lint:fix": "bun x biome check --fix --unsafe . && bun x biome lint --write --unsafe .",
     "clean": "rm -rf .next && rm -rf node_modules"
   },
-  "version": "1.6.13",
+  "version": "1.6.14",
   "simple-git-hooks": {
     "post-commit": "bun run rubriclab-postcommit"
   }
