@@ -1,6 +1,9 @@
 {
 	"dependencies": {
-		"next": "15.0.2"
+		"next": "15.0.2",
+		"zod": "latest",
+		"rubricui": "*",
+		"@t3-oss/env-nextjs": "latest"
 	},
 	"devDependencies": {
 		"@rubriclab/config": "*",

@@ -11,6 +11,7 @@ export function getModuleDependencies({ modules }: { modules: (keyof Modules)[] 
 	const collectedModules = new Set<keyof Modules>()
 	const npmDependencies: Record<string, string> = {}
 	const npmDevDependencies: Record<string, string> = {}
+	const npmScripts: Record<string, string> = {}
 	const infrastructureDependencies = new Set<keyof InfrastructureOptions>()
 	const env: Record<string, ZodMapKey> = {}
 
@@ -19,12 +20,10 @@ export function getModuleDependencies({ modules }: { modules: (keyof Modules)[] 
 		collectedModules.add(moduleName)
 		const module = modulesOptions[moduleName]
 
-		module.npmDependencies?.map(dep => {
-			Object.assign(npmDependencies, dep)
-		})
-		module.npmDevDependencies?.map(devDep => {
-			Object.assign(npmDevDependencies, devDep)
-		})
+		Object.assign(npmDependencies, module.npmDependencies)
+		Object.assign(npmDevDependencies, module.npmDevDependencies)
+		Object.assign(npmScripts, module.npmScripts)
+
 		module.infrastructureDependencies?.map(infraDep => {
 			infrastructureDependencies.add(infraDep)
 		})
@@ -39,6 +38,7 @@ export function getModuleDependencies({ modules }: { modules: (keyof Modules)[] 
 		modules: Array.from(collectedModules),
 		npmDependencies,
 		npmDevDependencies,
+		npmScripts,
 		infrastructureDependencies: Array.from(infrastructureDependencies),
 		env
 	}

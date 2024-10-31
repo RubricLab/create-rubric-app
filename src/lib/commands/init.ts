@@ -44,6 +44,7 @@ export async function init(cmd: { name?: string }) {
 	const {
 		npmDependencies,
 		npmDevDependencies,
+		npmScripts,
 		infrastructureDependencies,
 		env: envDependencies
 	} = getModuleDependencies({
@@ -60,17 +61,26 @@ export async function init(cmd: { name?: string }) {
 		const filename = moduleFiles[i]
 		if (!filename) continue
 		const file = Bun.file(filename)
-		console.log(modulePaths[i])
 
 		await Bun.write(`${projectSlug}/${modulePaths[i]}`, await file.text())
 	}
 
 	packageJSON.dependencies = { ...packageJSON.dependencies, ...npmDependencies }
 	packageJSON.devDependencies = { ...packageJSON.devDependencies, ...npmDevDependencies }
+	packageJSON.scripts = { ...packageJSON.scripts, ...npmScripts }
 
 	await writePackageJSON({ projectDirectory: projectSlug, json: packageJSON })
 
 	const env: Record<string, string> = {}
+
+	if (modules.includes('AuthModule')) {
+		env.URL = 'http://localhost:3000'
+	}
+
+	if (modules.includes('EmailModule')) {
+		const { resendApiKey } = await checkConfig({ required: ['resendApiKey'] })
+		env.RESEND_API_KEY = resendApiKey
+	}
 
 	if (infrastructureDependencies.includes('postgres')) {
 		const { neonApiKey } = await checkConfig({ required: ['neonApiKey'] })
@@ -103,6 +113,8 @@ export async function init(cmd: { name?: string }) {
 		const { vercelApiKey, vercelTeamId, githubOrg, githubToken } = await checkConfig({
 			required: ['vercelApiKey', 'vercelTeamId', 'githubOrg', 'githubToken']
 		})
+		env.URL = 'https://${VERCEL_URL}'
+
 		await createRepo({
 			githubToken,
 			org: githubOrg,

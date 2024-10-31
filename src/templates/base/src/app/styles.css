@@ -1,0 +1,25 @@
+@tailwind utilities;
+@tailwind base;
+@tailwind components;
+
+@layer base {
+	:root {
+		--rubricui-primary: 252 252 252;
+		--rubricui-contrast: 5 5 5;
+	}
+
+	.dark {
+		--rubricui-primary: 5 5 5;
+		--rubricui-contrast: 252 252 252;
+	}
+}
+
+@layer base {
+	body {
+		@apply bg-rubricui-primary text-rubricui-contrast;
+		font-feature-settings: "rlig" 1, "calt" 1;
+	}
+	button:hover {
+		text-shadow: 0px 0px 10px rgb(var(--rubricui-primary));
+	}
+}

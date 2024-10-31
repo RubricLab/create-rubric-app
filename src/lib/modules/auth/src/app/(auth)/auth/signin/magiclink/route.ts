@@ -33,8 +33,7 @@ export async function GET(request: Request) {
 			}
 		}
 	})
-
-	cookies().set('key', key)
-	cookies().set('user', JSON.stringify(user))
+	;(await cookies()).set('key', key)
+	;(await cookies()).set('user', JSON.stringify(user))
 	redirect(redirectUrl)
 }

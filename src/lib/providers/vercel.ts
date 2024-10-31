@@ -31,7 +31,7 @@ export async function deployVercelProject({
 				? Object.entries(environmentVariables).map(([k, v]) => ({
 						key: k,
 						target: 'production',
-						type: 'plain',
+						type: 'encrypted',
 						value: v
 					}))
 				: undefined

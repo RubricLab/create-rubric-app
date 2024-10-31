@@ -14,13 +14,15 @@ export type Config = {
 	deploy: boolean
 }
 
-export type NpmDependency = Record<string, string>
+export type NpmDependencies = Record<string, string>
+export type NpmScripts = Record<string, string>
 
 export interface Module {
 	description: string
 	templateDir?: string
-	npmDependencies?: NpmDependency[]
-	npmDevDependencies?: NpmDependency[]
+	npmDependencies?: NpmDependencies
+	npmDevDependencies?: NpmDependencies
+	npmScripts?: NpmScripts
 	moduleDependencies?: (keyof Modules)[]
 	infrastructureDependencies?: (keyof InfrastructureOptions)[]
 	env?: Record<string, ZodMapKey>

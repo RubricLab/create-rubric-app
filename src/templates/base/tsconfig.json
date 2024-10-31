@@ -2,7 +2,7 @@
 	"compilerOptions": {
 		"baseUrl": ".",
 		"paths": {
-			"~/*": ["./src/lib/*"]
+			"~/*": ["./src/lib/*", "./src/app/*"]
 		},
 		"plugins": [{ "name": "next" }]
 	},
