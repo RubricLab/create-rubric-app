@@ -1,3 +1,4 @@
+- [2024-10-31] [Show Vercel team ID](https://github.com/RubricLab/create-rubric-app/commit/41cf4741ca25a63d25b56d4eff2e89a35c0b299c)
 - [2024-10-31] [rewrite WIP](https://github.com/RubricLab/create-rubric-app/commit/c5a8716b75682d0133c09941c0457c5992bb4385)
 - [2024-10-28] [bleed and refactor blank template for next15](https://github.com/RubricLab/create-rubric-app/commit/cba414a06f1d8a4c558aaab6470c0dc3d28acea8)
 - [2024-10-04] [bleed for mono](https://github.com/RubricLab/create-rubric-app/commit/189c34da11a69441cd4fb2bf8f71e7cd15f2c384)

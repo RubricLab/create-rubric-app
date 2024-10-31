@@ -47,7 +47,7 @@ export async function config({ required }: { required?: string[] }) {
 			default: undefined
 		},
 		{
-			type: 'password',
+			type: 'text',
 			name: 'vercelTeamId',
 			message: 'Enter your Vercel Team id:',
 			default: undefined
