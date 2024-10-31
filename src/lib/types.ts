@@ -1,5 +1,6 @@
 import type { Modules } from './modules'
 import type { InfrastructureOptions } from './providers'
+import type { ZodMapKey } from './utils/env'
 
 export type Config = {
 	githubOrg: string
@@ -22,4 +23,5 @@ export interface Module {
 	npmDevDependencies?: NpmDependency[]
 	moduleDependencies?: (keyof Modules)[]
 	infrastructureDependencies?: (keyof InfrastructureOptions)[]
+	env?: Record<string, ZodMapKey>
 }

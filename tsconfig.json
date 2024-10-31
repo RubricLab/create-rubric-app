@@ -2,7 +2,12 @@
 	"compilerOptions": {
 		"baseUrl": ".",
 		"paths": {
-			"~/*": ["src/lib/*"]
+			"~/*": [
+				"src/lib/*",
+				"src/lib/modules/database/src/lib/*",
+				"src/lib/modules/auth/src/lib/*",
+				"src/lib/modules/email/src/lib/*"
+			]
 		}
 	},
 	"extends": "@rubriclab/config/tsconfig",

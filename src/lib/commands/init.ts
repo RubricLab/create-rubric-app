@@ -1,9 +1,11 @@
+import { $ } from 'bun'
 import { prompt } from 'inquirer'
 import { getModuleDependencies, modulesOptions } from '~/modules'
 import { provisionNeonDatabase } from '~/providers/neon'
 import { provisionUpstashRedisDatabase } from '~/providers/upstash'
 import { deployVercelProject } from '~/providers/vercel'
 import { checkConfig } from '~/utils/config'
+import { writeEnv } from '~/utils/env'
 import { copyDir, getPackageJSON, writePackageJSON } from '~/utils/file'
 import { log } from '~/utils/log'
 import { commit, createRepo, install, run } from '~/utils/setup'
@@ -39,18 +41,40 @@ export async function init(cmd: { name?: string }) {
 		}
 	])
 
-	const { npmDependencies, npmDevDependencies, infrastructureDependencies } = getModuleDependencies({
+	const {
+		npmDependencies,
+		npmDevDependencies,
+		infrastructureDependencies,
+		env: envDependencies
+	} = getModuleDependencies({
 		modules
 	})
+
+	// TODO: boil this
+	const modulesPath = 'src/lib/modules/'
+	const moduleFiles = (await $`find ${modulesPath} -type f`.text()).split('\n').filter(Boolean)
+	const modulePaths = moduleFiles.map(f => f.replace(modulesPath, '').split('/').slice(2).join('/'))
+
+	for (let i = 0; i < moduleFiles.length; i++) {
+		if (!modulePaths[i] || modulePaths[i] === '/index.ts') continue
+		const filename = moduleFiles[i]
+		if (!filename) continue
+		const file = Bun.file(filename)
+		console.log(modulePaths[i])
+
+		await Bun.write(`${projectSlug}/${modulePaths[i]}`, await file.text())
+	}
 
 	packageJSON.dependencies = { ...packageJSON.dependencies, ...npmDependencies }
 	packageJSON.devDependencies = { ...packageJSON.devDependencies, ...npmDevDependencies }
 
 	await writePackageJSON({ projectDirectory: projectSlug, json: packageJSON })
 
+	const env: Record<string, string> = {}
+
 	if (infrastructureDependencies.includes('postgres')) {
 		const { neonApiKey } = await checkConfig({ required: ['neonApiKey'] })
-		await provisionNeonDatabase({
+		env.DATABASE_URL = await provisionNeonDatabase({
 			neonApiKey,
 			projectName: projectSlug
 		})
@@ -60,12 +84,14 @@ export async function init(cmd: { name?: string }) {
 		const { upstashApiKey, upstashEmail } = await checkConfig({
 			required: ['upstashApiKey', 'upstashEmail']
 		})
-		await provisionUpstashRedisDatabase({
+		env.REDIS_URL = await provisionUpstashRedisDatabase({
 			upstashApiKey,
 			upstashEmail,
 			databaseName: projectSlug
 		})
 	}
+
+	await writeEnv({ projectDirectory: projectSlug, envDependencies, env })
 
 	await install({ projectDirectory: projectSlug })
 
@@ -86,7 +112,8 @@ export async function init(cmd: { name?: string }) {
 			vercelApiKey: vercelApiKey,
 			vercelTeamId: vercelTeamId,
 			githubRepo: `${githubOrg}/${projectSlug}`,
-			projectName: projectSlug
+			projectName: projectSlug,
+			environmentVariables: env
 		})
 		await commit({
 			org: githubOrg,

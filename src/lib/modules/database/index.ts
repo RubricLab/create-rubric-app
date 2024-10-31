@@ -5,5 +5,8 @@ export const DatabaseModule: Module = {
 	templateDir: 'templates/database',
 	npmDevDependencies: [{ prisma: 'latest' }],
 	npmDependencies: [{ '@prisma/client': 'latest' }],
-	infrastructureDependencies: ['postgres']
+	infrastructureDependencies: ['postgres'],
+	env: {
+		DATABASE_URL: 'string'
+	}
 }

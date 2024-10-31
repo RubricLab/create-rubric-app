@@ -1,3 +1,4 @@
+- [2024-10-31] [Copy module files over and gen env](https://github.com/RubricLab/create-rubric-app/commit/93ede3184dbaf5c5c8d5b62fe1d01e0e79d30e6f)
 - [2024-10-31] [Show Vercel team ID](https://github.com/RubricLab/create-rubric-app/commit/41cf4741ca25a63d25b56d4eff2e89a35c0b299c)
 - [2024-10-31] [rewrite WIP](https://github.com/RubricLab/create-rubric-app/commit/c5a8716b75682d0133c09941c0457c5992bb4385)
 - [2024-10-28] [bleed and refactor blank template for next15](https://github.com/RubricLab/create-rubric-app/commit/cba414a06f1d8a4c558aaab6470c0dc3d28acea8)

@@ -1,4 +1,5 @@
 import type { InfrastructureOptions } from '~/providers'
+import type { ZodMapKey } from '~/utils/env'
 import { AuthModule } from './auth'
 import { DatabaseModule } from './database'
 import { EmailModule } from './email'
@@ -11,6 +12,7 @@ export function getModuleDependencies({ modules }: { modules: (keyof Modules)[] 
 	const npmDependencies: Record<string, string> = {}
 	const npmDevDependencies: Record<string, string> = {}
 	const infrastructureDependencies = new Set<keyof InfrastructureOptions>()
+	const env: Record<string, ZodMapKey> = {}
 
 	const collect = (moduleName: keyof Modules) => {
 		if (collectedModules.has(moduleName)) return
@@ -26,6 +28,7 @@ export function getModuleDependencies({ modules }: { modules: (keyof Modules)[] 
 		module.infrastructureDependencies?.map(infraDep => {
 			infrastructureDependencies.add(infraDep)
 		})
+		Object.assign(env, module.env)
 
 		module.moduleDependencies?.forEach(collect)
 	}
@@ -36,6 +39,7 @@ export function getModuleDependencies({ modules }: { modules: (keyof Modules)[] 
 		modules: Array.from(collectedModules),
 		npmDependencies,
 		npmDevDependencies,
-		infrastructureDependencies: Array.from(infrastructureDependencies)
+		infrastructureDependencies: Array.from(infrastructureDependencies),
+		env
 	}
 }
