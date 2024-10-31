@@ -1,0 +1,10 @@
+{
+	"compilerOptions": {
+		"baseUrl": ".",
+		"paths": {
+			"~/*": ["src/lib/*"]
+		}
+	},
+	"extends": "@rubriclab/config/tsconfig",
+	"include": ["**/*.ts", "**/*.tsx"]
+}

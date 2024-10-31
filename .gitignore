@@ -41,3 +41,6 @@ jarvis/
 **/dev.db
 
 **/bun.lockb
+cra.config.ts
+
+__ARCHIVE

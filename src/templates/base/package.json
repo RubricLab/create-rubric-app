@@ -1,0 +1,24 @@
+{
+	"dependencies": {
+		"next": "15.0.2"
+	},
+	"devDependencies": {
+		"@rubriclab/config": "*",
+		"biome": "latest",
+		"npm-check-updates": "latest",
+		"typescript": "latest",
+		"@types/react": "latest",
+		"@types/node": "latest"
+	},
+	"packageManager": "bun@1.1.33",
+	"scripts": {
+		"bleed": "ncu -u",
+		"format": "biome format --write .",
+		"lint": "biome check .",
+		"lint:fix": "biome lint . --write --unsafe",
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start"
+	},
+	"license": "go nuts"
+}
