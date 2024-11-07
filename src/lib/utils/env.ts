@@ -27,7 +27,7 @@ export async function writeEnv({
 	env: Record<string, string>
 }) {
 	// Create .env
-	const dotEnvFile = Bun.file(`${projectDirectory}/.env.local`)
+	const dotEnvFile = Bun.file(`${projectDirectory}/.env`)
 	await Bun.write(
 		dotEnvFile,
 		Object.entries(env)

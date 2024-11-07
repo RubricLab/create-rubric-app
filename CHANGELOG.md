@@ -1,3 +1,4 @@
+- [2024-11-07] [module deps and .env filename](https://github.com/RubricLab/create-rubric-app/commit/8218ea68be7ef309bac0067c38aafd23fb96631f)
 - [2024-10-31] [auth module](https://github.com/RubricLab/create-rubric-app/commit/b6683cd9c050100736d6502ab8bf071aa59ec985)
 - [2024-10-31] [Copy module files over and gen env](https://github.com/RubricLab/create-rubric-app/commit/93ede3184dbaf5c5c8d5b62fe1d01e0e79d30e6f)
 - [2024-10-31] [Show Vercel team ID](https://github.com/RubricLab/create-rubric-app/commit/41cf4741ca25a63d25b56d4eff2e89a35c0b299c)
