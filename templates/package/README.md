@@ -1,29 +1,41 @@
-# Package
+# rubricui
 
-A tool for scaffolding and publishing NPM packages quickly.
+## Description
 
-## Installation
+This project is a UI component library built with React and TypeScript.
 
-### Global Installation
+To build the package, available under dist, run:
 
-Run `bun add -g @rubriclab/package`.
+```sh
+bun install
+bun run build
+```
 
-### Per-project Installation
+## Test locally
 
-Ensure you have a `package.json`. If not, run `bun init`.
+Use Bun's linking commands to create a symlink between your library and the project where you want to test it, run in your package:
 
-## Getting started
+```sh
+bun link
+```
 
-### Init a package
+In your test project, run:
 
-Run `bun add -d @rubriclab/package`. The postinstall script should run automatically. If not, run `bunx rubriclab-setuppackage`.
+```sh
+bun link rubricui
+bunx rubricui init
+```
 
-This will add a few resources to your package:
+While working on your library, run the watch script to automatically rebuild your library on changes:
 
-- a publish workflow
-  - on push to main, the NPM package will be bumped and auto-published
-- scripts
-  - `lint`: checks for code issues
-  - `format`: tries to fix code issues
-  - `bleed`: updates all dependencies to `latest`
-  - `clean`: clears node modules and cache
+```sh
+bun run watch
+```
+
+## Publish
+
+To publish a new version, bump the version number and run
+
+```sh
+npm publish
+```
