@@ -1,3 +1,4 @@
+- [2024-11-09] [Add README](https://github.com/RubricLab/create-rubric-app/commit/b3ad4b5e0e50d9cbfa429750097d7b708cd166d8)
 - [2024-10-30] [null commit](https://github.com/RubricLab/create-rubric-app/commit/7e57a8b7098408b9b63411c0c931358f81b9ce43)
 - [2024-10-29] [feat: add ts for next.config](https://github.com/RubricLab/create-rubric-app/commit/2ca8434a4bb98d06fa347c3a92ba8b128b312cdd)
 - [2024-10-28] [bleed and refactor blank template for next15](https://github.com/RubricLab/create-rubric-app/commit/cba414a06f1d8a4c558aaab6470c0dc3d28acea8)
