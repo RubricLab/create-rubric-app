@@ -1,3 +1,4 @@
+import type { Route } from '@rubriclab/ui'
 import type { Modules } from './modules'
 import type { InfrastructureOptions } from './providers'
 import type { ZodMapKey } from './utils/env'
@@ -26,4 +27,5 @@ export interface Module {
 	moduleDependencies?: (keyof Modules)[]
 	infrastructureDependencies?: (keyof InfrastructureOptions)[]
 	env?: Record<string, ZodMapKey>
+	routes?: Route[]
 }

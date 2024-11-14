@@ -1,3 +1,4 @@
+import type { Route } from '@rubriclab/ui'
 import type { InfrastructureOptions } from '~/providers'
 import type { ZodMapKey } from '~/utils/env'
 import { AuthModule } from './auth'
@@ -11,6 +12,7 @@ export function getModuleDependencies({ modules }: { modules: (keyof Modules)[] 
 	const collectedModules = new Set<keyof Modules>()
 	const npmDependencies: Record<string, string> = {}
 	const npmDevDependencies: Record<string, string> = {}
+	const routes: Route[] = []
 	const npmScripts: Record<string, string> = {}
 	const infrastructureDependencies = new Set<keyof InfrastructureOptions>()
 	const env: Record<string, ZodMapKey> = {}
@@ -23,6 +25,7 @@ export function getModuleDependencies({ modules }: { modules: (keyof Modules)[] 
 		Object.assign(npmDependencies, module.npmDependencies)
 		Object.assign(npmDevDependencies, module.npmDevDependencies)
 		Object.assign(npmScripts, module.npmScripts)
+		routes.push(...(module.routes || []))
 
 		module.infrastructureDependencies?.map(infraDep => {
 			infrastructureDependencies.add(infraDep)
@@ -37,6 +40,7 @@ export function getModuleDependencies({ modules }: { modules: (keyof Modules)[] 
 	return {
 		modules: Array.from(collectedModules),
 		npmDependencies,
+		routes,
 		npmDevDependencies,
 		npmScripts,
 		infrastructureDependencies: Array.from(infrastructureDependencies),

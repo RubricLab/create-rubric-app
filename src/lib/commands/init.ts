@@ -6,7 +6,7 @@ import { provisionUpstashRedisDatabase } from '~/providers/upstash'
 import { deployVercelProject } from '~/providers/vercel'
 import { checkConfig } from '~/utils/config'
 import { writeEnv } from '~/utils/env'
-import { copyDir, getPackageJSON, writePackageJSON } from '~/utils/file'
+import { copyDir, getPackageJSON, writePackageJSON, writeRoutes } from '~/utils/file'
 import { log } from '~/utils/log'
 import { commit, createRepo, install, run } from '~/utils/setup'
 
@@ -46,6 +46,7 @@ export async function init(cmd: { name?: string }) {
 		npmDevDependencies,
 		npmScripts,
 		infrastructureDependencies,
+		routes,
 		env: envDependencies
 	} = getModuleDependencies({
 		modules
@@ -70,6 +71,8 @@ export async function init(cmd: { name?: string }) {
 	packageJSON.scripts = { ...packageJSON.scripts, ...npmScripts }
 
 	await writePackageJSON({ projectDirectory: projectSlug, json: packageJSON })
+
+	await writeRoutes({ projectDirectory: projectSlug, json: routes })
 
 	const env: Record<string, string> = {}
 
