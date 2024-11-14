@@ -4,8 +4,16 @@ import type { ZodMapKey } from '~/utils/env'
 import { AuthModule } from './auth'
 import { DatabaseModule } from './database'
 import { EmailModule } from './email'
+import { AgentModule } from './agent'
+import { EventsModule } from './events'
 
-export const modulesOptions = { AuthModule, DatabaseModule, EmailModule }
+export const modulesOptions = {
+	AuthModule,
+	DatabaseModule,
+	EmailModule,
+	AgentModule,
+	EventsModule
+}
 export type Modules = typeof modulesOptions
 
 export function getModuleDependencies({ modules }: { modules: (keyof Modules)[] }) {

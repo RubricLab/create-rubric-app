@@ -1,3 +1,4 @@
+- [2024-11-14] [Scaffold agent module](https://github.com/RubricLab/create-rubric-app/commit/9c34364adba52731c0e36048709e660f1073ebd0)
 - [2024-11-14] [Support per-module routes. Add typesafe package.json.](https://github.com/RubricLab/create-rubric-app/commit/e4e09c76c8150b9d08d58b2a0d883178f3fbd1ee)
 - [2024-11-07] [module deps and .env filename](https://github.com/RubricLab/create-rubric-app/commit/8218ea68be7ef309bac0067c38aafd23fb96631f)
 - [2024-10-31] [auth module](https://github.com/RubricLab/create-rubric-app/commit/b6683cd9c050100736d6502ab8bf071aa59ec985)

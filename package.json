@@ -11,6 +11,7 @@
     "commander": "^12.1.0",
     "ejs": "^3.1.10",
     "open": "^10.1.0",
+    "rubricui": "^0.0.17",
     "zod": "^3.23.8"
   },
   "devDependencies": {
@@ -41,7 +42,7 @@
     "lint:fix": "bun x biome check --fix --unsafe . && bun x biome lint --write --unsafe .",
     "clean": "rm -rf .next && rm -rf node_modules"
   },
-  "version": "1.6.19",
+  "version": "1.6.20",
   "simple-git-hooks": {
     "post-commit": "bun run rubriclab-postcommit"
   }

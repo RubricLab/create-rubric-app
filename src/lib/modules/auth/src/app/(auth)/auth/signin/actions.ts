@@ -39,7 +39,10 @@ export async function sendMagicLink({
 }
 
 export async function handleSignOut({ redirectUrl }: { redirectUrl: string }) {
-	;(await cookies()).delete('key')
-	;(await cookies()).delete('user')
+	const cookieStore = await cookies()
+
+	cookieStore.delete('key')
+	cookieStore.delete('user')
+
 	redirect(redirectUrl)
 }

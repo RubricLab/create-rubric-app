@@ -67,6 +67,13 @@ export async function config({ required }: { required?: string[] }) {
 			default: undefined
 		},
 		{
+			type: 'password',
+			name: 'openaiApiKey',
+			message: 'Enter your OpenAI API key:',
+			mask: '*',
+			default: undefined
+		},
+		{
 			type: 'confirm',
 			name: 'deploy',
 			message: 'Enable automatic deployment with Vercel?',

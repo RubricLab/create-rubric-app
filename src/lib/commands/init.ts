@@ -80,6 +80,11 @@ export async function init(cmd: { name?: string }) {
 		env.URL = 'http://localhost:3000'
 	}
 
+	if (modules.includes('AgentModule')) {
+		const { openaiApiKey } = await checkConfig({ required: ['openaiApiKey'] })
+		env.OPENAI_API_KEY = openaiApiKey
+	}
+
 	if (modules.includes('EmailModule')) {
 		const { resendApiKey } = await checkConfig({ required: ['resendApiKey'] })
 		env.RESEND_API_KEY = resendApiKey

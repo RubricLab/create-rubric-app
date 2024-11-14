@@ -13,6 +13,7 @@ export type Config = {
 	neonApiKey: string
 	resendApiKey: string
 	deploy: boolean
+	openaiApiKey: string
 }
 
 export type NpmDependencies = Record<string, string>
