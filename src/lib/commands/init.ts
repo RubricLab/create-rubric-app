@@ -36,8 +36,7 @@ export async function init(cmd: { name?: string }) {
 			choices: Object.entries(modulesOptions).map(([key, { description }]) => ({
 				name: description,
 				value: key
-			})),
-			validate: (input: string[]) => (input.length > 0 ? true : 'Please select at least one module.')
+			}))
 		}
 	])
 
