@@ -1,5 +1,6 @@
 'use client'
 
+import { useSession } from '@rubriclab/auth'
 import { createEventHooks } from '@rubriclab/events/hooks'
 import { useState } from 'react'
 import { Button, Stack } from 'rubricui'
@@ -19,9 +20,13 @@ const { useEvents } = createEventHooks({
 	eventTypes
 })
 
-export default ({ userId }: { userId: string }) => {
+export default () => {
 	const [message, setMessage] = useState('')
 	const [messages, setMessages] = useState<Message[]>([])
+
+	const {
+		user: { id: userId }
+	} = useSession()
 
 	useEvents({
 		id: userId,

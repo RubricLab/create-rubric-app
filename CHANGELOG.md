@@ -1,3 +1,4 @@
+- [2024-11-20] [no prop chat component](https://github.com/RubricLab/create-rubric-app/commit/d742ddfc9a80886b01c75bf5650074d34d6d1982)
 - [2024-11-18] [optional modules](https://github.com/RubricLab/create-rubric-app/commit/d50b5f0b06dd58c43bc89b30d550cceaea6a3fd2)
 - [2024-11-14] [Scaffold agent module](https://github.com/RubricLab/create-rubric-app/commit/9c34364adba52731c0e36048709e660f1073ebd0)
 - [2024-11-14] [Support per-module routes. Add typesafe package.json.](https://github.com/RubricLab/create-rubric-app/commit/e4e09c76c8150b9d08d58b2a0d883178f3fbd1ee)
