@@ -5,7 +5,9 @@ export default {
 		'@rubriclab/auth',
 		'@rubriclab/webhooks',
 		'@rubriclab/actions',
-		'@rubriclab/blocks'
+		'@rubriclab/blocks',
+		'@rubriclab/agents',
+		'@rubriclab/events'
 	],
 	reactStrictMode: true
 } satisfies NextConfig
