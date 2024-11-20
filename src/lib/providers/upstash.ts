@@ -36,7 +36,7 @@ export async function provisionUpstashRedisDatabase({
 
 	const { password, endpoint, port } = data
 
-	const connectionString = `resiss://default:${password}@${endpoint}:${port}`
+	const connectionString = `rediss://default:${password}@${endpoint}:${port}`
 
 	return connectionString
 }
