@@ -17,11 +17,11 @@ bun i
 ### 2. Set up the DB
 
 ```sh
-npm run db:push
+npm run db:dev:push
 ```
 
 ```sh
-bun db:push
+bun db:dev:push
 ```
 
 ### 3. Run the development server
@@ -42,7 +42,17 @@ You can start modifying the UI by editing [src/app/page.tsx](./src/app/page.tsx)
 
 To serve your app to users, simply deploy the Next.js app eg. on [Railway](https://railway.app/new) or [Vercel](https://deploy.new/).
 
-To persist data, you'll need a database. Both [Railway](https://docs.railway.app/databases/postgresql) and [Vercel](https://vercel.com/docs/storage/vercel-postgres) provide Postgres DBs. You'll simply need to change the [Prisma provider](./prisma/schema.prisma) to `"postgresql"` (and add an extra URL for Vercel: [example](https://github.com/vercel/examples/blob/main/storage/postgres-prisma/prisma/schema.prisma#L9C1-L11C74)).
+In the project config, append the prod Prisma script to your build script.
+
+```sh
+npm run build && npm run db:push
+```
+
+```sh
+bun run build && bun db:push
+```
+
+To persist data, you'll need a database. Both [Railway](https://docs.railway.app/databases/postgresql) and [Vercel](https://vercel.com/docs/storage/vercel-postgres) provide Postgres DBs. You'll simply need the `DATABASE_URL` and `DATABASE_URL_NON_POOLING` for running migrations.
 
 ## Learn More
 
