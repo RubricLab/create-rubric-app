@@ -1,3 +1,4 @@
+- [2025-04-07] [stash](https://github.com/RubricLab/create-rubric-app/commit/1c7e41c5cefa8b83f63a40c9aaed6cd1272d471e)
 - [2024-11-20] [transpile events, agents](https://github.com/RubricLab/create-rubric-app/commit/9b58ece347b5f6733492de259a06265947ba82ac)
 - [2024-11-20] [redis url bug](https://github.com/RubricLab/create-rubric-app/commit/6e66762836e58c93e0566259ebd0aa099030b69b)
 - [2024-11-20] [no prop chat component](https://github.com/RubricLab/create-rubric-app/commit/d742ddfc9a80886b01c75bf5650074d34d6d1982)

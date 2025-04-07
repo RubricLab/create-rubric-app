@@ -1,7 +1,7 @@
 {
 	"dependencies": {
 		"next": "15.0.2",
-		"zod": "latest",
+		"zod": "3.24.2",
 		"rubricui": "*",
 		"@t3-oss/env-nextjs": "latest"
 	},
