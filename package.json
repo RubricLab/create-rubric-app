@@ -3,12 +3,12 @@
     "create-rubric-app": "./index.ts"
   },
   "dependencies": {
-    "@inquirer/prompts": "^6.0.1",
-    "@neondatabase/api-client": "^1.10.3",
-    "@vercel/client": "^13.4.15",
+    "@inquirer/prompts": "^7.4.1",
+    "@neondatabase/api-client": "^2.0.0",
+    "@vercel/client": "^15.1.6",
     "boxen": "^8.0.1",
     "clear": "^0.1.0",
-    "commander": "^12.1.0",
+    "commander": "^13.1.0",
     "ejs": "^3.1.10",
     "open": "^10.1.0",
     "rubricui": "^0.0.17",
@@ -18,8 +18,8 @@
     "@rubriclab/config": "*",
     "@rubriclab/ui": "*",
     "@rubriclab/package": "*",
-    "next": "^14.2.14",
-    "typescript": "^5.6.3"
+    "next": "^15.2.4",
+    "typescript": "^5.8.3"
   },
   "homepage": "https://github.com/RubricLab/create-rubric-app#readme",
   "keywords": [
@@ -42,7 +42,7 @@
     "lint:fix": "bun x biome check --fix --unsafe . && bun x biome lint --write --unsafe .",
     "clean": "rm -rf .next && rm -rf node_modules"
   },
-  "version": "1.6.25",
+  "version": "1.6.26",
   "simple-git-hooks": {
     "post-commit": "bun run rubriclab-postcommit"
   }

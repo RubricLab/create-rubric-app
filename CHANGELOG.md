@@ -1,3 +1,4 @@
+- [2025-04-15] [bleed](https://github.com/RubricLab/create-rubric-app/commit/9700acb78e3bf4950f83b99dc875379b7af3476f)
 - [2025-04-07] [stash](https://github.com/RubricLab/create-rubric-app/commit/1c7e41c5cefa8b83f63a40c9aaed6cd1272d471e)
 - [2024-11-20] [transpile events, agents](https://github.com/RubricLab/create-rubric-app/commit/9b58ece347b5f6733492de259a06265947ba82ac)
 - [2024-11-20] [redis url bug](https://github.com/RubricLab/create-rubric-app/commit/6e66762836e58c93e0566259ebd0aa099030b69b)
