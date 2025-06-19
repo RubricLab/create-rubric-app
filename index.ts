@@ -250,10 +250,7 @@ if (settings.includes('db')) {
 
 if (settings.includes('vscode'))
 	try {
-		child_process.execSync('code --install-extension dbaeumer.vscode-eslint --force', {
-			stdio: [0, 1, 2]
-		})
-		child_process.execSync('code --install-extension esbenp.prettier-vscode --force', {
+		child_process.execSync('code --install-extension biomejs.biome --force', {
 			stdio: [0, 1, 2]
 		})
 		child_process.execSync(`code ${name}`, { stdio: [0, 1, 2] })
