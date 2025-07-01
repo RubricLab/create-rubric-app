@@ -1,49 +1,47 @@
 {
-  "bin": {
-    "create-rubric-app": "./index.ts"
-  },
-  "dependencies": {
-    "@inquirer/prompts": "^7.4.1",
-    "@neondatabase/api-client": "^2.0.0",
-    "@vercel/client": "^15.1.6",
-    "boxen": "^8.0.1",
-    "clear": "^0.1.0",
-    "commander": "^13.1.0",
-    "ejs": "^3.1.10",
-    "open": "^10.1.0",
-    "rubricui": "^0.0.17",
-    "zod": "3.24.2"
-  },
-  "devDependencies": {
-    "@rubriclab/config": "*",
-    "@rubriclab/ui": "*",
-    "@rubriclab/package": "*",
-    "next": "^15.2.4",
-    "typescript": "^5.8.3"
-  },
-  "homepage": "https://github.com/RubricLab/create-rubric-app#readme",
-  "keywords": [
-    "agent",
-    "ai",
-    "create",
-    "rubric"
-  ],
-  "license": "gonuts",
-  "name": "create-rubric-app",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/RubricLab/create-rubric-app.git"
-  },
-  "scripts": {
-    "prepare": "bun x simple-git-hooks",
-    "bleed": "bun x npm-check-updates -u",
-    "format": "bun x biome format --write .",
-    "lint": "bun x biome check . && bun x biome lint .",
-    "lint:fix": "bun x biome check --fix --unsafe . && bun x biome lint --write --unsafe .",
-    "clean": "rm -rf .next && rm -rf node_modules"
-  },
-  "version": "1.6.26",
-  "simple-git-hooks": {
-    "post-commit": "bun run rubriclab-postcommit"
-  }
+	"bin": {
+		"create-rubric-app": "./index.ts"
+	},
+	"dependencies": {
+		"@inquirer/prompts": "^7.4.1",
+		"@neondatabase/api-client": "^2.0.0",
+		"@vercel/client": "^15.1.6",
+		"boxen": "^8.0.1",
+		"clear": "^0.1.0",
+		"commander": "^13.1.0",
+		"ejs": "^3.1.10",
+		"open": "^10.1.0",
+		"rubricui": "^0.0.17",
+		"zod": "3.24.2"
+	},
+	"devDependencies": {
+		"@rubriclab/config": "*",
+		"@rubriclab/ui": "*",
+		"@rubriclab/package": "*",
+		"next": "^15.2.4",
+		"typescript": "^5.8.3"
+	},
+	"homepage": "https://github.com/RubricLab/create-rubric-app#readme",
+	"keywords": [
+		"agent",
+		"ai",
+		"create",
+		"rubric"
+	],
+	"license": "gonuts",
+	"name": "create-rubric-app",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/RubricLab/create-rubric-app.git"
+	},
+	"scripts": {
+		"prepare": "bun x simple-git-hooks",
+		"bleed": "bun x npm-check-updates -u",
+		"clean": "rm -rf .next && rm -rf node_modules",
+		"format": "bun x biome check . --write"
+	},
+	"version": "1.6.26",
+	"simple-git-hooks": {
+		"post-commit": "bun run rubriclab-postcommit"
+	}
 }
