@@ -1,9 +1,9 @@
 import config from '@rubriclab/config/tailwind'
 import type { Config } from 'tailwindcss'
 
-const tailwindConfig = {
-	darkMode: 'class',
+export default {
 	content: ['./src/**/*.tsx'],
+	darkMode: 'class',
 	presets: [config],
 	theme: {
 		colors: {
@@ -12,5 +12,3 @@ const tailwindConfig = {
 		extend: {}
 	}
 } satisfies Config
-
-export default tailwindConfig

@@ -18,7 +18,12 @@
 		"next": "^14.2.14"
 	},
 	"homepage": "https://github.com/RubricLab/create-rubric-app#readme",
-	"keywords": ["agent", "ai", "create", "rubric"],
+	"keywords": [
+		"agent",
+		"ai",
+		"create",
+		"rubric"
+	],
 	"license": "gonuts",
 	"name": "create-rubric-app",
 	"repository": {
@@ -26,15 +31,15 @@
 		"url": "https://github.com/RubricLab/create-rubric-app.git"
 	},
 	"scripts": {
-		"prepare": "bun x @rubriclab/package prepare",
 		"bleed": "bun x npm-check-updates -u",
+		"clean": "rm -rf .next && rm -rf node_modules",
 		"format": "bun x biome format --write .",
 		"lint": "bun x biome check . && bun x biome lint .",
 		"lint:fix": "bun x biome check --fix --unsafe . && bun x biome lint --write --unsafe .",
-		"clean": "rm -rf .next && rm -rf node_modules"
+		"prepare": "bun x @rubriclab/package prepare"
 	},
-	"version": "1.6.18",
 	"simple-git-hooks": {
 		"post-commit": "bun x @rubriclab/package post-commit"
-	}
+	},
+	"version": "1.6.18"
 }

@@ -28,8 +28,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 			>
 				<Providers>
 					<BackgroundGrid className="fixed h-full w-full opacity-30 dark:opacity-40" />
-					<Nav title={'> npx create-rubric-app'} />
-					<div className="z-10 flex w-full max-w-3xl items-center justify-center">{children}</div>
+					<Nav title={'> bunx create rubric-app'} />
+					<div className="z-10 flex w-full max-w-4xl items-center justify-center">{children}</div>
 				</Providers>
 			</body>
 		</html>

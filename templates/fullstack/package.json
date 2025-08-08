@@ -13,7 +13,7 @@
 		"dotenv": "^16.4.5",
 		"framer-motion": "^11.9.0",
 		"lucide-react": "^0.447.0",
-		"next": "^14.2.14",
+		"next": "^15.4.6",
 		"next-auth": "^4.24.8",
 		"next-themes": "^0.3.0",
 		"prisma": "^5.20.0",
@@ -45,19 +45,19 @@
 	},
 	"private": true,
 	"scripts": {
+		"bleed": "bun x npm-check-updates -u",
 		"build": "next build",
+		"clean": "rm -rf .next && rm -rf node_modules",
 		"db:dev:push": "prisma generate --schema=./prisma/dev/schema.prisma && prisma db push --schema=./prisma/dev/schema.prisma",
 		"db:dev:studio": "prisma studio --schema=./prisma/dev/schema.prisma",
 		"db:push": "prisma generate && prisma db push",
 		"db:studio": "prisma studio",
 		"dev": "next dev",
-		"generate": "touch prisma/dev.db",
-		"start": "next start",
-		"bleed": "bun x npm-check-updates -u",
 		"format": "bun x biome format --write .",
+		"generate": "touch prisma/dev.db",
 		"lint": "bun x biome check .",
 		"lint:fix": "bun x biome lint . --write --unsafe",
-		"clean": "rm -rf .next && rm -rf node_modules"
+		"start": "next start"
 	},
 	"version": "0.0.0"
 }

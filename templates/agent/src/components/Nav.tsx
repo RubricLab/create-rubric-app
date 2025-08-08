@@ -12,7 +12,6 @@ export default function Nav({ title }: { title: string }) {
 				>
 					{title}
 				</Link>
-
 				<Link
 					href="https://rubriclabs.com/blog/cra"
 					target="_blank"

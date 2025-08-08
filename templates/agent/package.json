@@ -1,50 +1,45 @@
 {
 	"dependencies": {
-		"@prisma/client": "^5.20.0",
-		"dotenv": "^16.4.5",
-		"framer-motion": "^11.9.0",
-		"langchain": "^0.3.2",
-		"lucide-react": "^0.447.0",
-		"next": "^14.2.14",
-		"next-themes": "^0.3.0",
-		"prisma": "^5.20.0",
-		"react": "^18.3.1",
-		"react-dom": "^18.3.1",
-		"sqlite3": "^5.1.7"
+		"@prisma/client": "^6.13.0",
+		"@rubriclab/agents": "0.0.55",
+		"framer-motion": "^12.23.12",
+		"lucide-react": "^0.537.0",
+		"next": "^15.4.6",
+		"next-themes": "^0.4.6",
+		"prisma": "^6.13.0",
+		"react": "^19.1.1",
+		"react-dom": "^19.1.1",
+		"sqlite3": "^5.1.7",
+		"zod": "^4.0.15"
 	},
 	"description": "This project was bootstrapped with create-rubric-app",
 	"devDependencies": {
 		"@rubriclab/config": "*",
-		"@t3-oss/env-nextjs": "^0.11.1",
-		"@types/node": "22.7.4",
-		"@types/react": "18.3.11",
-		"@types/react-dom": "18.3.0",
-		"autoprefixer": "^10.4.20",
-		"postcss": "^8.4.47",
-		"tailwindcss": "^3.4.13",
-		"ts-node": "^10.9.2",
-		"typescript": "^5.6.2",
-		"zod": "^3.23.8"
+		"@t3-oss/env-nextjs": "^0.13.8",
+		"@types/node": "^24.2.0",
+		"@types/react": "^19.1.9",
+		"@types/react-dom": "^19.1.7",
+		"autoprefixer": "^10.4.21",
+		"postcss": "^8.5.6",
+		"tailwindcss": "^4.1.11",
+		"typescript": "^5.9.2"
 	},
 	"name": "my-cool-agent",
-	"prisma": {
-		"seed": "npx ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
-	},
 	"private": true,
 	"scripts": {
+		"bleed": "bun x npm-check-updates -u",
 		"build": "prisma generate && next build",
+		"clean": "rm -rf .next && rm -rf node_modules",
 		"db:dev:push": "prisma generate --schema=./prisma/dev/schema.prisma && prisma db push --schema=./prisma/dev/schema.prisma",
 		"db:dev:studio": "prisma studio --schema=./prisma/dev/schema.prisma",
 		"db:push": "prisma generate && prisma db push",
 		"db:studio": "prisma studio",
 		"dev": "next dev",
-		"generate": "touch prisma/dev.db",
-		"start": "next start",
-		"bleed": "bun x npm-check-updates -u",
 		"format": "bun x biome format --write .",
+		"generate": "touch prisma/dev.db",
 		"lint": "bun x biome check .",
 		"lint:fix": "bun x biome lint .",
-		"clean": "rm -rf .next && rm -rf node_modules"
+		"start": "next start"
 	},
 	"version": "0.0.0"
 }

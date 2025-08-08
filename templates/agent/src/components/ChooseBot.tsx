@@ -1,12 +1,11 @@
 import { ChevronDown } from 'lucide-react'
+import { models } from '~/constants/models'
 import type { Model } from '~/utils/types'
 
 type Props = {
 	model: Model
 	setModel: (model: Model) => void
 }
-
-export const models = ['gpt-3.5-turbo', 'gpt-4-1106-preview', 'gpt-4', 'gpt-4-32k'] as const
 
 export default function ChooseBot({ model, setModel }: Props) {
 	return (

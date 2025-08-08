@@ -16,8 +16,8 @@ export default async function Icon() {
 				background: 'black',
 				color: 'white',
 				display: 'flex',
-				fontWeight: 700,
 				fontSize: 28,
+				fontWeight: 700,
 				height: '100%',
 				justifyContent: 'center',
 				width: '100%'

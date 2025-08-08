@@ -6,15 +6,15 @@ const distDir = './dist'
 
 // Clean dist directory before building
 await rm(distDir, {
-	recursive: true,
-	force: true
+	force: true,
+	recursive: true
 })
 
 // Run build
 await Bun.build({
 	entrypoints: ['./src/index.ts'],
-	outdir: './dist',
 	minify: true,
+	outdir: './dist',
 	plugins: [dts()]
 })
 

@@ -8,80 +8,86 @@ import { useChatScroll } from '~/utils/useChatScroll'
 import ChooseBot from './ChooseBot'
 import Loader from './Loader'
 
-type Props = {
-	refetch: () => void
-}
-
 // List of messages to be rendered in the UI
 const messages = new Map([
-	['createTask', { message: 'Creating task', className: 'bg-green-300 dark:bg-green-600' }],
-	['deleteTask', { message: 'Deleting task', className: 'bg-red-300 dark:bg-red-600' }],
-	['updateTask', { message: 'Updating task', className: 'bg-purple-300 dark:bg-purple-600' }],
-	['listTasks', { message: 'Listing tasks', className: 'bg-blue-300 dark:bg-blue-600' }]
+	['createTask', { className: 'bg-green-300 dark:bg-green-600', message: 'Creating task' }],
+	['deleteTask', { className: 'bg-red-300 dark:bg-red-600', message: 'Deleting task' }],
+	['updateTask', { className: 'bg-purple-300 dark:bg-purple-600', message: 'Updating task' }],
+	['listTasks', { className: 'bg-blue-300 dark:bg-blue-600', message: 'Listing tasks' }]
 ])
 
-export default function ChatBox({ refetch }: Props) {
+export default function ChatBox({ refetch }: { refetch: () => void }) {
 	const [prompt, setPrompt] = useState('')
 	const [loading, setLoading] = useState(false)
-	const [model, setModel] = useState<Model>('gpt-3.5-turbo')
+	const [model, setModel] = useState<Model>('gpt-4.1')
 
 	// Used for streaming response from the agent endpoint
-	const [agentOutput, setAgentOutput] = useState([])
+	const [agentOutput, setAgentOutput] = useState<{ className: string; message: string }[]>([])
 
 	// Find corresponding message and className
 	const getMessage = (line: string): [boolean, { message: string; className: string }] => {
 		// Check if the line made any action calls
-		const found = messages.get(Array.from(messages.keys()).find(key => line.includes(key)))
+		const messageKeys = Array.from(messages.keys())
+		const messageKey = messageKeys.find(key => line.includes(key))
+		const found = messages.get(messageKey ?? '')
 		if (found) {
-			found.message = line
+			found.message = line.replace(messageKey ?? '', '')
 			return [true, found]
 		}
-		return [false, { message: line, className: 'bg-secondary' }]
+		return [false, { className: 'bg-secondary', message: line }]
 	}
 
 	async function agentChat(input: string) {
 		setLoading(true)
 		setAgentOutput([])
 
+		// TODO: migrate this to @rubriclab/events
 		const response = await fetch('/api/agent', {
 			body: JSON.stringify({ input, modelName: model }),
-			headers: { 'Content-Type': 'application/json' },
+			headers: {
+				'Content-Type': 'application/json'
+			},
 			method: 'POST'
 		})
 
-		const reader = response.body.getReader()
+		const reader = response.body?.getReader()
+		if (!reader) {
+			console.error('No reader')
+			return
+		}
 
 		// Set/Reset the index of the messages object
-		let objInd = 0
+		let objectIndex = 0
 
 		// Render streamed data as it comes in
 		while (true) {
 			const { done, value } = await reader.read()
 
 			if (done) {
-				await refetch()
+				refetch()
 				setLoading(false)
 				break
 			}
 
 			const text = new TextDecoder().decode(value)
 
-			// Check if an action call is made and get the according message object
+			// Check if a tool call is made and get the according message object
 			const [found, messsage] = getMessage(text)
 
 			if (found) {
 				setAgentOutput(prevData => [...prevData, messsage])
 
 				// Message is rendered, increment index
-				objInd++
+				objectIndex++
 			}
+
 			// Message is not completed, append to previous message
 			else
 				setAgentOutput(prevData => {
 					const newData = [...prevData]
-					newData[objInd] = {
-						message: (prevData[objInd]?.message ?? '') + text,
-						className: messsage.className
+					newData[objectIndex] = {
+						className: messsage.className,
+						message: (prevData[objectIndex]?.message ?? '') + text
 					}
 					return newData
 				})
