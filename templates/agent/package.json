@@ -2,6 +2,7 @@
 	"dependencies": {
 		"@prisma/client": "^6.13.0",
 		"@rubriclab/agents": "0.0.55",
+		"@tailwindcss/postcss": "^4.1.11",
 		"framer-motion": "^12.23.12",
 		"lucide-react": "^0.537.0",
 		"next": "^15.4.6",
