@@ -1,17 +1,18 @@
-import { DynamicStructuredTool } from 'langchain/tools'
-import z from 'zod'
+import { createTool } from '@rubriclab/agents'
+import z from 'zod/v4'
 import { createTask } from '~/app/actions/createTask'
 
-export const createTaskTool = new DynamicStructuredTool({
-	name: 'createTask',
-	description: 'Create a task',
-	func: async ({ title, status }) => {
+export const createTaskTool = createTool({
+	execute: async ({ title, status }) => {
 		const createdTask = await createTask({ status, title })
 
 		return JSON.stringify(createdTask)
 	},
-	schema: z.object({
-		status: z.boolean(),
-		title: z.string()
-	})
+	schema: {
+		input: z.object({
+			status: z.boolean().describe('Status of the task, true if completed, false otherwise'),
+			title: z.string().describe('Title of the task')
+		}),
+		output: z.string().describe('JSON string of the created task')
+	}
 })

@@ -1,14 +1,15 @@
-import { DynamicStructuredTool } from 'langchain/tools'
-import z from 'zod'
+import { createTool } from '@rubriclab/agents'
+import z from 'zod/v4'
 import { listTasks } from '~/app/actions/listTasks'
 
-export const listTasksTool = new DynamicStructuredTool({
-	name: 'listTasks',
-	description: 'List all or some of the tasks sorted in descending order by created timestamp',
-	func: async () => {
+export const listTasksTool = createTool({
+	execute: async () => {
 		const allTasks = await listTasks()
 
 		return JSON.stringify(allTasks)
 	},
-	schema: z.object({})
+	schema: {
+		input: z.object({}),
+		output: z.string().describe('JSON string of the list of tasks')
+	}
 })

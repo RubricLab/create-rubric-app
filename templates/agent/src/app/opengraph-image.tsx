@@ -11,11 +11,7 @@ export const size = {
 	width: 1200
 }
 
-type Props = {
-	params: object
-}
-
-export default async function Image({ params }: Props) {
+export default async function Image() {
 	return new ImageResponse(
 		<div
 			style={{

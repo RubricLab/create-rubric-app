@@ -1,8 +1,7 @@
 #! /usr/bin/env bun
 
-import child_process from 'node:child_process'
-import { spawn } from 'node:child_process'
-import fs, { mkdirSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs'
+import child_process, { spawn } from 'node:child_process'
+import fs, { mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs'
 import https from 'node:https'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -21,7 +20,7 @@ const __dirname = path.dirname(__filename)
 const CURR_DIR = process.cwd()
 
 // Gets the native commands, e.g. `cp` or `copy` depending on the platform
-function getPlatformNativeCmds(platform) {
+function getPlatformNativeCmds(platform: 'win32' | string) {
 	switch (platform) {
 		case 'win32':
 			return {
@@ -39,7 +38,7 @@ function getPlatformNativeCmds(platform) {
 
 const PLC = getPlatformNativeCmds(process.platform)
 
-function createDirectoryContents(templatePath, newProjectPath) {
+function createDirectoryContents(templatePath: string, newProjectPath: string) {
 	const filesToCreate = readdirSync(templatePath)
 
 	for (const file of filesToCreate) {
@@ -62,7 +61,7 @@ function createDirectoryContents(templatePath, newProjectPath) {
 	}
 }
 
-function copyTemplate(name, template) {
+function copyTemplate(name: string, template: string) {
 	const projectName = name
 	const templatePath = `${__dirname}/templates/${template}`
 
@@ -71,7 +70,7 @@ function copyTemplate(name, template) {
 	createDirectoryContents(templatePath, projectName)
 }
 
-async function downloadFile(url, dest) {
+async function _downloadFile(url: string, dest: string) {
 	if (!fs.existsSync(dest)) mkdirSync(dest)
 	const file = fs.createWriteStream(`${dest}/${path.basename(url)}`)
 	return await new Promise<void>(resolve => {
@@ -101,16 +100,14 @@ const {
 	}
 } = parseArgs({
 	options: {
-		name: {
-			short: 'n',
-			type: 'string'
+		ai: {
+			type: 'boolean'
 		},
-		template: {
-			short: 't',
-			type: 'string'
+		blank: {
+			type: 'boolean'
 		},
-		yes: {
-			short: 'y',
+		bun: {
+			short: 'b',
 			type: 'boolean'
 		},
 		// verbose: {
@@ -121,14 +118,16 @@ const {
 			short: 'k',
 			type: 'string'
 		},
-		ai: {
-			type: 'boolean'
+		name: {
+			short: 'n',
+			type: 'string'
 		},
-		blank: {
-			type: 'boolean'
+		template: {
+			short: 't',
+			type: 'string'
 		},
-		bun: {
-			short: 'b',
+		yes: {
+			short: 'y',
 			type: 'boolean'
 		}
 	}
@@ -154,7 +153,7 @@ console.log(
 	)
 )
 
-const CHOICES = readdirSync(`${__dirname}/templates`).map(template => ({
+const CHOICES = readdirSync(`${__dirname}/templates`).map((template: string) => ({
 	name: template,
 	value: template
 }))
@@ -255,7 +254,7 @@ if (settings.includes('vscode'))
 		})
 		child_process.execSync(`code ${name}`, { stdio: [0, 1, 2] })
 		console.log('✅ 5/6 - Configured vscode')
-	} catch (e) {
+	} catch (_e) {
 		console.log(
 			'❌ 5/6 - Could not configure vscode. You might have to do this: https://code.visualstudio.com/docs/setup/mac'
 		)
@@ -289,8 +288,8 @@ if (settings.includes('dev'))
 			)
 		}),
 		spawn('cd', [name, '&&', settings.includes('bun') ? 'bun' : 'npm', 'run', 'dev'], {
-			stdio: 'inherit',
-			shell: true
+			shell: true,
+			stdio: 'inherit'
 		})
 	])
 else console.log('✅ 6/6 - no-dev flag passed')

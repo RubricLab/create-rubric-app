@@ -11,7 +11,7 @@ const TaskList = ({ tasks }: Props) => {
 	const [codeView, setCodeView] = useState(false)
 
 	return (
-		<div className="flex h-full max-h-96 w-full flex-col rounded-md border-primary bg-primary px-3 sm:max-h-[50vh]">
+		<div className="flex h-full max-h-96 w-full flex-col rounded-md border border-subtle bg-primary px-3 sm:max-h-[50vh]">
 			<div className="flex w-full items-center justify-between pt-3 pb-6">
 				<h3>Checklist</h3>
 				<button
@@ -32,7 +32,7 @@ const TaskList = ({ tasks }: Props) => {
 				</>
 			) : (
 				<>
-					<div className="sticky top-0 flex w-full items-center border-neutral-200 border-b-2 bg-primary pb-2 text-center text-secondary dark:border-neutral-800">
+					<div className="sticky top-0 flex w-full items-center border-subtle border-b-2 bg-primary pb-2 text-center text-secondary">
 						<div>Status</div>
 						<div className="grow">Task</div>
 						<div>Created at</div>

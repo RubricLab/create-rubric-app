@@ -14,8 +14,8 @@ export async function updateTask({
 }) {
 	const updatedTask = await db.task.update({
 		data: {
-			status,
-			title
+			...(status && { status }),
+			...(title && { title })
 		},
 		where: {
 			id

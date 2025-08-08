@@ -1,16 +1,17 @@
-import { DynamicStructuredTool } from 'langchain/tools'
-import z from 'zod'
+import { createTool } from '@rubriclab/agents'
+import z from 'zod/v4'
 import { deleteTask } from '~/app/actions/deleteTask'
 
-export const deleteTaskTool = new DynamicStructuredTool({
-	name: 'deleteTask',
-	description: 'Delete a task',
-	func: async ({ id }) => {
+export const deleteTaskTool = createTool({
+	execute: async ({ id }) => {
 		const deletedTask = await deleteTask({ id })
 
 		return JSON.stringify(deletedTask)
 	},
-	schema: z.object({
-		id: z.number()
-	})
+	schema: {
+		input: z.object({
+			id: z.number()
+		}),
+		output: z.string().describe('JSON string of the deleted task')
+	}
 })

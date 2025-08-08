@@ -1,10 +1,9 @@
 import { basicAgent } from '~/agents/basic'
 
-export async function POST(req) {
+export async function POST(req: Request) {
 	const { input, modelName } = await req.json()
-	if (process.env.NODE_ENV === 'development') console.log('Using OpenAI', modelName)
 
-	const stream = basicAgent({ input, modelName })
+	const stream = await basicAgent({ input, modelName })
 
-	return new Response(await stream)
+	return new Response(stream)
 }
