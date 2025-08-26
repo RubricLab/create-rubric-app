@@ -1,0 +1,72 @@
+model User {
+    id    String @id @default(nanoid(6))
+    email String @unique
+
+    oAuth2AuthenticationAccounts OAuth2AuthenticationAccount[]
+    oAuth2AuthorizationAccounts  OAuth2AuthorizationAccount[]
+    apiKeyAuthorizationAccounts  ApiKeyAuthorizationAccount[]
+
+    sessions Session[]
+
+    tasks Task[]
+}
+
+model OAuth2AuthenticationRequest {
+    token       String   @id
+    callbackUrl String
+    expiresAt   DateTime
+}
+
+model OAuth2AuthorizationRequest {
+    token       String   @id
+    userId      String
+    callbackUrl String
+    expiresAt   DateTime
+}
+
+model MagicLinkRequest {
+    token     String   @id
+    email     String
+    expiresAt DateTime
+}
+
+model OAuth2AuthenticationAccount {
+    userId       String
+    user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    provider     String
+    accountId    String
+    accessToken  String
+    refreshToken String
+    expiresAt    DateTime
+
+    @@id([userId, provider, accountId])
+}
+
+model OAuth2AuthorizationAccount {
+    userId       String
+    user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    provider     String
+    accountId    String
+    accessToken  String
+    refreshToken String
+    expiresAt    DateTime
+
+    @@id([userId, provider, accountId])
+}
+
+model ApiKeyAuthorizationAccount {
+    userId    String
+    user      User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+    provider  String
+    accountId String
+    apiKey    String
+
+    @@id([userId, provider, accountId])
+}
+
+model Session {
+    key       String   @id @default(cuid())
+    userId    String
+    user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    expiresAt DateTime
+}
