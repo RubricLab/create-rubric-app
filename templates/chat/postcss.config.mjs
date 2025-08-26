@@ -1,3 +1,1 @@
-export default {
-	plugins: ['@tailwindcss/postcss']
-}
+export { default } from '@rubriclab/config/postcss'

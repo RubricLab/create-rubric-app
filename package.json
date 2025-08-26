@@ -32,5 +32,5 @@
 	"simple-git-hooks": {
 		"post-commit": "bun x @rubriclab/package post-commit"
 	},
-	"version": "1.6.22"
+	"version": "1.6.23"
 }

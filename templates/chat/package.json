@@ -9,7 +9,7 @@
 	},
 	"description": "This project was bootstrapped with create-rubric-app",
 	"devDependencies": {
-		"@rubriclab/config": "^0.0.21",
+		"@rubriclab/config": "^0.0.22",
 		"@types/node": "^24.3.0",
 		"@types/react": "^19.1.11",
 		"@types/react-dom": "^19.1.8",
