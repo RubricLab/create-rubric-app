@@ -2,8 +2,10 @@
 	"bin": {
 		"create-rubric-app": "./index.ts"
 	},
+	"dependencies": {
+		"@rubriclab/cli": "*"
+	},
 	"devDependencies": {
-		"@rubriclab/cli": "*",
 		"@rubriclab/config": "*",
 		"@rubriclab/package": "*"
 	},
@@ -30,5 +32,5 @@
 	"simple-git-hooks": {
 		"post-commit": "bun x @rubriclab/package post-commit"
 	},
-	"version": "1.6.21"
+	"version": "1.6.22"
 }

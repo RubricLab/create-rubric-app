@@ -1,3 +1,4 @@
+- [2025-08-26] [oops - cli should be dep not devDep](https://github.com/RubricLab/create-rubric-app/commit/fb37ca59643a7923e3af59d59c5cedd36e07e18f)
 - [2025-08-26] [transpile packages, add cli as dep](https://github.com/RubricLab/create-rubric-app/commit/1fe218483098d885f8f8d935685ed487361c2ebb)
 - [2025-08-26] [release](https://github.com/RubricLab/create-rubric-app/commit/63e0d6a17c8ce5ccf60c0e37169062aa1395189e)
 - [2025-08-08] [Bump version](https://github.com/rubriclab/create-rubric-app/commit/5c3d26faadc8c924aac0bc3651aabfaa338eef2b)
