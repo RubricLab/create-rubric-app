@@ -1,3 +1,4 @@
+- [2025-08-26] [release](https://github.com/RubricLab/create-rubric-app/commit/63e0d6a17c8ce5ccf60c0e37169062aa1395189e)
 - [2025-08-08] [Bump version](https://github.com/rubriclab/create-rubric-app/commit/5c3d26faadc8c924aac0bc3651aabfaa338eef2b)
 - [2025-06-25] [Use package post-commit hooks](https://github.com/RubricLab/create-rubric-app/commit/4578f7295e49f8ba88dba2525a6cc196a0713704)
 - [2024-11-09] [Undo README change](https://github.com/RubricLab/create-rubric-app/commit/f0a55c966a6fbb1a6b0c5a2635bfdffa435f2f11)
