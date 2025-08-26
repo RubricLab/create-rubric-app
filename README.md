@@ -1,3 +1,3 @@
 ```sh
-bun x create-rubric-app init
+bun x create-rubric-app@latest init
 ```
