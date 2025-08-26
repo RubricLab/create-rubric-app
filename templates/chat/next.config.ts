@@ -3,13 +3,13 @@ import type { NextConfig } from 'next'
 export default {
 	reactStrictMode: true,
 	transpilePackages: [
-		'@rubriclab/auth',
-		'@rubriclab/webhooks',
-		// '@rubriclab/actions',
-		// '@rubriclab/blocks',
+		'@rubriclab/actions',
 		'@rubriclab/agents',
-		'@rubriclab/events'
-		// '@rubriclab/chains',
-		// '@rubriclab/shapes'
+		'@rubriclab/auth',
+		'@rubriclab/blocks',
+		'@rubriclab/chains',
+		'@rubriclab/events',
+		'@rubriclab/shapes',
+		'@rubriclab/webhooks'
 	]
 } satisfies NextConfig
