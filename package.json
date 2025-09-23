@@ -1,36 +1,36 @@
 {
-	"bin": {
-		"create-rubric-app": "./index.ts"
-	},
-	"dependencies": {
-		"@rubriclab/cli": "*"
-	},
-	"devDependencies": {
-		"@rubriclab/config": "*",
-		"@rubriclab/package": "*"
-	},
-	"homepage": "https://github.com/RubricLab/create-rubric-app#readme",
-	"keywords": [
-		"agent",
-		"ai",
-		"create",
-		"rubric"
-	],
-	"license": "gonuts",
-	"name": "create-rubric-app",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/RubricLab/create-rubric-app.git"
-	},
-	"scripts": {
-		"bleed": "bun x npm-check-updates -u",
-		"check": "bun x biome check .",
-		"clean": "rm -rf .next && rm -rf node_modules",
-		"format": "bun x biome check --write .",
-		"prepare": "bun x @rubriclab/package prepare"
-	},
-	"simple-git-hooks": {
-		"post-commit": "bun x @rubriclab/package post-commit"
-	},
-	"version": "1.6.25"
+  "bin": {
+    "create-rubric-app": "./index.ts"
+  },
+  "dependencies": {
+    "@rubriclab/cli": "*"
+  },
+  "devDependencies": {
+    "@rubriclab/config": "*",
+    "@rubriclab/package": "*"
+  },
+  "homepage": "https://github.com/RubricLab/create-rubric-app#readme",
+  "keywords": [
+    "agent",
+    "ai",
+    "create",
+    "rubric"
+  ],
+  "license": "gonuts",
+  "name": "create-rubric-app",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RubricLab/create-rubric-app.git"
+  },
+  "scripts": {
+    "bleed": "bun x npm-check-updates -u",
+    "check": "bun x biome check .",
+    "clean": "rm -rf .next && rm -rf node_modules",
+    "format": "bun x biome check --write .",
+    "prepare": "bun x @rubriclab/package prepare"
+  },
+  "simple-git-hooks": {
+    "post-commit": "bun x @rubriclab/package post-commit"
+  },
+  "version": "1.6.26"
 }

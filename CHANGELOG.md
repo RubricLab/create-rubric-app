@@ -1,3 +1,4 @@
+- [2025-09-23] [Add README](https://github.com/rubriclab/create-rubric-app/commit/33744bf670bfac43cfbcaf9859d0df1e4e0629a4)
 - [2025-08-26] [commit .env.example](https://github.com/RubricLab/create-rubric-app/commit/bb94b9bff4d1a2eb3046a51b326fffef7989ffc1)
 - [2025-08-26] [deps](https://github.com/RubricLab/create-rubric-app/commit/aa2d10a324a334ec2f19a2f1bf195f90d648d46f)
 - [2025-08-26] [bump config](https://github.com/RubricLab/create-rubric-app/commit/cc1a58871fd922d4e797c304ef5ce5897a566493)
