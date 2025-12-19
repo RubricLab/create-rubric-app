@@ -1,5 +1,5 @@
 import { createAgent, createResponseFormat, noTabs } from '@rubriclab/agents'
-import { z } from 'zod/v4'
+import { z } from 'zod'
 import createTodo from '~/tools/createTodo'
 import getTodoList from '~/tools/getTodoList'
 
@@ -17,7 +17,7 @@ const systemPrompt = noTabs`
 `
 
 const { executeAgent, eventTypes, __ToolEvent, __ResponseEvent } = createAgent({
-	model: 'gpt-4.1-mini',
+	model: 'gpt-5.2',
 	responseFormat,
 	systemPrompt,
 	tools: {

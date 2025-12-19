@@ -1,5 +1,5 @@
 import { createTool } from '@rubriclab/agents'
-import z from 'zod/v4'
+import { z } from 'zod'
 import db from '~/db'
 
 export default createTool({

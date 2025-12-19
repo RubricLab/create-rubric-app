@@ -4,7 +4,7 @@ import { existsSync } from 'node:fs'
 import path from 'node:path'
 import { createCLI, createCommand } from '@rubriclab/cli'
 import { $ } from 'bun'
-import { z } from 'zod/v4'
+import { z } from 'zod'
 
 const initCommand = createCommand({
 	args: z.object({

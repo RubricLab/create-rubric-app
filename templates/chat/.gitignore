@@ -34,3 +34,6 @@ yarn-error.log*
 # bun
 bun.lockb
 bun.lock
+
+# prisma
+generated
