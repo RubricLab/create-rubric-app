@@ -1,3 +1,4 @@
+- [2025-12-19] [Match Zod version to dependencies](https://github.com/rubriclab/create-rubric-app/commit/8549dc0f70c39a1ecf28cfedbfce5d3da5c5fab0)
 - [2025-12-19] [Bleed chat template dependencies](https://github.com/rubriclab/create-rubric-app/commit/23782eb6f316061dc679883e0c230a87f1889fe9)
 - [2025-09-23] [Add README](https://github.com/rubriclab/create-rubric-app/commit/33744bf670bfac43cfbcaf9859d0df1e4e0629a4)
 - [2025-08-26] [commit .env.example](https://github.com/RubricLab/create-rubric-app/commit/bb94b9bff4d1a2eb3046a51b326fffef7989ffc1)

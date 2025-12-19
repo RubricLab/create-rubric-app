@@ -10,7 +10,7 @@
 		"prisma": "6.19.1",
 		"react": "19.2.3",
 		"react-dom": "19.2.3",
-		"zod": "4.2.1"
+		"zod": "4.1.13"
 	},
 	"description": "This project was bootstrapped with create-rubric-app",
 	"devDependencies": {
