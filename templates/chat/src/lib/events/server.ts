@@ -4,5 +4,5 @@ import { eventTypes } from '~/events/types'
 
 export const { publish, GET, maxDuration } = createEventsServer({
 	eventTypes,
-	redisURL: env.UPSTASH_REDIS_URL
+	redisURL: env.REDIS_URL
 })
