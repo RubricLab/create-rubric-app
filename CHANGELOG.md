@@ -1,3 +1,4 @@
+- [2025-12-19] [Fix build](https://github.com/rubriclab/create-rubric-app/commit/f25fb6f2540c82df6e030a1a0dfdebd951a99b60)
 - [2025-12-19] [Bump agents package](https://github.com/rubriclab/create-rubric-app/commit/95485109392cfd75a48e9cef819c152b6e2d5219)
 - [2025-12-19] [Match Zod version to dependencies](https://github.com/rubriclab/create-rubric-app/commit/8549dc0f70c39a1ecf28cfedbfce5d3da5c5fab0)
 - [2025-12-19] [Bleed chat template dependencies](https://github.com/rubriclab/create-rubric-app/commit/23782eb6f316061dc679883e0c230a87f1889fe9)
