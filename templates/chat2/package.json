@@ -1,0 +1,32 @@
+{
+	"dependencies": {
+		"@rubriclab/agents": "^0.0.84",
+		"@rubriclab/events": "^0.0.41",
+		"@rubriclab/ui": "^5.1.54",
+		"@t3-oss/env-core": "^0.13.10",
+		"bun-plugin-tailwind": "^0.1.2",
+		"react": "^19.2.3",
+		"react-dom": "^19.2.3",
+		"tailwindcss": "^4.1.18"
+	},
+	"description": "This project was bootstrapped with create-rubric-app",
+	"devDependencies": {
+		"@biomejs/biome": "^2.3.10",
+		"@types/bun": "^1.3.5",
+		"@types/react": "^19.2.7",
+		"@types/react-dom": "^19.2.3"
+	},
+	"license": "MIT",
+	"name": "my-app",
+	"private": true,
+	"scripts": {
+		"bleed": "bun x npm-check-updates -u",
+		"check": "bun x biome check .",
+		"clean": "rm -rf .next && rm -rf node_modules",
+		"dev": "bun --hot src/internals/server.tsx",
+		"format": "bun x biome check --write .",
+		"start": "NODE_ENV=production bun src/internals/server.tsx"
+	},
+	"type": "module",
+	"version": "0.0.0"
+}

@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+@source "../node_modules/@rubriclab/ui";
+
+:root {
+	--background: #ffffff;
+	--foreground: #171717;
+	--primary: oklch(54.6% 0.245 262.881);
+	--accent: oklch(96.53% 0.004 262.56);
+	--border: oklch(86.68% 0.017 261.56);
+	--hover: oklch(92.05% 0.008 262.67);
+	--destructive: oklch(62.72% 0.233 29.22);
+	--muted: oklch(98.27% 0.001 95.47);
+	--muted-foreground: oklch(13.68% 0.034 0.09);
+	--radius: 0.5rem;
+	/* Optional but recommended */
+	--accent-foreground: #111111;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--background: #0a0a0a;
+		--foreground: #ededed;
+		--primary: oklch(54.6% 0.245 262.881);
+		--accent: oklch(21.41% 0.007 89.49 / 60%);
+		--border: oklch(26.98% 0.009 89.63);
+		--hover: oklch(21.41% 0.007 89.49);
+		--destructive: oklch(62.72% 0.233 29.22);
+		--muted: oklch(15.48% 0.006 89.58);
+		--muted-foreground: oklch(86.68% 0.017 261.56);
+		--radius: 0.5rem;
+		/* Optional but recommended */
+		--accent-foreground: #fafafa;
+	}
+}
+
+@theme inline {
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+	--color-accent: var(--accent);
+	--color-accent-foreground: var(--accent-foreground);
+	--color-primary: var(--primary);
+	--color-border: var(--border);
+	--color-hover: var(--hover);
+	--color-destructive: var(--destructive);
+	--color-muted: var(--muted);
+	--color-muted-foreground: var(--muted-foreground);
+	--radius-default: var(--radius); /* Radius token for rounded utilities */
+}
+
+@layer base {
+	* {
+		border-color: var(--border, currentColor);
+	}
+
+	html {
+		@apply text-foreground bg-background;
+	}
+}
