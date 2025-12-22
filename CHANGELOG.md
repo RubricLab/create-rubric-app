@@ -1,3 +1,4 @@
+- [2025-12-22] [Correct example env](https://github.com/rubriclab/create-rubric-app/commit/c7200451c9d2cac4338bc7ddd2f0a66b7bd7b55e)
 - [2025-12-19] [Fix build](https://github.com/rubriclab/create-rubric-app/commit/c78aa752e2b9eb8eec685670e610ea85d8821a3b)
 - [2025-12-19] [Fix build](https://github.com/rubriclab/create-rubric-app/commit/f25fb6f2540c82df6e030a1a0dfdebd951a99b60)
 - [2025-12-19] [Bump agents package](https://github.com/rubriclab/create-rubric-app/commit/95485109392cfd75a48e9cef819c152b6e2d5219)
