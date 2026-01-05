@@ -1,3 +1,4 @@
+- [2026-01-05] [Fix favicon render](https://github.com/rubriclab/create-rubric-app/commit/0954c8e304f228060e6c7cafa71a3d927acb811f)
 - [2025-12-22] [Scaffold vanilla React template](https://github.com/rubriclab/create-rubric-app/commit/1d2ec3b47514a93c2aeaa3fbbd8318430fb2ba3c)
 - [2025-12-19] [Fix build](https://github.com/rubriclab/create-rubric-app/commit/c78aa752e2b9eb8eec685670e610ea85d8821a3b)
 - [2025-12-19] [Fix build](https://github.com/rubriclab/create-rubric-app/commit/f25fb6f2540c82df6e030a1a0dfdebd951a99b60)

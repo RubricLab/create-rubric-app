@@ -1,7 +1,7 @@
 export function Icon() {
 	return (
 		<svg
-			xmlns="https://www.w3.org/2000/svg"
+			xmlns="http://www.w3.org/2000/svg"
 			shapeRendering="crispEdges"
 			viewBox="0 0 99 99"
 			width="32"
