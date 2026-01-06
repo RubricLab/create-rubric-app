@@ -2,19 +2,29 @@ import { useEvents } from '~/events/client'
 import '../globals.css'
 import { Button, cn, Input } from '@rubriclab/ui'
 import { useState } from 'react'
-import type { z } from 'zod'
-import type { eventTypes } from '~/events'
+import type { TodoAgentResponseEvent, TodoAgentToolEvent } from '~/agents/todo'
 
 const channelId = Date.now().toString()
 
+type Message =
+	| TodoAgentToolEvent
+	| TodoAgentResponseEvent
+	| {
+			id: string
+			type: 'user_message'
+			message: string
+	  }
+
 export function App() {
-	const [messages, setMessages] = useState<z.infer<(typeof eventTypes)['message']>[]>([])
+	const [messages, setMessages] = useState<Message[]>([])
 	const [message, setMessage] = useState('')
 
 	useEvents({
 		id: channelId,
 		on: {
-			message: payload => setMessages(prev => [...prev, payload])
+			assistant_message: payload => setMessages(prev => [...prev, payload]),
+			createTodo: payload => setMessages(prev => [...prev, payload]),
+			getTodoList: payload => setMessages(prev => [...prev, payload])
 		}
 	})
 
@@ -25,11 +35,15 @@ export function App() {
 					<p
 						key={message.id}
 						className={cn(
-							message.role === 'user' ? 'ml-auto bg-primary' : 'bg-muted',
+							message.type === 'user_message' ? 'ml-auto bg-primary' : 'bg-muted',
 							'w-fit rounded-default p-2 px-3'
 						)}
 					>
-						{message.content}
+						{message.type === 'user_message'
+							? message.message
+							: message.type === 'assistant_message'
+								? message.message.response
+								: message.name}
 					</p>
 				))}
 			</div>
@@ -37,6 +51,14 @@ export function App() {
 				<Input value={message} onChange={e => setMessage(e.target.value)} />
 				<Button
 					onClick={async () => {
+						setMessages(prev => [
+							...prev,
+							{
+								id: Date.now().toString(),
+								message,
+								type: 'user_message'
+							}
+						])
 						await fetch(`/api/message/${channelId}`, {
 							body: JSON.stringify({
 								content: message,

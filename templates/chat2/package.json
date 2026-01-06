@@ -26,6 +26,7 @@
 		"check": "bun x biome check .",
 		"clean": "rm -rf .next && rm -rf node_modules",
 		"db:generate": "prisma generate",
+		"db:push": "prisma db push",
 		"dev": "bun --hot src/internals/server.tsx",
 		"format": "bun x biome check --write .",
 		"start": "NODE_ENV=production bun src/internals/server.tsx"

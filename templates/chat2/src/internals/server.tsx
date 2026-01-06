@@ -2,6 +2,7 @@ import { watch } from 'node:fs'
 import { createEventsServer } from '@rubriclab/events/server'
 import { serve } from 'bun'
 import { renderToStaticMarkup } from 'react-dom/server.bun'
+import { executeTodoAgent } from '~/agents/todo'
 import { eventTypes } from '~/events/index'
 import { Icon } from '../app/icon'
 import env from '../lib/env'
@@ -30,24 +31,32 @@ const server = serve({
 		'/api/events': GET,
 		'/api/message/:channel': async req => {
 			const body = await req.json()
-			publish({
-				channel: req.params.channel,
-				eventType: 'message',
-				payload: {
-					content: body.content,
-					id: body.id,
-					role: body.role
-				}
+
+			await executeTodoAgent({
+				messages: [{ content: body.content, role: body.role }],
+				onEvent: async events => {
+					switch (events.type) {
+						case 'assistant_message': {
+							await publish({
+								channel: req.params.channel,
+								eventType: events.type,
+								payload: events
+							})
+							break
+						}
+						case 'function_call': {
+							await publish({
+								channel: req.params.channel,
+								eventType: events.name,
+								payload: events
+							})
+							break
+						}
+					}
+				},
+				openAIKey: env.OPENAI_API_KEY
 			})
-			publish({
-				channel: req.params.channel,
-				eventType: 'message',
-				payload: {
-					content: 'Hello, world!',
-					id: Date.now().toString(),
-					role: 'assistant'
-				}
-			})
+
 			return new Response('ok')
 		},
 		'/favicon.ico': new Response(renderToStaticMarkup(<Icon />), {
