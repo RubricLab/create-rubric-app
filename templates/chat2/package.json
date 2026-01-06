@@ -1,10 +1,12 @@
 {
 	"dependencies": {
+		"@prisma/client": "^7.2.0",
 		"@rubriclab/agents": "^0.0.84",
 		"@rubriclab/events": "^0.0.41",
-		"@rubriclab/ui": "^5.1.54",
+		"@rubriclab/ui": "^5.1.55",
 		"@t3-oss/env-core": "^0.13.10",
 		"bun-plugin-tailwind": "^0.1.2",
+		"prisma": "^7.2.0",
 		"react": "^19.2.3",
 		"react-dom": "^19.2.3",
 		"tailwindcss": "^4.1.18"
@@ -23,6 +25,7 @@
 		"bleed": "bun x npm-check-updates -u",
 		"check": "bun x biome check .",
 		"clean": "rm -rf .next && rm -rf node_modules",
+		"db:generate": "prisma generate",
 		"dev": "bun --hot src/internals/server.tsx",
 		"format": "bun x biome check --write .",
 		"start": "NODE_ENV=production bun src/internals/server.tsx"

@@ -2,7 +2,7 @@ import { watch } from 'node:fs'
 import { createEventsServer } from '@rubriclab/events/server'
 import { serve } from 'bun'
 import { renderToStaticMarkup } from 'react-dom/server.bun'
-import { eventTypes } from '~/events'
+import { eventTypes } from '~/events/index'
 import { Icon } from '../app/icon'
 import env from '../lib/env'
 import index from './index.html'
@@ -16,6 +16,7 @@ const { publish, GET } = createEventsServer({
 
 const watcher = watch('./src/app', { recursive: true }, (event, path) => {
 	console.log('Change event: ', event, path)
+	// TODO: register routes at first load and on change
 })
 
 const server = serve({
@@ -27,14 +28,27 @@ const server = serve({
 	routes: {
 		'/*': index,
 		'/api/events': GET,
-		'/api/hello': () => new Response('Hello, world!'),
-		'/api/ping/:channel': async req => {
-			await publish({
+		'/api/message/:channel': async req => {
+			const body = await req.json()
+			publish({
 				channel: req.params.channel,
-				eventType: 'ping',
-				payload: 'pong'
+				eventType: 'message',
+				payload: {
+					content: body.content,
+					id: body.id,
+					role: body.role
+				}
 			})
-			return new Response()
+			publish({
+				channel: req.params.channel,
+				eventType: 'message',
+				payload: {
+					content: 'Hello, world!',
+					id: Date.now().toString(),
+					role: 'assistant'
+				}
+			})
+			return new Response('ok')
 		},
 		'/favicon.ico': new Response(renderToStaticMarkup(<Icon />), {
 			headers: { 'Content-Type': 'image/svg+xml' }
