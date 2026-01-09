@@ -1,4 +1,3 @@
-import { watch } from 'node:fs'
 import { createEventsServer } from '@rubriclab/events/server'
 import { serve } from 'bun'
 import { renderToStaticMarkup } from 'react-dom/server.bun'
@@ -13,11 +12,6 @@ const BUN_MAXIMUM_IDLE_TIMEOUT = 255
 const { publish, GET } = createEventsServer({
 	eventTypes,
 	redisURL: env.REDIS_URL
-})
-
-const watcher = watch('./src/app', { recursive: true }, (event, path) => {
-	console.log('Change event: ', event, path)
-	// TODO: register routes at first load and on change
 })
 
 const server = serve({
@@ -69,6 +63,5 @@ console.log(`Server running at ${server.url}`)
 
 process.on('SIGINT', () => {
 	console.log('Shutting down...')
-	watcher.close()
 	process.exit(0)
 })
