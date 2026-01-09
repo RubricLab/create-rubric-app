@@ -1,3 +1,4 @@
+- [2026-01-09] [Merge branch 'main' of https://github.com/rubriclab/create-rubric-app into feat/slim-template](https://github.com/rubriclab/create-rubric-app/commit/59689d76348f2144c3a4ca0c50101a815120b389)
 - [2026-01-09] [Remove file watcher](https://github.com/rubriclab/create-rubric-app/commit/a22fb8dc389626c555312f498ac80384bf58190f)
 - [2026-01-06] [Fix render](https://github.com/rubriclab/create-rubric-app/commit/e37c8f7078d2c903615b93c95cc4d531b43fa6ca)
 - [2026-01-06] [Add Rubric UI, DB, and agent](https://github.com/rubriclab/create-rubric-app/commit/515210ee039189a78506783e2ef0231a26257e8d)
