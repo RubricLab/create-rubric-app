@@ -1,5 +1,6 @@
 {
 	"dependencies": {
+		"@prisma/adapter-pg": "^7.2.0",
 		"@prisma/client": "^7.2.0",
 		"@rubriclab/agents": "^0.0.84",
 		"@rubriclab/events": "^0.0.41",

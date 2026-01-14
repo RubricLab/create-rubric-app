@@ -1,3 +1,4 @@
+- [2026-01-14] [Add missing Prisma PG adapter dependency](https://github.com/rubriclab/create-rubric-app/commit/f58a97ed9786f90bbfe7a8107671801e79165d42)
 - [2026-01-14] [Add template arg to CLI](https://github.com/rubriclab/create-rubric-app/commit/b3de12e510b02a839f5d833f11caed7ede2bda02)
 - [2026-01-09] [Reconcile changelog](https://github.com/rubriclab/create-rubric-app/commit/65c2411412e1873ba12b0b45ff7e9c36babf3407)
 - [2025-12-22] [Correct example env](https://github.com/rubriclab/create-rubric-app/commit/c7200451c9d2cac4338bc7ddd2f0a66b7bd7b55e)
