@@ -33,8 +33,6 @@ Create a `.env` file with:
 ```sh
 DATABASE_URL=postgres://postgres:postgres@localhost:5432/app
 REDIS_URL=redis://localhost:6379
-GITHUB_CLIENT_ID=your_github_client_id
-GITHUB_CLIENT_SECRET=your_github_client_secret
 OPENAI_API_KEY=your_openai_api_key
 PUBLIC_AUTH_URL=http://localhost:3000
 ```

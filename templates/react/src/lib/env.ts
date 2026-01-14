@@ -9,8 +9,6 @@ export default createEnv({
 	runtimeEnv: process.env,
 	server: {
 		DATABASE_URL: z.string().default('postgres://postgres:postgres@localhost:5432/app'),
-		GITHUB_CLIENT_ID: z.string().min(1),
-		GITHUB_CLIENT_SECRET: z.string().min(1),
 		NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
 		OPENAI_API_KEY: z.string().min(1),
 		REDIS_URL: z.string().default('redis://localhost:6379')
