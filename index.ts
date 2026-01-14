@@ -1,19 +1,22 @@
 #! /usr/bin/env bun
 
-import { existsSync } from 'node:fs'
+import { existsSync, readdirSync } from 'node:fs'
 import path from 'node:path'
 import { createCLI, createCommand } from '@rubriclab/cli'
 import { $ } from 'bun'
 import { z } from 'zod'
 
+const templates = readdirSync(path.join(import.meta.dir, 'templates'))
+
 const initCommand = createCommand({
 	args: z.object({
-		name: z.string().default('myApp').describe('Name of the new app directory')
+		name: z.string().default('my-app').describe('Name of the new app directory'),
+		template: z.enum(templates).default('react').describe('Template to use for the new app')
 	}),
 	description: 'Inits an app based on Rubric patterns',
-	handler: async ({ name }) => {
+	handler: async ({ name, template }) => {
 		const targetDir = path.join(process.cwd(), name)
-		const templateDir = path.join(import.meta.dir, 'templates', 'chat')
+		const templateDir = path.join(import.meta.dir, 'templates', template)
 
 		if (existsSync(targetDir)) {
 			console.error(`Error: Directory "${name}" already exists`)
