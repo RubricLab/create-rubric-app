@@ -17,7 +17,9 @@ export const eventTypes = createEventTypes({
 		call_id: z.string(),
 		id: z.string(),
 		name: z.literal('createTodo'),
-		result: z.undefined(),
+		result: z.object({
+			id: z.string()
+		}),
 		type: z.literal('function_call')
 	}),
 	getTodoList: z.object({

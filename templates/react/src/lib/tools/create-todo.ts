@@ -4,19 +4,21 @@ import db from '~/db'
 
 export default createTool({
 	async execute({ status, title }) {
-		await db.task.create({
+		const { id } = await db.task.create({
 			data: {
 				status,
 				title
 			}
 		})
-		return undefined
+		return { id }
 	},
 	schema: {
 		input: z.object({
 			status: z.boolean(),
 			title: z.string()
 		}),
-		output: z.undefined()
+		output: z.object({
+			id: z.string()
+		})
 	}
 })

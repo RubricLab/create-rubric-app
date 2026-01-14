@@ -1,3 +1,4 @@
+- [2026-01-14] [Return required function output from create tool](https://github.com/rubriclab/create-rubric-app/commit/f22b90b68b0159f54cd28195238b90fa89bc6b4d)
 - [2026-01-14] [Add example env. Remove unused env vars.](https://github.com/rubriclab/create-rubric-app/commit/8348de4297144140b479d445f6901ecb9281364d)
 - [2026-01-14] [Add missing Prisma PG adapter dependency](https://github.com/rubriclab/create-rubric-app/commit/f58a97ed9786f90bbfe7a8107671801e79165d42)
 - [2026-01-14] [Add template arg to CLI](https://github.com/rubriclab/create-rubric-app/commit/b3de12e510b02a839f5d833f11caed7ede2bda02)
