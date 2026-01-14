@@ -1,0 +1,22 @@
+# dependencies
+node_modules
+
+# output
+out
+dist
+generated
+
+# logs
+logs
+
+# dotenv environment variable files
+.env
+.env.*
+!.env.example
+
+# caches
+.cache
+*.tsbuildinfo
+
+# Finder (MacOS) folder config
+.DS_Store

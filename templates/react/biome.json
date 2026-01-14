@@ -1,0 +1,3 @@
+{
+	"extends": ["@rubriclab/config/biome"]
+}
